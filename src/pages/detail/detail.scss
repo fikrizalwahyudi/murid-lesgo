@@ -1,0 +1,202 @@
+page-detail {
+  span{
+    margin-right: 10%;
+  }
+    .rating{
+      margin: 0;
+      text-align: center;
+      padding: 0;
+      ul{
+        margin-top: 0;
+        margin-bottom: 5%;
+      }
+      li {
+       background: none;
+       color: #ffb400;
+       font-size: 3rem !important;
+        }
+      }
+  img{
+      height: 30vw;
+      width: 30vw;
+      border-radius: 50%;
+      margin-bottom: 5%;
+      margin-left: 35%;
+      margin-top: 5%;
+      margin-right:5%;
+      border-style: solid;
+      border-width: 2px;
+      border-color: #cccccc;
+  }
+
+  .select{
+    font-size: 2rem;
+  }
+
+  .orderCard{
+      background-color: #cce6cf;
+    margin-bottom: 5%;
+  .card-header{
+    font-size: 2.2rem;
+    color: #000000;
+    background-color: #cce6cf !important;
+  }
+  .item{
+    border-bottom-color: #e4e4e4;
+    border-bottom-width: thin;
+    border-bottom-style: solid;
+
+
+    }
+  }
+
+  .item [item-right]{
+
+      text-align: right;
+  }
+  .paymentCard{
+    background-color: #cce6cf;
+    .total{
+
+      border-top-style: solid;
+      border-top-color: #c5c5c5;
+      border-top-width: 1px;
+      h2{
+        font-weight: bold;
+      }
+    }
+    .label{
+      font-size: 2rem;
+      color:black;
+    }
+    .select{
+      font-size: 2rem !important;
+    }
+    .card-header{
+      font-size: 2.2rem;
+      color: #000000;
+    }
+    .item {
+      h2{
+        font-size: 2rem;
+      }
+    }
+  }
+  font-family: brandon;
+    .navtitle{
+      height:10%;
+    }
+    .navbar{
+      background: transparent;
+    }
+    .main{
+      .toolbar-background{
+        background: #39b54a;
+      }
+      ion-title{
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 90px 1px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        img{
+          width: 20vw;
+        }
+      }
+    .bar-buttons[left]{
+      font-size: 2.5rem;
+    }
+    .bar-buttons[right]{
+      font-family: comic;
+      margin-top: 17%;
+      margin-right: 4%;
+    }
+
+    }
+    .subheader{
+      .segment-button{
+        font-size: 2rem;
+        color:gray;
+
+      }
+      .segment-activated{
+        color:darkgreen !important;
+        border-color:darkgreen !important;
+      }
+    .toolbar-background{
+    }
+    .bar-header {
+      border: 0px !important;
+    }
+    .bar-buttons[left]{
+      p{
+      font-size: 12pt;
+      font-family: roboto;
+      font-weight: bold;
+      }
+      border-right-style: solid;
+      border-right-width: 1px;
+    }
+    .left{
+        text-align: right;
+        button{
+          font-size: 12pt;
+          font-weight: bold;
+          color: #39b54a;
+        }
+        border-right-width: thin;
+        border-right-style: solid;
+      }
+
+    .right{
+          text-align: left;
+          button{
+            font-size: 12pt;
+            font-weight: bold;
+            color:#39b54a;
+          }
+        }
+    .bar-buttons[right]{
+      p{
+      font-size: 12pt;
+      font-family: roboto;
+      font-weight: bold;
+      }
+
+    }
+
+    }
+    .labeltop{
+      font-size: 12pt;
+      border-bottom-color: green;
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+      font-weight: bold;
+    }
+    .isi{
+      font-size: 11pt;
+      border-bottom-color: grey;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+    .total{
+      font-weight: bold;
+    }
+    .button-left{
+      text-align: right;
+    }
+    .button-right{
+      text-align: left;
+    }
+    .bayar{
+      text-align: right;
+    }
+    .topButton{
+        background-color: #39b54a !important;
+      }
+    ion-input{
+      width:50%;
+    }
+}

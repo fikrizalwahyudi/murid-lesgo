@@ -1,0 +1,164 @@
+page-pelajaran {
+
+      background: rgba(0,0,0,0.5);
+      .scroll-content {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        padding-top: 00%;
+      }
+      ion-content{
+        overflow:auto;
+        font-family:brandon;
+        background-color: white !important;
+        text-align: center;
+        ion-list{
+          height:auto;
+          ion-item{
+            align-items: center;
+          }
+
+        }
+        .submitMe{
+          background-color: #009900;
+          font-family:brandon-bold;
+          border-radius:10px;
+        }
+        .main{
+          width:80%;
+          margin-left: 10%;
+          border-top-style:solid;
+          border-top-width: thin;
+          border-top-color: #ffffff;
+        }
+        .mainLast{
+          width:80%;
+          margin-left: 10%;
+          border-top-style:solid;
+          border-top-width: thin;
+          border-top-color: #ffffff;
+          border-bottom-style:solid;
+          border-bottom-width: thin;
+          border-bottom-color: #ffffff;
+        }
+        .lastOne{
+          width:80%;
+          margin-left: 10%;
+          border-top-style:solid;
+          border-top-width: thin;
+          border-top-color: #ffffff;
+        }
+        .titleCol{
+          padding:0;
+        }
+        .titleText{
+          background: transparent;
+          color: green;
+          font-size: 2.5rem;
+          text-transform: none !important;
+          font-weight: bold;
+        }
+        .bottomBut{
+          margin-top: 5%;
+          margin-bottom:5%;
+          button{
+            font-family: comic;
+          }
+        }
+        .inputBut{
+          width:100%;
+          background-color: green;
+          border-radius: 25px;
+          padding-left: 5%;
+          font-size: 1.5rem;
+
+        }
+        .selections{
+          padding-bottom: 5%;
+          margin-left:10%;
+        }
+
+        .picking{
+          padding-bottom: 5%;
+          border-radius:10px;
+
+        }
+        .active{
+          background-color:green !important;
+          }
+        .backorange{
+          background-color:#f7941d;
+        }
+        .backmerah{
+          background-color:#ed1c24;
+        }
+        .backbiru{
+          background-color:#27aae1;
+        }
+        .backbirutua{
+          background-color:#1b75bc;
+        }
+        .backcoklat{
+          background-color:#a97c50;
+        }
+        .backhitam{
+          background-color:#000000;
+        }
+        ion-grid{
+          padding-left: 25%;
+          padding-right: 15%;
+        }
+        .true{
+          border-bottom:none;
+        }
+        .buttonIn{
+          width: 100%;
+          font-size: 1.5rem;
+          color:white;
+          font-weight: bold;
+          padding-bottom:10%;
+          padding-top:10%;
+        }
+
+        .buttomBut{
+          font-size: 2rem;
+          background-color: green;
+          color:white;
+          font-weight: bold;
+          font-family:comic;
+        }
+        .selectionsLast{
+          width:80%;
+          padding-bottom: 5%;
+          margin-left:10%;
+          border-bottom-style:solid;
+          border-bottom-width: thin;
+          border-bottom-color: #ffffff;
+        }
+        .item{
+          width:75%;
+          margin-left: 12.5%;
+          padding: 0% !important;
+        }
+        .orange{
+          color:#f7941d;
+        }
+        .merah{
+          color:#ed1c24;
+        }
+        .biru{
+          color:#27aae1;
+        }
+        .birutua{
+          color:#1b75bc;
+        }
+        .coklat{
+          color:#a97c50;
+        }
+        .hitam{
+          color:#000000;
+        }
+
+      }
+
+    }

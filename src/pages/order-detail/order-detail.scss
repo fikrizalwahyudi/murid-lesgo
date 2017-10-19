@@ -1,0 +1,101 @@
+page-order-detail {
+
+  font-family: brandon;
+  .toolbar-background{
+    background: #39b54a;
+  }
+  ion-title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 90px 1px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    img{
+      width: 20vw;
+    }
+  }
+  .button-clear{
+    height:100%;
+  }
+  .bar-buttons[left]{
+    font-size: 2.5rem;
+  }
+    .rating{
+      margin: 0;
+      text-align: center;
+      padding: 0;
+      margin-bottom: 5%;
+      ul{
+        margin-top: 0;
+      }
+      li {
+       background: none;
+       color: #ffb400;
+       font-size: 1.5rem !important;
+        }
+      }
+
+    .detailCard{
+        background-color: #cce6cf;
+      margin-bottom: 5%;
+      img{
+
+      width: 30vw;
+      height: 30vw;
+      border-radius: 50%;
+      margin-bottom: 5%;
+      margin-left: 35%;
+      margin-top: 5%;
+      margin-right:5%;
+      border-style: solid;
+      border-width: 5px;
+      border-color: #cccccc;
+      }
+    .card-header{
+      font-size: 2.2rem;
+      color: #000000;
+      background-color: #cce6cf !important;
+    }
+    .item{
+      border-bottom-color: #e4e4e4;
+      border-bottom-width: thin;
+      border-bottom-style: solid;
+
+
+      }
+    }
+
+      .orderCard{
+          background-color: #cce6cf;
+        margin-bottom: 5%;
+      .card-header{
+        font-size: 2.2rem;
+        color: #000000;
+        background-color: #cce6cf !important;
+      }
+      .item{
+        border-bottom-color: #e4e4e4;
+        border-bottom-width: thin;
+        border-bottom-style: solid;
+
+        }
+      }
+      ion-col{
+        h2{
+          text-align: center;
+        }
+      }
+      .login-button:active {
+        background-color:blue;
+      }
+      .login-button {
+        width:100%;
+          border-radius: 10px;
+          font-size:1.4rem;
+          border: 1px solid #009900;
+          background-color: #009900;
+          font-family: comic;
+      }
+}

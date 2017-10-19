@@ -1,0 +1,48 @@
+<!--
+  Generated template for the Filter page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content fixed>
+<ion-grid style="padding:0;">
+  <ion-row>
+    <ion-col width-100 class="title">
+      <div>
+        Sort
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-item>
+      <ion-label floating>Harga</ion-label>
+      <ion-select [(ngModel)]="harga">
+        <ion-option value="murah" selected="true">Termurah</ion-option>
+        <ion-option value="mahal">Termahal</ion-option>
+      </ion-select>
+    </ion-item>
+    </ion-row>
+  <ion-row>
+  <ion-item>
+  <ion-label floating>Rating</ion-label>
+  <ion-select [(ngModel)]="rating">
+    <ion-option value="rendah" selected="true">Terendah</ion-option>
+    <ion-option value="tinggi">Tertinggi</ion-option>
+  </ion-select>
+</ion-item>
+  </ion-row>
+</ion-grid>
+<ion-row style="margin-top: 10%;">
+  <ion-col class="bottomBut">
+    <button ion-button class="submitMe" (click)="dismiss()">
+      CANCEL
+    </button>
+  </ion-col>
+  <ion-col class="bottomBut">
+    <button ion-button class="submitMe" (click)="send()">
+      OK
+    </button>
+  </ion-col>
+</ion-row>
+</ion-content>

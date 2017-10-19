@@ -1,0 +1,260 @@
+// http://ionicframework.com/docs/v2/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@font-face {
+  font-family: "roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/ign-fonts/roboto-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "comic";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/ign-fonts/SF Comic Script.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "brandon";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/ign-fonts/Brandon_reg.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "brandon-light";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/ign-fonts/Brandon_light.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "brandon-bold";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/ign-fonts/Brandon_bld.otf") format("opentype");
+}
+
+body {
+  font-family: roboto !important;
+  font-family: comic !important;
+  font-family: brandon !important;
+  font-family: brandon-light !important;
+  font-family: brandon-bold !important;
+}
+
+.loading-md {
+  .loading-wrapper {
+    background: transparent;
+    box-shadow: none;
+  }
+  img {
+    width: 10vw;
+    height: 10vw;
+  }
+  .loading-content {
+    background: transparent;
+  }
+}
+
+.loading-ios {
+  .loading-wrapper {
+    background: transparent;
+    box-shadow: none;
+  }
+  img {
+    width: 10vw;
+    height: 10vw;
+  }
+  .loading-content {
+    background: transparent;
+  }
+}
+
+.alert-ios {
+  .alert-wrapper {
+    border-radius: 20px !important;
+  }
+  .alert-head {
+    background-color: #999 !important;
+    text-align: center;
+    color: white;
+    font-family: comic;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 10px;
+  }
+  .alert-title {
+    font-size: 26px;
+  }
+  .alert-message {
+    padding-top: 18px;
+    color: black;
+    font-family: brandon-bold;
+  }
+  .alert-button {
+    border-radius: 10px;
+    background-color: #39b54a;
+    color: white;
+    font-family: comic;
+    text-align: left;
+    margin: auto;
+  }
+  .alert-button-group {
+    justify-content: center;
+    padding: 8px;
+  }
+}
+
+.alert-md {
+  .alert-wrapper {
+    border-radius: 20px !important;
+  }
+  .alert-head {
+    background-color: #999 !important;
+    text-align: center;
+    color: white;
+    font-family: comic;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 10px;
+  }
+  .alert-title {
+    font-size: 26px;
+  }
+  .alert-message {
+    padding-top: 18px;
+    color: black;
+    font-family: brandon-bold;
+  }
+  .alert-button {
+    border-radius: 10px;
+    background-color: #39b54a;
+    color: white;
+    font-family: comic;
+    text-align: left;
+    margin: auto;
+  }
+  .alert-button-group {
+    justify-content: center;
+    padding: 8px;
+  }
+}
+
+.action-sheet-md {
+  text-align: center !important;
+  .action-sheet-container {
+    padding: 0 !important;
+  }
+  .action-sheet-title {
+    padding-top: 17px !important;
+    font-size: 1.6em !important;
+    text-align: center !important;
+    margin-bottom: 5%;
+    background-color: #999;
+    color: white;
+    font-family: comic;
+  }
+  .action-sheet-button {
+    text-align: center !important;
+    border-radius: 10px !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    margin-bottom: 2%;
+    width: 80% !important;
+    text-transform: uppercase;
+    font-family: brandon-bold;
+    background-color: #39b54a !important;
+    .button-inner {
+      text-align: center !important;
+    }
+  }
+  .action-sheet-group {
+    .button-inner {
+      justify-content: center!important;
+    }
+  }
+}
+
+.toast-container {
+  justify-content: center!important;
+  font-family: brandon!important;
+  background-color: black !important;
+}
+
+.action-sheet-ios {
+  text-align: center !important;
+  .action-sheet-container {
+    padding: 0 !important;
+  }
+  .action-sheet-title {
+    padding-top: 17px !important;
+    font-size: 1.6em !important;
+    text-align: center !important;
+    margin-bottom: 5%;
+    background-color: #999;
+    color: white;
+    font-family: comic;
+  }
+  .action-sheet-button {
+    text-align: center !important;
+    border-radius: 10px !important;
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+    margin-bottom: 2%;
+    width: 80% !important;
+    text-transform: uppercase;
+    font-family: brandon-bold;
+    background-color: #39b54a !important;
+    .button-inner {
+      text-align: center !important;
+    }
+  }
+  .action-sheet-group {
+    .button-inner {
+      justify-content: center!important;
+    }
+  }
+}
+
+.toast-container {
+  justify-content: center!important;
+  font-family: brandon!important;
+  background-color: black !important;
+}
+
+.toast-md {
+  justify-content: center!important;
+  text-align: center!important;
+  font-family: brandon !important;
+  .toast-message {
+    justify-content: center!important;
+    text-align: center!important;
+    font-family: brandon !important;
+    font-size: 1.8rem !important;
+  }
+}
+
+.toast-ios {
+  justify-content: center!important;
+  text-align: center!important;
+  font-family: brandon !important;
+  .toast-message {
+    justify-content: center!important;
+    text-align: center!important;
+    font-family: brandon !important;
+    font-size: 1.8rem !important;
+  }
+}

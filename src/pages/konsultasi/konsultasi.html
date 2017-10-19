@@ -1,0 +1,77 @@
+<!--
+  Generated template for the Konsultasi page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <button *ngIf="tutorUid == undefined" ion-button icon-only class="backbut" (click)="dismiss()">
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+      <button *ngIf="tutorUid != undefined" ion-button icon-only class="backbut" (click)="getTutor()">
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+    </ion-buttons>
+    <ion-title *ngIf="tutorUid == undefined">
+      <img src="assets/logowhite.png" />
+    </ion-title>
+    <ion-title *ngIf="tutorUid != undefined">{{Tutor.tutorName}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content #content direction="y" style="background:url('assets/patterna.png');background-size:cover;background-repeat:repeat;"
+  class="has-footer">
+
+  <ion-list no-lines *ngIf="tutorUid != undefined && status">
+    <!-- <template ngFor let-chats [ngForOf]="chatData"> -->
+    <ion-item *ngFor="let chats of chatData" style="background:none;">
+      <div class="chatBubble">
+
+        <div class="chat-bubble {{chats.position}}" *ngIf="chats.type == 'text'">
+          <div class="message">{{chats.message}}</div>
+          <div class="message-detail">
+            <span style="font-weight:bold;" *ngIf="chats.position == 'left'">{{Tutor.tutorName}}</span>
+            <span style="font-weight:bold;" *ngIf="chats.position == 'right'">{{name}}</span>,
+            <span>{{getDates(chats.sentAt)}}</span>
+          </div>
+        </div>
+        <div class="chat-bubble {{chats.position}}" *ngIf="chats.type != 'text'">
+          <div class="message"><img src="{{chats.message}}" imageViewer/></div>
+          <div class="message-detail">
+            <span style="font-weight:bold;" *ngIf="chats.position == 'left'">{{Tutor.tutorName}}</span>
+            <span style="font-weight:bold;" *ngIf="chats.position == 'right'">{{name}} </span>,
+            <span>{{getDates(chats.sentAt)}}</span>
+          </div>
+        </div>
+      </div>
+    </ion-item>
+    <!-- </template> -->
+  </ion-list>
+  <ion-list *ngIf="status == false && tutorData.length > 0 ">
+    <ion-item *ngFor="let tutor of tutorData" (click)="chatHim(tutor)">
+      <ion-thumbnail item-left>
+        <img [src]="tutor.tutorAvatar" />
+      </ion-thumbnail>
+      <h3 class="teacherName">{{ tutor.tutorName }}</h3>
+      <h3>{{ tutor.jenisPaket }}</h3>
+      <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer no-border style="background:url('assets/patterna.png');background-size:cover;background-repeat:repeat;">
+  <ion-toolbar>
+    <ion-buttons *ngIf="status" left>
+      <button *ngIf="status" ion-button icon-only (click)="presentActionSheet()">
+        <ion-icon name="ios-add-circle-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-input *ngIf="status" content type="text" [(ngModel)]="theChat" placeholder="Enter your message" (keyup.enter)="sendChat();">{{theChat}}</ion-input>
+    <ion-buttons *ngIf="status" right>
+      <button *ngIf="status" ion-button icon-only (click)="sendChat();">
+          <ion-icon name="ios-send-outline"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

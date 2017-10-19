@@ -1,0 +1,443 @@
+import { Component, ViewChild } from '@angular/core';
+import { NavController, ToastController, ViewController, ActionSheetController, Platform, AlertController, LoadingController, NavParams, ModalController, Loading, Content } from 'ionic-angular';
+import { Calendar } from '@ionic-native/calendar';
+import { UserService } from '../../providers/user-service';
+import { Zapier } from '../../providers/zapier';
+import { KategoriPage } from '../kategori/kategori';
+import { SettingPage } from '../setting/setting';
+import { KonsultasiPage } from '../konsultasi/konsultasi';
+import { CartPage } from '../cart/cart';
+import { ErrorPage } from '../error/error';
+import { ModalMuridPage } from '../modal-murid/modal-murid';
+import { CustomerservicePage } from '../customerservice/customerservice';
+import { FilePath } from '@ionic-native/file-path';
+import { FileOpener } from '@ionic-native/file-opener';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { File } from '@ionic-native/file';
+import { Camera, CameraOptions } from '@ionic-native/Camera';
+import { Network } from '@ionic-native/network';
+import * as firebase from 'firebase';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+import { Helper } from '../../providers/helper';
+
+declare var cordova: any
+declare var window;
+/*
+  Generated class for the Home page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html',
+  providers: [UserService, Calendar, Zapier]
+})
+export class HomePage {
+  @ViewChild(Content) content: Content;
+  public user: any = [];
+  public today: any = new Date();
+  public loading: Loading;
+  public myUserId: any;
+  public cartData: any = [];
+  private session: any = 0;
+  private cart: any = 0;
+  private pending: any = 0;
+  public chatCs: any = [];
+  public chatData: any = [];
+  public csSubscribe: any;
+  public tutorSubscribe: any;
+  public cartStatus: any;
+  public cartId: any;
+  public schedule: any = [];
+  public role: any;
+  public latLng: any = { lat: 0, lng: 0 };
+  public smsVerification: any;
+  public murid: any = [];
+  public status: any;
+  public count: any = 0;
+  public smsVerificationCode: any;
+
+  constructor(
+    private network: Network,
+    private localNotif: LocalNotifications,
+    private zapier: Zapier,
+    private Camera: Camera,
+    private File: File,
+    private FilePath: FilePath,
+    private FileChooser: FileChooser,
+    private toast: ToastController,
+    private plt: Platform,
+    private Calendar: Calendar,
+    private navCtrl: NavController,
+    private params: NavParams,
+    private userService: UserService,
+    private alertCtrl: AlertController,
+    private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController,
+    private actionSheetCtrl: ActionSheetController,
+    private helper: Helper,
+  ) {
+    this.registerBackButton();
+    this.listenLoad();
+  }
+
+  listenLoad() {
+    let dataNotif = this.helper.getDataNotif();
+    if (dataNotif) {
+      this.listenNotification(dataNotif)
+    }
+    this.helper.emitterNotif.subscribe((res: any) => {
+      this.listenNotification(res);
+    });
+  }
+
+  listenNotification(data: any) {
+    if (data.additionalData && data.additionalData.typeNotif == 'order') {
+      this.navCtrl.push(CartPage, data);
+    }
+    if (data.additionalData && data.additionalData.typeNotif == 'chat') {
+      if (data.additionalData.type == 'user') {
+        this.navCtrl.push(KonsultasiPage, { uid: data.additionalData.uid, name: this.user.firstName });
+      }
+      if (data.additionalData.type == 'cs') {
+        this.navCtrl.push(KonsultasiPage, { uid: data.additionalData.uid, name: this.user.firstName });
+      }
+    }
+  }
+
+  registerBackButton() {
+    this.plt.registerBackButtonAction(() => {
+      this.count = this.count + 1;
+      if (this.count <= 1) {
+        let toaster = this.toast.create({
+          message: 'press back once more to exit the app',
+          duration: 2000,
+          position: 'bottom'
+        });
+        toaster.present();
+      }
+      if (this.count > 1) {
+        this.plt.exitApp();
+      }
+      setTimeout(() => {
+        if (this.count > 1) {
+          this.plt.exitApp();
+        }
+      }, 2000)
+    }, 1);
+  }
+
+
+
+  ionViewWillEnter() {
+    let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+      disconnectSubscription.unsubscribe();
+      this.navCtrl.push(ErrorPage);
+    });
+
+    this.getUser();
+  }
+  ionViewDidLeave() {
+    this.csSubscribe.unsubscribe();
+    this.tutorSubscribe.unsubscribe();
+  }
+  getUser() {
+    let loader = this.loadingCtrl.create({
+      content: '<img src="./assets/loading.gif"/>',
+      spinner: 'hide'
+    });
+    loader.present();
+    setTimeout(() => {
+      this.myUserId = firebase.auth().currentUser.uid;
+      var that = this;
+      this.userService.getUserData(this.myUserId).subscribe(snapshot => {
+        var data = snapshot;
+        that.user = data;
+        that.user.userId = snapshot.$key;
+        if (data.smsVerificationStatus != true) {
+          let smsobj = { uid: this.myUserId, phoneNumber: data.phoneNumber, email: data.email, verificationCode: data.smsVerificationCode, textMessage: "Ini adalah verification code dari LESGO!" };
+
+          let alert = this.alertCtrl.create({
+            title: 'Verifikasi HP',
+            message: 'Kode Verifikasi anda sedang dalam proses pengiriman',
+            enableBackdropDismiss: false,
+            inputs: [
+              {
+                name: 'code',
+                placeholder: 'Kode Anda'
+              }
+            ],
+            buttons: [
+              {
+                text: 'Resend Code',
+                handler: datas => {
+                  this.resendSMS(smsobj);
+                  alert.setMessage('Pengiriman ulang ke nomor telah dilaksanakan ' + data.phoneNumber);
+                  return false
+                }
+              },
+              {
+                text: 'Confirm',
+                handler: datas => {
+                  if (datas.code != data.smsVerificationCode) {
+                    alert.setMessage('Kode verifikasi yang anda masukkan salah ');
+                    return false
+                  } else {
+                    this.updateUserStatus(this.myUserId);
+                    return true
+                  }
+                }
+              }
+            ]
+          });
+          alert.present();
+          that.userService.resendSms(smsobj).subscribe(res => {
+            if (res['_body'] == 'success') {
+
+              alert.setMessage('<span style="color:green !important;">Kode verifikasi Anda telah terkirim ke nomor ' + data.phoneNumber + '</span>');
+              return false;
+
+            } else {
+              alert.setMessage('<span style="color:green !important;">Kode verifikasi Anda gagal dikirim ke nomor ' + data.phoneNumber + '</span>');
+              return false;
+
+            }
+
+          });
+          loader.dismissAll();
+        } else {
+          that.chatNotificationCs();
+          that.getCart(this.myUserId)
+          that.chatNotificationMurid();
+          that.status = true;
+          loader.dismissAll();
+        }
+
+      })
+
+    }, 3000);
+  }
+  // displayUser(theUserId){
+  //
+  //
+  //
+  // }
+  chatNotificationCs() {
+    var that = this;
+    this.csSubscribe = this.userService.getChatCsStatus(this.myUserId).subscribe(snapshot => {
+      if (snapshot.length != 0) {
+        that.chatCs = [];
+        snapshot.forEach(o => {
+          if (o.status == false && o.position == 'left') {
+            that.chatCs.push(o);
+          }
+        })
+      }
+    })
+  }
+  chatNotificationMurid() {
+    var that = this;
+    this.tutorSubscribe = this.userService.getChatTutorStatus(this.myUserId).subscribe(snapshot => {
+      if (snapshot.length != 0) {
+        that.chatData = [];
+        snapshot.forEach(o => {
+          if (o.status == false && o.position == 'left') {
+            that.chatData.push(o);
+          }
+        })
+      }
+    })
+  }
+  test() {
+    this.zapier.getUnavailability("2017-07-04", "UEE50q8PMnVU0H8bUiUSIn7D6762").subscribe(res => {
+      console.log(res)
+      alert(res.status);
+    })
+  }
+  // getCart(uid){
+  //   var that=this;
+  //   console.log(that.params);
+  //   let loader=this.loadingCtrl.create({
+  //     content:'<img src="./assets/loading.gif"/>',
+  //     spinner:'hide'
+  //   });
+  //   loader.present();
+  //     that.userService.getCart(uid).on('value', function(snapshot){
+  //       if(snapshot.val() != undefined){
+  //       snapshot.forEach(function(childSnapshot){
+  //         var data =  childSnapshot.val();
+  //         data['key']= childSnapshot.key;
+  //        that.cartData.push(data);
+  //      })
+  //      if(that.params.data.data=='cart'){
+  //        that.navigateMe('CartPage');
+  //      }else if(that.params.data.data=='tambah'){
+  //        that.navigateMe('KategoriPage');
+  //      }
+  //
+  //
+  //    }else{
+  //      return loader.dismiss();
+  //    }
+  //   })
+  //   loader.dismiss();
+  // }
+  getCart(uid) {
+    var that = this;
+    var today = moment(new Date()).format('x');
+    return this.userService.muridCariTutor(uid).subscribe(snaps => {
+      if (snaps != undefined) {
+
+        that.cartData = snaps;
+        that.cart = 0;
+        that.pending = 0;
+        that.session = 0;
+        if (that.params.data.data == 'cart') {
+          that.params.data.data = undefined;
+          return that.navigateMe('CartPage');
+        } else if (that.params.data.data == 'tambah') {
+          that.params.data.data = undefined;
+          return that.navigateMe('KategoriPage');
+        }
+        return snaps.forEach(d => {
+          if (d.status == 'cart') {
+            that.cart = that.cart + 1;
+          }
+          else if (d.status == 'booked') {
+            that.pending = that.pending + 1;
+            d.sessions.forEach(session => {
+              if (session.status == 'booked') {
+                that.session = that.session + 1;
+              }
+            })
+          }
+        })
+
+      }
+    })
+  }
+  navigateMe(name: string) {
+    if (name == 'CartPage') this.navCtrl.push(CartPage, {
+      data: this.myUserId, cartData: this.cartData, cartStatus: this.cartStatus
+    });
+    if (name == 'KategoriPage') this.navCtrl.push(KategoriPage, { uid: this.myUserId, source: 'home' });
+    if (name == 'CustomerservicePage') this.navCtrl.push(CustomerservicePage, { data: this.myUserId, name: this.user.firstName });
+    if (name == 'KonsultasiPage') this.navCtrl.push(KonsultasiPage, { uid: this.myUserId, name: this.user.firstName });
+    if (name == 'MyschedulePage') this.Calendar.openCalendar(this.today);
+    if (name == 'SettingPage') this.navCtrl.push(SettingPage, { uid: this.myUserId });
+  }
+  public uploadImage(data, fileType) {
+    // Destination URL
+    let storageRef = firebase.storage().ref(this.myUserId);
+    const filename = fileType;
+    const imageRef = storageRef.child(`${filename}.png`);
+    this.loading = this.loadingCtrl.create({
+      content: '<img src="./assets/loading.gif"/>',
+      spinner: 'hide'
+    });
+    this.loading.present();
+    imageRef.putString(data, 'base64', { contentType: 'image/jpg' }).then((snapshot) => {
+      this.userService.viewUser(this.myUserId).update({ avatar: snapshot.downloadURL });
+      this.user.avatar = snapshot.downloadURL;
+      this.loading.dismissAll()
+      this.presentToast('Foto telah tersimpan');
+    }, err => {
+      this.loading.dismissAll()
+    });
+
+  }
+  private presentToast(text) {
+    let toast = this.toast.create({
+      message: text,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
+  public takePicture(sourceType, fileType) {
+    // Create options for the Camera Dialog
+    const options: CameraOptions = {
+      quality: 50,
+      sourceType: sourceType,
+      saveToPhotoAlbum: true,
+      allowEdit: true,
+      targetWidth: 600,
+      targetHeight: 600,
+      destinationType: 0,
+      encodingType: this.Camera.EncodingType.JPEG,
+      mediaType: 0,
+      correctOrientation: true
+    };
+
+    // Get the data of an image
+    this.Camera.getPicture(options).then((imagePath) => {
+      // Special handling for Android library
+      this.uploadImage(imagePath, fileType);
+
+    }, (err) => {
+    });
+  }
+
+  public presentActionSheet(fileType) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Load from Library',
+          handler: () => {
+            this.takePicture(0, fileType);
+          }
+        },
+        {
+          text: 'Use Camera',
+          handler: () => {
+            this.takePicture(1, fileType);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+  insertEvent() {
+  }
+  resendSMS(smsObj) {
+    this.zapier.sendVerificationCode(smsObj).subscribe(res => {
+      console.log(res);
+      if (res['_body'] == 'success') {
+        return true
+      } else {
+        return false
+      }
+    });
+  }
+  updateUserStatus(uid) {
+    var that = this;
+    this.userService.updateUserData(uid, { smsVerificationStatus: true }).then(() => {
+      that.status = true;
+      return true
+    })
+  }
+  //  checkChat(){
+  //    var id = firebase.auth().currentUser.uid;;
+  //    firebase.database().ref('chat').child(id).once('value').then(snapshot=>{
+  //      var data = snapshot.val();
+  //      console.log(data);
+  //      this.getChat(data);
+  //    });
+  //  }
+  //  getChat(data){
+  //    this.chatData = data;
+  //    this.chatCs = _.remove(data,{sender:'cs'});
+  //    console.log(this.chatCs);
+  //    console.log(this.chatData);
+  //
+  //  }
+}

@@ -1,0 +1,232 @@
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, AlertController, ActionSheetController, ModalController, ToastController, Platform, Content, LoadingController, Loading } from 'ionic-angular';
+import { UserService } from '../../providers/user-service';
+import { FilePath } from '@ionic-native/file-path';
+import { FileOpener } from '@ionic-native/file-opener';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+import { Camera, CameraOptions } from '@ionic-native/Camera';
+import * as firebase from 'firebase';
+import * as moment from 'moment';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
+
+/*
+  Generated class for the Customeservice page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/declare var cordova: any
+declare var window;
+@Component({
+  selector: 'page-customerservice',
+  templateUrl: 'customerservice.html',
+  providers: [UserService]
+})
+export class CustomerservicePage {
+  @ViewChild(Content) content: Content;
+  theChat: any;
+  receiver: any;
+  name: any;
+  lastImage: string = null;
+  loading: Loading;
+  captureDataUrl: any;
+  myChat: any = [];
+  uid: any;
+  offset: any;
+
+  constructor(
+    private Camera: Camera,
+    private File: File,
+    private FilePath: FilePath,
+    private FileChooser: FileChooser,
+    private navCtrl: NavController,
+    private params: NavParams,
+    private userService: UserService,
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    private actionSheetCtrl: ActionSheetController,
+    private toastCtrl: ToastController,
+    private platform: Platform,
+    private loadingCtrl: LoadingController
+  ) {
+    console.log(this.params);
+    let loader = this.loadingCtrl.create({
+      content: '<img src="./assets/loading.gif"/>',
+      spinner: 'hide',
+      duration: 1000
+    });
+    loader.present()
+    // this.userService.myChatsGuru(this.uid,'cs').once('value').then(function(snapshot){
+    //   var data=[];
+    //   snapshot.forEach(function(childData){
+    //     console.log(childData);
+    //     var dats = childData.val();
+    //     dats['key']=childData.key;
+    //     that.ChatData.push(dats);
+    //   });
+    //   console.log(that.ChatData);
+    //   return that.ChatData.push(data);
+    // });
+    // console.log(this.ChatData);
+    console.log(this.myChat);
+  }
+  ionViewWillEnter() {
+
+    this.uid = this.params.get('data');
+    this.name = this.params.get('name');
+    this.updateChat();
+  }
+  ionViewWillLeave() {
+    this.offset = false;
+  }
+
+
+  private updateChat() {
+    var that = this;
+    this.userService.newChatCs(this.uid).subscribe(snapshot => {
+      this.myChat = snapshot;
+      if (snapshot.length == 0) {
+        that.userService.sendFirstChat(that.uid, that.name)
+      } else {
+        snapshot.forEach(e => {
+          if (e.position == 'left' && e.status == false) {
+            that.presentToast('Ada chat baru dari CS');
+            that.userService.updateChatStatus(e.$key, that.uid);
+          }
+        })
+      }
+    })
+  }
+
+  openThis(name: string) {
+    if (name == 'back') {
+      this.navCtrl.pop();
+    }
+  }
+  sendChat() {
+    this.userService.sendChatCsNew(this.theChat, this.uid, 'text');
+    console.log(this.theChat);
+    this.theChat = null;
+  }
+  getDates(dates) {
+    let date = moment(dates).format('DD/MM/YYYY HH:MM');
+    let hour = moment(dates).format('HH:MM');
+    return date + ' ' + hour;
+  }
+
+  private createFileName() {
+    var d = new Date(),
+      n = d.getTime(),
+      newFileName = n + ".jpg";
+    return newFileName;
+  }
+
+  public uploadImage(data) {
+    // Destination URL
+    let storageRef = firebase.storage().ref(this.uid + '/cs/');
+
+    const filename = new Date().getTime();
+    const imageRef = storageRef.child(`${filename}.png`);
+
+    this.loading = this.loadingCtrl.create({
+    });
+    this.loading.present();
+    imageRef.putString(data, 'base64', { contentType: 'image/jpg' }).then((snapshot) => {
+      this.userService.sendChatCsNew(snapshot.downloadURL, this.uid, 'img');
+      this.loading.dismissAll()
+    }, err => {
+      this.loading.dismissAll()
+    });
+
+  }
+
+  private copyFileToLocalDir(namePath, currentName, newFileName) {
+
+    this.File.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+      this.lastImage = newFileName;
+    }, error => {
+    });
+  }
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  // Always get the accurate path to your apps folder
+  public pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      return cordova.file.dataDirectory + img;
+    }
+  }
+  public takePicture(sourceType) {
+    // Create options for the Camera Dialog
+    const options: CameraOptions = {
+      quality: 50,
+      sourceType: sourceType,
+      saveToPhotoAlbum: true,
+      allowEdit: true,
+      targetWidth: 600,
+      targetHeight: 600,
+      destinationType: 0,
+      encodingType: this.Camera.EncodingType.JPEG,
+      mediaType: 0,
+      correctOrientation: true
+    };
+
+    // Get the data of an image
+    this.Camera.getPicture(options).then((imagePath) => {
+      // Special handling for Android library
+      if (sourceType == 0) {
+        this.uploadImage(imagePath);
+      } else {
+        this.uploadImage(imagePath);
+        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+      }
+    }, (err) => {
+    });
+  }
+
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Load from Library',
+          handler: () => {
+            this.takePicture(0);
+          }
+        },
+        {
+          text: 'Use Camera',
+          handler: () => {
+            this.takePicture(1);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  fuck(data) {
+    console.log(data);
+  }
+
+  dismiss() {
+    this.offset = false;
+    this.navCtrl.pop();
+  }
+}

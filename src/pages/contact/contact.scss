@@ -1,0 +1,99 @@
+.ios, .md {
+
+  page-contact {
+    .datetime-text:empty:not(:focus):before{
+      content: "Date of birth"
+    }
+    ion-content{
+      background:url('../assets/patternb.png');
+      background-repeat: none;
+      background-size: cover;
+    }
+
+    #ion-header{
+      background-color: primary;
+    }
+  //  .scroll-content {
+  //    background-color: inherit;
+  //    display: flex;
+  //    flex-direction: column;
+  //    overflow: scroll;
+  //  }
+  .toolbar{
+    .toolbar-background{
+      background: transparent;
+  }
+
+  }
+
+  img {
+    width: 60%;
+    margin-top: -10%;
+  }
+
+
+
+      ion-row {
+        text-align: center;
+      }
+      .registration{
+        margin-bottom: 5%;
+        border-radius: 10px;
+      }
+
+      .item{
+      border-style: solid;
+      border-width: 2px;
+      border-color: #dcefe1;
+
+      }
+.item-inner {
+border-bottom-color: transparent !important;
+box-shadow: none !important;
+}
+
+
+      ion-item {
+          width: 95%;
+          height:70%;
+          border-radius: 10px !important;
+          padding-left: 5% !important;
+          margin-bottom: 2%;
+          margin-left: 2.5%;
+          margin-top: 2%;
+          background-color: primary;
+          font-size: 1em;
+      }
+      ion-title{
+        margin-left: 30%;
+      }
+      ion-list {
+          margin: 0;
+      }
+      ion-label{
+        text-align: left;
+      }
+      .login-button {
+          margin-top:10%;
+          width: 90%;
+          border-radius: 10px;
+          font-size: 0.9em;
+          border: 1px solid #009900;
+          background-color: #009900;
+          font-family: comic;
+      }
+      .login-button:hover{
+        background-color: #00a09a;
+      }
+      .normalTop{
+        margin-top: 2% !important;
+      }
+      .repassword{
+        margin-bottom: 2% !important;
+      }
+      .icon{
+        color:#5a5a5a;
+      }
+  }
+
+}

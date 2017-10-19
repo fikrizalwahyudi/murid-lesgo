@@ -1,0 +1,22 @@
+page-error {
+  background: #39b54a;
+  .toolbar-background{
+    background: #39b54a;
+  }
+  ion-title{
+    img{
+      width: 20vw;
+    }
+  }
+  .image{
+    img{
+      width: 40vw;
+      height:40vw;
+      text-align:center;
+      margin-top:3em;
+    }
+  }
+  .contentW{
+    text-align: center;
+  }
+}

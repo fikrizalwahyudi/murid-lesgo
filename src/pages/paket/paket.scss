@@ -1,0 +1,209 @@
+page-paket {
+  background: rgba(0, 0, 0, 0.5);
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding-top: 0%;
+    h2 {
+      text-align: center;
+    }
+  }
+  .myselect {
+    min-width: 70%;
+  }
+  ion-header {
+    font-family: comic;
+    ion-title {
+      text-align: center;
+    }
+  }
+  ion-segment {
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #009900;
+    border-width: 1px;
+    width: 95%;
+    margin-left: 2.5%;
+    padding: 0;
+  }
+  ion-segment-button {
+    border-right-radius: 10px;
+    border-right-style: solid;
+    border-right-color: #009900;
+    border-right-width: 1px;
+    font-family: comic;
+    font-size: 2rem!important;
+    color: #5a5a5a!important;
+    background-color: #cacaca!important;
+  }
+  .segment-activated {
+    background-color: #cacaca!important;
+    color: #009900!important;
+  }
+  img {
+    width: 100%;
+  }
+  .durasi {
+    button {
+      padding: 0!important;
+    }
+    img {
+      width: 50%!important;
+    }
+  }
+  ion-content {
+    background-color: white !important;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0%;
+    text-align: center;
+    font-family: brandon;
+    ion-list {
+      height: auto;
+      ion-item {
+        align-items: center;
+      }
+    }
+    .main {
+      width: 80%;
+      margin-left: 10%;
+      border-top-style: solid;
+      border-top-width: thin;
+      border-top-color: #ffffff;
+    }
+    .mainLast {
+      width: 80%;
+      margin-left: 10%;
+      border-top-style: solid;
+      border-top-width: thin;
+      border-top-color: #ffffff;
+      border-bottom-style: solid;
+      border-bottom-width: thin;
+      border-bottom-color: #ffffff;
+    }
+    .lastOne {
+      width: 80%;
+      margin-left: 10%;
+      border-top-style: solid;
+      border-top-width: thin;
+      border-top-color: #ffffff;
+    }
+    .titleCol {
+      padding: 0;
+    }
+    .titleText {
+      background: transparent;
+      color: green;
+      font-size: 2.5rem;
+      text-transform: none !important;
+      font-weight: bold;
+    }
+    .bottomBut {
+      margin-top: 5%;
+      margin-bottom: 5%;
+    }
+    .inputBut {
+      width: 100%;
+      background-color: green;
+      border-radius: 25px;
+      padding-left: 5%;
+      font-size: 1.5rem;
+    }
+    .selections {
+      padding-bottom: 5%;
+      margin-left: 10%;
+    }
+    .picking {
+      padding-bottom: 5%;
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+    .submitMe {
+      background-color: #009900;
+      font-family: comic;
+      border-radius: 10px;
+    }
+    .buttonBot {
+      width: 100%;
+      font-size: 2rem;
+      background-color: green;
+      color: white;
+      font-weight: bold;
+    }
+    .selectionsLast {
+      width: 80%;
+      padding-bottom: 5%;
+      margin-left: 10%;
+      border-bottom-style: solid;
+      border-bottom-width: thin;
+      border-bottom-color: #ffffff;
+    }
+    button {
+      text-align: center;
+    }
+  }
+  .Regular {
+    height: 100%;
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 2%;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #009900;
+  }
+  .Daily {
+    width: 95%;
+    margin-left: 2.5%;
+    margin-top: 2%;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #009900;
+  }
+  item-select {
+    width: 50%!important;
+  }
+  ion-select {
+    width: 100%!important;
+  }
+  .right {
+    font-family: brandon;
+    text-align: left;
+    font-size: 2rem;
+  }
+  .Right {
+    font-family: brandon;
+    text-align: left;
+    font-size: 2rem;
+  }
+  .left {
+    font-size: 3rem;
+    font-family: brandon-bold;
+  }
+  .subHeader {
+    padding: 0;
+    border-top-color: #009900;
+    border-top-style: solid;
+    border-top-width: 1px;
+    margin-top: 2%;
+  }
+  .item-datetime ion-datetime {
+    text-align: center !important;
+    width: 100%;
+  }
+  .label-md {
+    text-align: center;
+    width: 100%;
+  }
+} //block-date
+.block-date {
+  color: red !important;
+} //alert-width
+.alert-width {
+  position: relative;
+  width: 40%;
+  display: inline-block;
+}

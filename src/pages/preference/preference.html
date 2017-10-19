@@ -1,0 +1,146 @@
+<!--
+  Generated template for the Preference page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+--><!--
+  Generated template for the Jadwal page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content>
+  <ion-list-header>
+    Preference
+  </ion-list-header>
+  <ion-list>
+
+    <ion-item (click)="showHideGender()" [hidden]="hideGender != false">
+
+      <h2>Gender</h2>
+
+      <ion-icon item-left name="ios-arrow-dropdown-outline" class="orange"></ion-icon>
+    </ion-item>
+      <ion-item  no-lines (click)="showHideGender()" [hidden]="hideGender != true">
+
+        <h2>Gender</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="orange"></ion-icon>
+
+    </ion-item>
+      <ion-item [hidden]="hideGender != true" style="text-align:center">
+              <button ion-button [ngClass]="{'active': buttonClassM == 'Active','notActive': buttonClassM != 'Active'}" (click)="getGender('male')">
+                Male
+              </button>
+              <button ion-button [ngClass]="{'active': buttonClassF == 'Active','notActive': buttonClassF != 'Active'}" (click)="getGender('female')">
+                Female
+              </button>
+        </ion-item>
+
+    <ion-item (click)="showHideUni()" [hidden]="hideUni != false">
+
+          <h2>Universitas</h2>
+
+          <ion-icon item-left name="ios-arrow-dropdown-outline" class="merah"></ion-icon>
+
+    </ion-item>
+
+    <ion-item no-lines (click)="showHideUni()" [hidden]="hideUni != true">
+
+      <h2>Universitas</h2>
+
+      <ion-icon item-left name="ios-arrow-dropdown-outline" class="merah"></ion-icon>
+
+    </ion-item>
+
+    <ion-item class="selections" [hidden]="hideUni != true">
+        <ion-input [(ngModel)]="univ"></ion-input>
+    </ion-item>
+
+    <ion-item (click)="showHideName()" [hidden]="hideName != false">
+
+      <h2>Name</h2>
+
+      <ion-icon item-left name="ios-arrow-dropdown-outline" class="birutua"></ion-icon>
+
+    </ion-item>
+    <ion-item no-lines (click)="showHideName()" [hidden]="hideName != true">
+
+      <h2>Name</h2>
+
+      <ion-icon item-left name="ios-arrow-dropdown-outline" class="birutua"></ion-icon>
+
+    </ion-item>
+
+    <ion-item class="selectionsLast" [hidden]="hideName != true">
+        <ion-input [(ngModel)]="tutorName">
+      </ion-input>
+    </ion-item>
+  </ion-list>
+  <!-- <ion-grid>
+    <ion-row class="main">
+      <ion-col width-100 class="titleCol">
+        <button ion-button clear class="titleText" (click)="showHideGender()">
+          Gender
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="picking" [hidden]="hideGender != true">
+      <ion-col width-50 class="button">
+        <button ion-button class="{{buttonClassM}}" (click)="getGender('Male')">
+          Male
+        </button>
+      </ion-col>
+      <ion-col width-50 class="button">
+        <button ion-button class="{{buttonClassF}}" (click)="getGender('Female')">
+          Female
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="main">
+      <ion-col width-100 class="titleCol">
+        <button ion-button clear class="titleText" (click)="showHideUni()">
+          University
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="selections" [hidden]="hideUni != true">
+      <ion-col width-80 class="inputBut">
+        <ion-input [(ngModel)]="univ">
+      </ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="{{hideName}}">
+      <ion-col width-100 class="titleCol">
+        <button ion-button clear class="titleText" (click)="showHideName()">
+          Name
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="selectionsLast" [hidden]="hideName != 'lastOne'">
+      <ion-col width-100 class="inputBut">
+        <ion-input [(ngModel)]="tutorName">
+      </ion-input>
+      </ion-col>
+    </ion-row> -->
+
+
+<ion-row class="last">
+  <ion-col class="bottomBut">
+    <button ion-button class="submitMe" (click)="dismiss()">
+      CANCEL
+    </button>
+  </ion-col>
+  <ion-col class="bottomBut">
+    <button ion-button class="submitMe" (click)="send()">
+      OK
+    </button>
+  </ion-col>
+</ion-row>
+<!-- </ion-grid> -->
+
+
+
+</ion-content>

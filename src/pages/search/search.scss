@@ -1,0 +1,127 @@
+page-search {
+    font-family:brandon;
+    ion-content{
+      // background:url('../assets/patternb.png');
+      background-repeat: repeat;
+      background-size: cover;
+
+    }
+  .scroll-content {
+
+      // background:url('../assets/patternb.png');
+      background-repeat: repeat;
+      background-size: cover;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+  }
+  .main{
+
+    // .toolbar-background{
+    //   background-image: url('../assets/button pendukung-01.png')!important;
+    //   background-size: cover;
+    //   background-repeat: no-repeat;
+    // }
+    // .bar-buttons[end]{
+    //   margin-top: 17%;
+    //   margin-right: 6%;
+    // }
+    // .toolbar{
+    //   height:17%;
+    // }
+    .toolbar-background{
+      background: #39b54a;
+    }
+    ion-title{
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0 90px 1px;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      img{
+        width: 20vw;
+      }
+    }
+    .button-clear{
+      height:100%;
+    }
+    .bar-buttons[left]{
+      font-size: 2.5rem;
+    }
+    .bar-buttons[right]{
+      font-family: comic;
+      text-align: right;
+      margin-top: 20%;
+      font-size: 1.5rem;
+    }
+  }
+  .item{
+    background: transparent;
+    .item-button{
+    border-color: #6a6a6a;
+    border-width: 0.1px;
+    vertical-align: bottom;
+    position: fixed;
+    bottom: 0%;
+    right: 0%;
+    font-size: 2rem;
+    color: green;
+    }
+  }
+  .filters{
+    padding:0%;
+    object-fit: cover;
+  }
+    .notice{
+      font-size: 1.1rem;
+      color: #16aa1c;
+      text-align: center;
+    }
+    .notice p{
+      margin-top: 0%;
+      margin-bottom: 0%;
+      font-size: 1rem
+    }
+    .title{
+      font-size: 1.5rem;
+      color: #000000;
+      text-align: left;
+      font-family: comic;
+    }
+    ion-content{
+      .tool-bar{
+        height:100%;
+      }
+
+      .teacherName{
+        font-weight: bold;
+      }
+      h4{
+        color:green;
+        font-style: italic;
+      }
+    }
+    ion-thumbnail {
+      img{
+      border-radius:50%;
+    }
+  }
+  ion-grid ion-row{
+    padding:0%;
+    height:wrap;
+    ion-col {
+      height:100px;
+      button{
+        height:70px;
+      }
+    }
+  }
+  .harga{
+    text-transform: none;
+    font-family: brandon;
+    background-color: transparent;
+    color:green;
+  }
+}

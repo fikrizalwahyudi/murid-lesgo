@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-toolbar top>
+    <ion-buttons left>
+      <button ion-button icon-only navPop>
+          <ion-icon name="md-arrow-round-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title>
+      Forgot Password
+    </ion-title>
+  </ion-toolbar>
+  <ion-row class="login">
+    <ion-col>
+      <ion-list>
+        <ion-item>
+          <ion-label>Email</ion-label>
+          <ion-input type="text" [(ngModel)]="email"></ion-input>
+        </ion-item>
+        <button ion-button class="login-button" (click)="forgetPass()">Send Password</button>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>

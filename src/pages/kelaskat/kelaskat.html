@@ -1,0 +1,37 @@
+
+<!-- <ion-header>
+      <ion-toolbar>
+        <ion-buttons left>
+          <button ion-button icon-only navPop>
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+        </ion-buttons>
+          <ion-buttons right>
+              <p>TINGKATAN</p>
+          </ion-buttons>
+      </ion-toolbar>
+</ion-header> -->
+<ion-header>
+      <ion-toolbar>
+        <ion-buttons left>
+          <button ion-button icon-only class="backbut" navPop>
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title>
+          <img src="assets/logowhite.png"/>
+        </ion-title>
+
+      </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid>
+          <ion-row *ngFor="let row of categories">
+              <ion-col width-50 *ngFor="let items of row" class="container">
+                <button ion-button clear (click)="goSearch(items.key)">
+                  <img class="logo" src="{{items.imageURL}}"/>
+                </button>
+              </ion-col>
+          </ion-row>
+  </ion-grid>
+</ion-content>

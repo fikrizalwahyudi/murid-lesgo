@@ -1,0 +1,214 @@
+page-dashboard {
+    font-family:brandon;
+    ion-content{
+      background:url('../assets/pattern-04.png');
+      background-repeat: repeat;
+      background-size: cover;
+
+    }
+    .notActive{
+      opacity:0.5;
+    }
+    .scroll-content {
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+    }
+    .toolbar-background{
+      background:transparent;
+    }
+    .topData{
+      height:100%;
+      background-color:#dcefe1;
+    }
+    .segment-button{
+      border-style: solid;
+      border-width: 2px;
+      line-height: 0 !important;
+
+    }
+        .button-left{
+          margin-top:5%;
+          button{
+            text-transform: none;
+            font-size: 1.8rem;
+            background-color: #fff200 !important;
+            color: black !important;
+          }
+
+          }
+          .button{
+            border-radius:10px;
+            border-style: solid;
+            border-width: 1px;
+            border-color:#cacaca;
+          }
+        .button-right{
+          margin-top: 5%;
+          button{
+            text-transform: none;
+            font-size: 1.8rem;
+            background-color: #fff200  !important;
+            color: black !important;
+          }
+        }
+    .filters{
+      width: 100%;
+      height: 90%;
+    }
+    .button-clear{
+      height:100%;
+      background-color: #000000 !important;
+    }
+    .bar-buttons[left]{
+      margin-bottom: 20%!important;
+      font-size: 2.5rem;
+    }
+    .bar-buttons[right]{
+      font-family: comic;
+      margin-top:20%;
+      margin-right:5%;
+      font-size: 1.3rem;
+    }
+    .notice{
+      font-size: 1.1rem;
+      color: #16aa1c;
+      text-align: center;
+    }
+    .notice p{
+      margin-top: 20%;
+      margin-bottom: -20%;
+      font-size: 1rem
+    }
+    .title{
+      font-size: 1.5rem;
+      color: #000000;
+      text-align: left;
+      font-family: comic;
+    }
+    .Segment{
+      margin-bottom: 0;
+      border-style: solid;
+      border-width: thin;
+      text-align: center;
+      border-color: green;
+      color:#39B54A;
+      border-radius: 10px;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
+    .Bio{
+      text-align: center;
+      background-style: transparent;
+      background-color: green;
+    }
+    .Almameter{
+      color:#000000;
+      border-color: white;
+      text-align: center;
+      font-size: 1.6rem;
+      flex-wrap: wrap;
+      padding-top: 2%;
+      padding-bottom: 2%;
+    }
+    .avatar{
+      background:url('../assets/backgroundfoto.png');
+      background-size: 70%;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 10% 10%;
+
+    }
+    img {
+    position: relative;
+    align-items: center;
+    text-align: center;
+    height: 40vw;
+    width: 40vw;
+    margin-left:25%;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #5a5a5a;
+  }
+  .tutorFName{
+    h2{
+    text-align: center;
+    width:100%;
+    color: #000000;
+    font-family: comic;
+    font-size: 3rem;
+    }
+    h3{
+    text-align: center;
+    width:100%;
+    color: #000000;
+    }
+  }
+  .orderTutor{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-family:comic;
+    button{
+      background-color: #39B54A;
+      font-size: 3rem;
+    }
+    button:hover{
+      box-shadow: 0 5px 20px rgba(0,0,0,0.19), 0 3px 6px rgba(0,0,0,0.23) !important;
+      background-color: #00A09A !important;
+      color: white !important;
+    }
+  }
+  ion-title{
+    text-align: center;
+  }
+  .aboutData{
+    width:100%;
+    .button-left{
+      text-align: center;
+    }
+    .button-right{
+      text-align: center;
+    }
+  }
+  .about{
+    text-align: center;
+    width:100%;
+    margin-bottom:5%;
+    font-size: 1.6rem;
+    white-space: pre-line;
+  }
+  .labeltop{
+    ion-col{
+      background-color:#b2ceb8;
+      border-style: solid;
+      border-width: thin;
+      border-color:#dcefe1;
+      color:#414042;
+      font-weight:bold;
+      font-size: 1.5rem;
+      border-bottom: 0px;
+    }
+
+  }
+  .isi{
+    ion-col{
+      background-color:#dcefe1;
+      border-right-style: solid;
+      border-width: thin;
+      border-color:#ffffff;
+      color:#414042;
+    }
+  }
+  .jadwalbot{
+    ion-col{
+      background-color:#dcefe1;
+      border-right-style: solid;
+      border-width: thin;
+      border-color:#ffffff;
+      color:#000000;
+    }
+  }
+
+}

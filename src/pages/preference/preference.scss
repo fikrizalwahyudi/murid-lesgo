@@ -1,0 +1,135 @@
+page-preference {
+background: rgba(0,0,0,0.5);
+.scroll-content {
+
+  border-radius:10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+  ion-content{
+
+    background-color: #ffffff !important;
+    width: 95%;
+    height:70%;
+    padding:30%;
+    position:fixed;
+    top:30%;
+    left:2.5%;
+    border-radius:10px;
+    text-align: center;
+    font-family: brandon;
+    ion-list{
+      height:auto;
+      ion-item{
+        align-items: center;
+      }
+
+    }
+    ion-list-header{
+      font-size: 3.5rem!important;
+      font-family: comic;
+    }
+    .submitMe{
+      background-color: #009900;
+      font-family:comic;
+      font-size: 1.6em;
+    }
+    h2{
+      font-size:2.5rem!important;
+    }
+    ion-list-header{
+      border-top: 0;
+      color:white !important;
+      background-color: #999 !important;
+    }
+    .list-header{
+      border-top: 0;
+    }
+    .main{
+      width:80%;
+      margin-left: 10%;
+      border-top-style:solid;
+      border-top-width: thin;
+      border-top-color: #cacaca;
+    }
+    .mainLast{
+      width:80%;
+      margin-left: 10%;
+      border-top-style:solid;
+      border-top-width: thin;
+      border-top-color: #cacaca;
+      border-bottom-style:solid;
+      border-bottom-width: thin;
+      border-bottom-color: #cacaca;
+    }
+    .lastOne{
+      width:80%;
+      margin-left: 10%;
+      border-top-style:solid;
+      border-top-width: thin;
+      border-top-color: #cacaca;
+    }
+    .titleCol{
+      padding:0;
+    }
+    .titleText{
+      background: transparent;
+      color: #000000;
+      font-size: 3rem;
+      text-transform: none !important;
+      font-weight: bold;
+    }
+    .bottomBut{
+      margin-top: 5%;
+    }
+    .inputBut{
+      width:100%;
+      background-color: #cacaca;
+      border-radius: 25px;
+      padding-left: 5%;
+      font-size: 1.5rem;
+
+    }
+    .selections{
+      padding-bottom: 5%;
+      margin-left:10%;
+    }
+
+    .picking{
+      padding-bottom: 5%;
+      padding-right:10%;
+    }
+    .notActive{
+      padding-top: 5%;
+      padding-bottom: 5%;
+      width: 40%;
+      font-size: 3rem;
+      background-color: gray;
+      color:white;
+      font-weight: bold;
+    }
+    .active{
+      padding-top: 5%;
+      padding-bottom: 5%;
+      width: 40%;
+      font-size: 3rem;
+      background-color: green;
+      color:black;
+      font-weight: bold;
+    }
+    .selectionsLast{
+      width:80%;
+      padding-bottom: 5%;
+      margin-left:10%;
+      border-bottom-style:solid;
+      border-bottom-width: thin;
+      border-bottom-color: #ffffff;
+    }
+    button{
+      text-align: center;
+    }
+  }
+
+}

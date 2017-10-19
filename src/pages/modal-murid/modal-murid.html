@@ -1,0 +1,191 @@
+<!--
+  Generated template for the ModalMurid page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content #Content scroll-content *ngIf="types == 'pilih'" class="front">
+  <!-- <template [ngIf]="types == 'pilih'"> -->
+  <ion-toolbar class="out">
+    <ion-buttons left>
+      <button ion-button icon-only class="backbut" (click)="goHome();">
+          <ion-icon name="md-arrow-round-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title>Pilih Murid</ion-title>
+  </ion-toolbar>
+  <ion-list radio-group *ngIf="listMurid.length != 0">
+    <ion-item *ngFor="let items of listMurid; let i = index">
+      <ion-label>{{items.firstName}} {{items.lastName}}</ion-label>
+      <ion-radio value="{{i}}" (ionSelect)="isiMurid(i)"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <h1 *ngIf="listMurid.length == 0 && status == true" style="font-family:comic;font-size:1.6rem;text-align:center;">Anda belum memiliki murid, harap tambah murid terlebih dahulu</h1>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button class="login-button" (click)="tambahMurid()">Tambah Murid</button>
+    </ion-col>
+    <ion-col>
+      <button ion-button class="login-button" [disabled]="!listMurid.length" (click)="send()">OK</button>
+    </ion-col>
+  </ion-row>
+  <!-- </template> -->
+</ion-content>
+<ion-content #Content scroll-content style="
+    background-color: #39b54a;
+    color: white;" *ngIf="types == 'newbie'" class="front">
+  <!-- <template [ngIf]="types == 'pilih'"> -->
+
+  <h1 style="font-family:comic;text-align:center;
+    font-size: 5em;text-transform:capitalize;margin-top:1em;">Selamat</h1>
+  <h1 style="font-family:comic;text-align:center;
+    font-size: 5em;text-transform:capitalize">Datang</h1>
+  <h1 style="font-family:comic;text-align:center;
+    font-size: 5em;text-transform:capitalize">Di LESGO!</h1>
+  <br>
+  <h2 style="font-family:comic;text-align:center;">Selanjutnya isi data murid </h2>
+  <h2 style="font-family:comic;text-align:center;margin-top:0;margin-bottom:1em;">yang akan belajar</h2>
+  <ion-row>
+    <ion-col width-100 style="text-align:right;">
+      <button ion-button class="next-button" (click)="types = 'tambah'">Next</button>
+    </ion-col>
+  </ion-row>
+  <!-- </template> -->
+</ion-content>
+<!-- <ion-list *ngIf="types == 'pilih'">
+        <ion-item>
+          <ion-label>List Murid</ion-label>
+          <ion-select [(ngModel)]="select" (ionChange)="isiMurid()" >
+            <ion-option *ngFor="let items of listMurid;let i=index" value="{{i}}" >{{items.firstName}} {{items.lastName}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <button ion-button (click)="tambahMurid()">Tambah Murid</button>
+          </ion-col>
+          <ion-col>
+            <button ion-button (click)="send()">OK</button>
+          </ion-col>
+        </ion-row>
+  </ion-list> -->
+<ion-content #Content scroll-content *ngIf="(types == 'tambah' || types == 'edit') && dataMurid.length != 0" class="back">
+  <ion-list>
+    <ion-row style="position:absolute;">
+      <ion-buttons left *ngIf="source == 'home'">
+        <button clear (click)="types = 'pilih'" style="background:transparent">
+                <ion-icon name="ios-close-circle-outline" style="color:black;"></ion-icon>
+              </button>
+      </ion-buttons>
+      <ion-buttons left *ngIf="source != 'home' && source != 'dashboard'">
+        <button clear style="background:transparent" navPop>
+                <ion-icon name="ios-close-circle-outline" style="color:black;"></ion-icon>
+              </button>
+      </ion-buttons>
+    </ion-row>
+    <ion-row>
+      <ion-col class="avatar" [hidden]="lastImage === null">
+        <img src="{{pathForImage(lastImage)}}" class="avatar">
+      </ion-col>
+      <ion-col class="avatar" [hidden]="lastImage !== null">
+        <img src="{{dataMurid.avatar}}" class="avatar">
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <button class="login-button" ion-button icon-left (click)="presentActionSheet()">
+            <!-- <ion-icon name="camera"></ion-icon> -->
+            Select Image
+          </button>
+      </ion-col>
+      <!-- <ion-col>
+          <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+            <ion-icon name="cloud-upload"></ion-icon>Upload
+          </button>
+        </ion-col> -->
+    </ion-row>
+    <ion-row>
+      <ion-col width-50>
+        <ion-item>
+          <ion-label floating>First Name<a style="color:red;">*</a></ion-label>
+          <ion-input type="text" [(ngModel)]="dataMurid.firstName"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col width-50>
+        <ion-item>
+          <ion-label floating>Last Name<a style="color:red;">*</a></ion-label>
+          <ion-input type="text" [(ngModel)]="dataMurid.lastName"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row radio-group [(ngModel)]="dataMurid.gender">
+      <ion-col width-50>
+        <ion-item>
+          <ion-label>Male<a style="color:red;">*</a></ion-label>
+          <ion-radio value="male" checked></ion-radio>
+        </ion-item>
+      </ion-col>
+      <ion-col width-50>
+        <ion-item>
+          <ion-label>Female<a style="color:red;">*</a></ion-label>
+          <ion-radio value="female"></ion-radio>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-item>
+      <ion-label floating>Date Of Birth<a style="color:red;">*</a></ion-label><a style="color:red;">*</a>
+      <ion-datetime displayFormat="DD-MMM-YYYY" [max]="max" [(ngModel)]="dataMurid.dob"></ion-datetime>
+      <!-- <ion-input type="date" [(ngModel)]="dataMurid.dob"></ion-input> -->
+    </ion-item>
+
+    <ion-item class="normal" (click)='openMap("murid")'>
+      <ion-label floating>Pin Area Belajar<a style="color:red;">*</a></ion-label>
+      <ion-textarea disabled="true" [(ngModel)]="dataMurid.displayAddress" style="color:black"></ion-textarea>
+      <!-- <ion-input type="text" [(ngModel)]="alamat" placeholder="Lokasi Belajar Mengajar"></ion-input> -->
+    </ion-item>
+
+    <ion-item class="normal">
+      <ion-label floating>Alamat Belajar<a style="color:red;">*</a></ion-label>
+      <ion-input type="text" [(ngModel)]="dataMurid.address"></ion-input>
+    </ion-item>
+
+
+    <ion-item class="normal">
+      <ion-label floating>Postal Code<a style="color:red;">*</a></ion-label>
+      <ion-input type="text" [(ngModel)]="dataMurid.postalCode"></ion-input><a style="color:red;">*</a>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Province<a style="color:red;">*</a></ion-label>
+      <ion-select [(ngModel)]="dataMurid.provinceId" (ionChange)="getProvince()">
+        <ion-option *ngFor="let item of arrayProvinceName" value="{{item.id}}">{{item.text}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>City<a style="color:red;">*</a></ion-label>
+      <ion-select [(ngModel)]="dataMurid.cityId" (ionChange)="getCity()">
+        <ion-option *ngFor="let items of arrayCityByProvince" value="{{items.id}}">{{items.text}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-row>
+      <ion-col width-100 style="text-align:center">
+        <button class="login-button" ion-button icon-left (click)="saveMurid()">
+              Save Murid
+            </button>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+
+
+  <!-- <ion-list>
+        <button ion-item (click)="openMap()">
+          <ion-icon name="pin">
+            {{  muridAddress }}</ion-icon>
+        </button>
+      </ion-list> -->
+
+
+</ion-content>

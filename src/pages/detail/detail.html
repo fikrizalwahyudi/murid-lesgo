@@ -1,0 +1,250 @@
+<!--
+  Generated template for the Detail page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+      <ion-toolbar>
+        <ion-title>
+          <img src="assets/logowhite.png"/>
+        </ion-title>
+
+      </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <ion-card class="orderCard">
+  <img src="assets/business.jpg">
+
+  <span class="rating">
+    <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" (ionChange)="onModelChange($event)"></rating>
+  </span>
+  <ion-item>
+    <ion-icon name="ios-contact-outline" item-left large></ion-icon>
+    <p>{{profile.label}}</p>
+    <h2>{{profile.firstName}} {{profile.lastName}}</h2>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="ios-school-outline" item-left large ></ion-icon>
+    <p>Tingkat</p>
+    <h2>SMA, SMP, SD, TK</h2>
+    <!-- <p>14 S. Hop Avenue, Madison, WI 53703</p> -->
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="ios-book-outline" item-left large ></ion-icon>
+    <p>Matpel</p>
+    <h2>Matematika, Fisika, Kimia</h2>
+    <!-- <p>14 S. Hop Avenue, Madison, WI 53703</p> -->
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="ios-pin-outline" item-left large ></ion-icon>
+    <p>Lokasi Belajar Mengajar</p>
+    <h2>{{profile.location}}</h2>
+    <!-- <p>14 S. Hop Avenue, Madison, WI 53703</p> -->
+  </ion-item>
+
+
+  <!-- <ion-item>
+    <span item-left>Berikan Rating</span>
+    <span item-left></span>
+    <button ion-button icon-left clear item-right>
+      <ion-icon name="navigate"></ion-icon>
+      Start
+    </button>
+  </ion-item> -->
+  </ion-card>
+
+  <ion-card class="orderCard">
+  <ion-card-header>
+   Detail Sesi #01020310120
+  </ion-card-header>
+  <ion-list>
+    <ion-item (click)="sessionDetail('010203101201')">
+      <!-- <ion-avatar item-left>
+        <img src="img/avatar-finn.png">
+      </ion-avatar> -->
+
+      <h3>#010203101201</h3>
+      <h2>Sudah Mengajar</h2>
+      <p> 16 Feb 2017</p>
+
+      <span item-content>
+      <h1> Review</h1>
+      </span>
+      <ion-icon item-right name="ios-arrow-down-outline" [hidden]="sessionActive != '010203101201'"></ion-icon>
+      <ion-icon item-right name="ios-arrow-forward-outline" [hidden]="sessionActive == '010203101201'"></ion-icon>
+
+
+    </ion-item>
+    <ion-card [hidden]="sessionActive != '010203101201'">
+        <ion-list>
+
+          <ion-item>
+            <h2>Jam Mulai</h2>
+            <h2 item-right> 07.00 </h2>
+          </ion-item>
+
+          <ion-item>
+            <h2>Jam Selesai</h2>
+            <h2 item-right> 09.00 </h2>
+          </ion-item>
+
+          <ion-item>
+            <h2>Mata Pelajaran</h2>
+            <h2 item-right> Matematika </h2>
+          </ion-item>
+
+          <ion-item>
+            <p>Hasil Belajar</p>
+            <h2> Hery murid yang baik, pelajaran matematika nya meningkat</h2>
+          </ion-item>
+        </ion-list>
+    </ion-card>
+    <ion-item (click)="sessionDetail('010203101202')">
+      <!-- <ion-avatar item-left>
+        <img src="img/avatar-finn.png">
+      </ion-avatar> -->
+
+      <h3>#010203101202</h3>
+      <h2>On The Way</h2>
+      <h3> 17 Feb 2017</h3>
+
+      <span item-content>
+      <h1> Review</h1>
+      </span>
+      <ion-icon item-right name="ios-arrow-down-outline" [hidden]="sessionActive != '010203101202'"></ion-icon>
+      <ion-icon item-right name="ios-arrow-forward-outline" [hidden]="sessionActive == '010203101202'"></ion-icon>
+
+      </ion-item>
+
+      <ion-card [hidden]="sessionActive != '010203101202'">
+          <ion-list>
+            <ion-item>
+              <h2>Jam Mulai</h2>
+              <h2 item-right> </h2>
+            </ion-item>
+
+            <ion-item>
+              <h2>Jam Selesai</h2>
+              <h2 item-right> </h2>
+            </ion-item>
+
+            <ion-item>
+              <h2>Mata Pelajaran</h2>
+              <h2 item-right> </h2>
+            </ion-item>
+
+            <ion-item>
+              <p>Hasil Belajar</p>
+              <h2 item-right></h2>
+            </ion-item>
+          </ion-list>
+      </ion-card>
+
+
+    <ion-item (click)="sessionDetail('010203101203')">
+      <!-- <ion-avatar item-left>
+        <img src="img/avatar-finn.png">
+      </ion-avatar> -->
+
+      <h3>#010203101203</h3>
+      <h2>Sudah Mengajar</h2>
+      <p> 18 Feb 2017</p>
+
+      <span item-content>
+      <h1> Review</h1>
+      </span>
+        <ion-icon item-right name="ios-arrow-down-outline" [hidden]="sessionActive != '010203101203'"></ion-icon>
+        <ion-icon item-right name="ios-arrow-forward-outline" [hidden]="sessionActive == '010203101203'"></ion-icon>
+
+        </ion-item>
+
+        <ion-card [hidden]="sessionActive != '010203101203'">
+            <ion-list>
+
+              <ion-item>
+                <h2>Jam Mulai</h2>
+                <h2 item-right> 07.00 </h2>
+              </ion-item>
+
+              <ion-item>
+                <h2>Jam Selesai</h2>
+                <h2 item-right> 09.00 </h2>
+              </ion-item>
+
+              <ion-item>
+                <h2>Mata Pelajaran</h2>
+                <h2 item-right> Bahasa Inggris </h2>
+              </ion-item>
+
+              <ion-item>
+                <p>Hasil Belajar</p>
+                <h2> Hery murid yang baik, pelajaran matematika nya meningkat</h2>
+              </ion-item>
+
+            </ion-list>
+        </ion-card>
+
+
+  </ion-list>
+</ion-card>
+
+
+
+<ion-card class="paymentCard">
+<ion-card-header>
+  Order Details
+</ion-card-header>
+  <ion-list>
+  <ion-item>
+    <!-- <ion-avatar item-left>
+      <img src="img/avatar-finn.png">
+    </ion-avatar> -->
+
+    <h2>Sub Total</h2>
+    <h2 item-right>Rp {{subtotal}}</h2>
+  </ion-item>
+  <ion-item>
+    <!-- <ion-avatar item-left>
+      <img src="img/avatar-finn.png">
+    </ion-avatar> -->
+
+    <h2>Promo</h2>
+    <h2 item-right>{{promo}}</h2>
+  </ion-item>
+  <ion-item>
+    <!-- <ion-avatar item-left>
+      <img src="img/avatar-finn.png">
+    </ion-avatar> -->
+
+    <h2>Payment</h2>
+    <h2 item-right>{{payment}}</h2>
+  </ion-item>
+
+  <ion-item>
+    <!-- <ion-avatar item-left>
+      <img src="img/avatar-finn.png">
+    </ion-avatar> -->
+
+    <h2>Convinience Fee</h2>
+    <h2 item-right>Rp {{conFee}}</h2>
+  </ion-item>
+
+  <ion-item class="total">
+    <!-- <ion-avatar item-left>
+      <img src="img/avatar-finn.png">
+    </ion-avatar> -->
+
+    <h2>Total</h2>
+    <h2 item-right>Rp {{total}}</h2>
+  </ion-item>
+
+</ion-list>
+</ion-card>
+</ion-content>

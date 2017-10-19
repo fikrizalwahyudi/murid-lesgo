@@ -1,0 +1,93 @@
+<!--
+  Generated template for the Search page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+        <ion-toolbar class="main">
+          <ion-buttons left>
+            <button ion-button icon-only class="backbut" navPop>
+              <ion-icon name="md-arrow-round-back"></ion-icon>
+            </button>
+          </ion-buttons>
+            <ion-buttons right>
+                <p>PILIH GURU</p>
+            </ion-buttons>
+        </ion-toolbar>
+</ion-header> -->
+<ion-header>
+  <ion-toolbar class="main">
+    <ion-buttons left>
+      <button ion-button icon-only class="backbut" navPop>
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+    </ion-buttons>
+    <ion-title>
+      <img src="assets/logowhite.png" />
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-25>
+          <button ion-button clear (click)="goPick('pelajaran')" wrap style="height:70px;">
+        <img src="assets/Pelajaran.png" class="filters"/>
+      </button>
+        </ion-col>
+        <ion-col width-25>
+          <button ion-button clear (click)="goPick('paket')" wrap style="height:70px;">
+        <img src="assets/Paket.png" class="filters"/>
+      </button>
+        </ion-col>
+        <ion-col width-25>
+          <button ion-button clear (click)="goPick('preference')" wrap style="height:70px;">
+        <img src="assets/Preferensi.png"  class="filters"/>
+      </button>
+        </ion-col>
+        <ion-col width-25>
+          <button ion-button clear (click)="goFilter()" wrap style="height:70px;">
+        <img src="assets/jam.png" class="filters"/>
+      </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-100 style="font-family:comic;text-align:center;">
+          <h1>PILIHAN GURU YANG SESUAI</h1>
+        </ion-col>
+      </ion-row>
+      <template [ngIf]="teachers != undefined">
+        <ion-list [virtualScroll]="teachers" [approxItemHeight]="'70px'">
+          <ion-item *virtualItem="let teacher" (click)="showProfile(teacher)">
+            <ion-thumbnail item-left>
+              <img [src]="teacher.avatar" />
+            </ion-thumbnail>
+            <h3 class="teacherName">{{ teacher.firstName }} {{ teacher.lastName }}</h3>
+            <h3>{{ teacher.rating}}</h3>
+            <h3>{{ teacher.universitas }}</h3>
+            <h4>
+              <template ngFor let-course [ngForOf]="teacher.courses" let-i="index">{{ course.text }}
+                <template [ngIf]="teacher.courses.length >1 && i != teacher.courses.length-1">, </template>
+                <template [ngIf]="i==1"><br></template>
+              </template>
+            </h4>
+
+            <h2 item-right class="harga">Rp. {{thousandMask(teacher.price)}}</h2>
+            <!-- {{refresh()}} -->
+          </ion-item>
+        </ion-list>
+      </template>
+      <template [ngIf]="teachers.length == 0">
+        <ion-item (click)="GetItBack()">
+          <button ion-button>Refresh</button>
+        </ion-item>
+      </template>
+    </ion-grid>
+  </div>
+  <!--<div class="isi">
+
+  </div>-->
+</ion-content>

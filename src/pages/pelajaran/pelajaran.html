@@ -1,0 +1,280 @@
+<!--
+  Generated template for the Pelajaran page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+<ion-content scroll-content style="padding-bottom:20% !important;">
+
+  <!-- <ion-grid> -->
+    <!-- <ion-row class="main">
+      <ion-col width-100 class="titleCol">
+        <button ion-button clear class="titleText" (click)="showHideTK()">
+          TK / Paud
+        </button>
+      </ion-col>
+    </ion-row> -->
+    <ion-list-header>
+      Pelajaran
+    </ion-list-header>
+    <ion-list>
+
+      <ion-item (click)="showHideTK()" [hidden]="TK != false">
+
+        <h2>TK / Paud</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="orange"></ion-icon>
+
+      </ion-item>
+
+      <ion-item no-lines (click)="showHideTK()" [hidden]="TK != true">
+
+        <h2>TK / Paud</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="orange"></ion-icon>
+
+      </ion-item>
+
+      <ion-item text-wrap [hidden]="TK != true">
+        <button ion-button [ngClass]="{'backorange active': tkdata.class == 'active','backorange': tkdata.class != 'active'}"  *ngFor="let tkdata of TKData " (click)="sendValueTK(tkdata.key,tkdata.parentId,tkdata.counter,tkdata.name)">
+          {{tkdata.name}}
+        </button>
+      </ion-item>
+
+      <ion-item (click)="showHideSD()" style="border-bottom:0" [hidden]="SD == true">
+
+        <h2>SD</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="merah"></ion-icon>
+
+
+      </ion-item>
+      <ion-item no-lines (click)="showHideSD()" style="border-bottom:0" [hidden]="SD != true">
+
+        <h2>SD</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="merah"></ion-icon>
+
+
+      </ion-item>
+      <ion-item text-wrap [hidden]="SD != true">
+      <button ion-button [ngClass]="{'backmerah active': sddata.class == 'active','backmerah': sddata.class != 'active'}" *ngFor="let sddata of SDData" (click)="sendValueSD(sddata.key,sddata.parentId,sddata.counter,sddata.name)">
+        {{sddata.name}}
+      </button>
+    </ion-item>
+
+      <ion-item (click)="showHideSMP()" [hidden]="SMP != false">
+
+        <h2>SMP</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="birutua"></ion-icon>
+
+
+      </ion-item>
+      <ion-item no-lines (click)="showHideSMP()" [hidden]="SMP != true">
+
+        <h2>SMP</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="birutua"></ion-icon>
+
+
+      </ion-item>
+
+      <ion-item text-wrap [hidden]="SMP != true">
+        <button ion-button [ngClass]="{'backbirutua active': smpdata.class == 'active','backbirutua': smpdata.class != 'active'}" *ngFor="let smpdata of SMPData" (click)="sendValueSMP(smpdata.key,smpdata.parentId,smpdata.counter,smpdata.name)" text-wrap>
+          {{smpdata.name}}
+        </button>
+      </ion-item>
+
+      <ion-item (click)="showHideSMA()" [hidden]="SMA != false">
+
+        <h2>SMA</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="biru"></ion-icon>
+
+      </ion-item>
+
+      <ion-item no-lines (click)="showHideSMA()" [hidden]="SMA != true">
+
+        <h2>SMA</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="biru"></ion-icon>
+
+      </ion-item>
+
+      <ion-item text-wrap [hidden]="SMA != true">
+        <button ion-button [ngClass]="{'backbiru active': smadata.class == 'active','backbiru': smadata.class != 'active'}" *ngFor="let smadata of SMAData" (click)="sendValueSMA(smadata.key,smadata.parentId,smadata.counter,smadata.name)" text-wrap>
+          {{smadata.name}}
+        </button>
+      </ion-item>
+
+      <ion-item (click)="showHideUni()" [hidden]="Uni == true">
+
+        <h2>Universitas</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="hitam"></ion-icon>
+
+      </ion-item>
+
+      <ion-item no-lines (click)="showHideUni()" [hidden]="Uni != true">
+
+        <h2>Universitas</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="hitam"></ion-icon>
+
+      </ion-item>
+
+      <ion-item text-wrap [hidden]="Uni != true">
+        <button ion-button [ngClass]="{'backhitam active': unidata.class == 'active','backhitam': unidata.class != 'active'}"  *ngFor="let unidata of UniData" (click)="sendValueUni(unidata.key,unidata.parentId,unidata.name)" text-wrap>
+          {{unidata.name}}
+        </button>
+      </ion-item>
+
+      <ion-item (click)="showHideUmum()" [hidden]="Umum == true">
+
+        <h2>Umum</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="coklat"></ion-icon>
+
+      </ion-item>
+
+      <ion-item no-lines (click)="showHideUmum()" [hidden]="Umum != true">
+
+        <h2>Umum</h2>
+
+        <ion-icon item-left name="ios-arrow-dropdown-outline" class="coklat"></ion-icon>
+
+      </ion-item>
+
+      <ion-item text-wrap [hidden]="Umum != true">
+        <button ion-button [ngClass]="{'backcoklat active': umumdata.class == 'active','backcoklat': umumdata.class != 'active'}" *ngFor="let umumdata of UmumData" (click)="sendValueUmum(umumdata.key,umumdata.parentId,umumdata.counter,umumdata.name)" text-wrap>
+          {{umumdata.name}}
+        </button>
+      </ion-item>
+
+        <ion-row>
+          <ion-col class="bottomBut">
+            <button ion-button class="submitMe" (click)="dismiss()">
+              CANCEL
+            </button>
+          </ion-col>
+          <ion-col class="bottomBut">
+            <button ion-button class="submitMe" (click)="send()">
+              OK
+            </button>
+          </ion-col>
+        </ion-row>
+    </ion-list>
+    <!-- <ion-row class="picking" [hidden]="TK != true" *ngFor="let i of TKrows;">
+      <ion-col width-33 class="button" *ngFor="let tkdata of TKData | slice:(i*3):(i+1)*3">
+        <button ion-button class="{{tkdata.class}}" (click)="sendValue(tkdata.key,tkdata.parentId,tkdata.counter,tkdata.name)">
+          {{tkdata.name}}
+        </button>
+      </ion-col>
+    </ion-row> -->
+
+<!--
+      <ion-row class="main">
+        <ion-col width-100 class="titleCol">
+          <button ion-button clear class="titleText" (click)="showHideSD()">
+            SD
+          </button>
+        </ion-col>
+      </ion-row>
+      <span *ngFor="let i of SDrows">
+      <ion-row class="picking" [hidden]="SD != true">
+        <ion-col width-33 class="button" *ngFor="let sddata of SDData | slice:(i*3):(i+1)*3">
+          <button ion-button class="{{sddata.class}}" (click)="sendValue(sddata.key,sddata.parentId,sddata.counter)">
+            {{sddata.name}}
+          </button>
+        </ion-col>
+      </ion-row>
+    </span>
+
+        <ion-row class="main">
+          <ion-col width-100 class="titleCol">
+            <button ion-button clear class="titleText" (click)="showHideSMP()">
+              SMP
+            </button>
+          </ion-col>
+        </ion-row>
+        <span *ngFor="let i of SMProws;">
+        <ion-row class="picking" [hidden]="SMP != true">
+          <ion-col class="button" *ngFor="let smpdata of SMPData | slice:(i*3):(i+1)*3">
+            <button ion-button class="{{smpdata.class}}" (click)="sendValue(smpdata.key,smpdata.parentId,smpdata.counter)">
+              {{smpdata.name}}
+            </button>
+          </ion-col>
+        </ion-row>
+      </span>
+
+          <ion-row class="main">
+            <ion-col width-100 class="titleCol">
+              <button ion-button clear class="titleText" (click)="showHideSMA()">
+                SMA
+              </button>
+            </ion-col>
+          </ion-row>
+          <ion-scroll class="ionScroll" direction="x">
+            <div class="content">
+            <span *ngFor="let i of SMArows;">
+              <ion-row class="picking" [hidden]="SMA != true">
+                <ion-col class="button" *ngFor="let smadata of SMAData | slice:(i*3):(i+1)*3">
+                  <button ion-button class="{{smadata.class}}" (click)="sendValue(smadata.key,smadata.parentId,smadata.counter)">
+                    {{smadata.name}}
+                  </button>
+                </ion-col>
+              </ion-row>
+            </span>
+          </div>
+        </ion-scroll>
+
+            <ion-row class="main">
+              <ion-col width-100 class="titleCol">
+                <button ion-button clear class="titleText" (click)="showHideUni()">
+                  Universitas
+                </button>
+              </ion-col>
+            </ion-row>
+            <ion-scroll class="ionScroll" direction="x">
+              <div class="content">
+                <span *ngFor="let i of Unirows;">
+                <ion-row class="picking" [hidden]="Uni != true">
+                  <ion-col class="button" *ngFor="let unidata of UniData | slice:(i*3):(i+1)*3">
+                    <button ion-button class="{{unidata.class}}" (click)="sendValue(unidata.key,unidata.parentId,unidata.counter)">
+                      {{unidata.name}}
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </span>
+            </div>
+          </ion-scroll>
+
+              <ion-row class="main">
+                <ion-col width-100 class="titleCol">
+                  <button ion-button clear class="titleText" (click)="showHideUmum()">
+                    Umum
+                  </button>
+                </ion-col>
+              </ion-row>
+              <span *ngFor="let i of Umumrows;">
+              <ion-row class="picking" [hidden]="Umum != true">
+                <ion-col class="button" *ngFor="let umumdata of UmumData | slice:(i*3):(i+1)*3">
+                  <button ion-button class="{{umumdata.class}}" (click)="sendValue(umumdata.key,umumdata.parentId,umumdata.counter)">
+                    {{umumdata.name}}
+                  </button>
+                </ion-col>
+              </ion-row>
+            </span> -->
+
+
+<!-- </ion-grid> -->
+
+
+
+
+
+
+</ion-content>

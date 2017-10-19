@@ -1,0 +1,93 @@
+<ion-content style="background:url('assets/patternb.png');background-size: cover;">
+
+  <ion-toolbar top>
+    <ion-buttons left>
+      <button ion-button icon-only navPop>
+        <ion-icon name="md-arrow-round-back"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-row>
+    <ion-col>
+      <img [@fadeIn]="loginState" src="assets/logo.png" />
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="registration">
+    <ion-col>
+      <ion-list>
+
+        <ion-item class="normalTop">
+          <ion-icon class="icon" name="ios-contact-outline" item-left></ion-icon>
+          <ion-input type="text" [(ngModel)]="firstName" placeholder="Nama Depan"></ion-input>
+        </ion-item>
+
+        <ion-item class="normalTop">
+          <ion-icon class="icon" name="ios-contact-outline" item-left></ion-icon>
+          <ion-input type="text" [(ngModel)]="lastName" placeholder="Nama Belakang"></ion-input>
+        </ion-item>
+
+        <ion-item class="normal">
+          <ion-icon class="icon" name="ios-phone-portrait" item-left></ion-icon>
+          <ion-input type="text" [(ngModel)]="telepon" [textMask]="{mask:mask, modelClean:true}"></ion-input>
+        </ion-item>
+
+        <ion-item class="normal">
+          <ion-icon class="icon" name="ios-mail-outline" item-left></ion-icon>
+          <ion-input type="text" [(ngModel)]="email" placeholder="Email"></ion-input>
+        </ion-item>
+
+        <ion-item class="password">
+          <ion-icon class="icon" name="ios-lock-outline" item-left></ion-icon>
+          <button clear ion-button icon-only item-right (click)="showPass()">
+              <ion-icon name="{{passIcon}}"></ion-icon>
+            </button>
+          <ion-input type="{{passState}}" [(ngModel)]="password" placeholder="Buat Password"></ion-input>
+        </ion-item>
+
+        <ion-item class="repassword">
+          <ion-icon class="icon" name="ios-lock-outline" item-left></ion-icon>
+          <button clear ion-button icon-only item-right (click)="showRePass()">
+              <ion-icon name="{{passReIcon}}"></ion-icon>
+            </button>
+          <ion-input type="{{passReState}}" [(ngModel)]="rePassword" placeholder="Konfirmasi Password"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon class="icon" name="ios-calendar-outline" item-left></ion-icon>
+          <ion-datetime displayFormat="DD-MMM-YYYY" max='2016' [(ngModel)]="dob" (ionChange)="status=false"></ion-datetime>
+          <!-- <ion-input type="date" [(ngModel)]="dataUser.dob"></ion-input> -->
+        </ion-item>
+        <ion-row radio-group [(ngModel)]="gender">
+          <ion-col width-50>
+            <ion-item>
+              <ion-label>Male</ion-label>
+              <ion-radio value="male" checked></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col width-50>
+            <ion-item>
+              <ion-label>Female</ion-label>
+              <ion-radio value="female"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-item>
+          <p item-right> Dengan mendaftar anda telah menyetujui <a (click)="goTo('tnc')">Terms & Condition</a> serta <a (click)="goTo('privacy')">Kebijakan Privasi</a>            kami</p>
+        </ion-item>
+
+        <ion-row>
+          <ion-col>
+            <button ion-button class="login-button" (click)="signMeUp()">Daftar</button>
+          </ion-col>
+        </ion-row>
+
+      </ion-list>
+    </ion-col>
+  </ion-row>
+
+
+
+</ion-content>

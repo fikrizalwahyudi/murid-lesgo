@@ -1,0 +1,222 @@
+import { Component } from '@angular/core';
+import { NavController, NavParams, LoadingController, PopoverController, ModalController} from 'ionic-angular';
+import { ListCat  } from '../../providers/list-cat';
+import { Zapier  } from '../../providers/zapier';
+import { UserService  } from '../../providers/user-service'
+import { HomePage  } from '../home/home';
+import { KategoriPage  } from '../kategori/kategori';
+import { OrderPage  } from '../order/order';
+import { PaketPage  } from '../paket/paket';
+import * as firebase from 'firebase';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+
+/*
+  Generated class for the Dashboard page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+@Component({
+  selector: 'page-dashboard',
+  templateUrl: 'dashboard.html',
+  providers: [ListCat, UserService,Zapier]
+})
+export class DashboardPage {
+
+  public profile: any = [];
+  public profileGuru: any = 'Detail';
+  public butOff:any;
+  public price:any;
+  public latLng:any;
+  public userId:any;
+  public class:any=[];
+  private jadwal:any;
+  private matpel:any;
+  private schedule:any=[];
+  private jadwalData:any;
+  public tutorOrder:any=[];
+  private paketData:any;
+  public listBlockedDate:any = [];
+
+  constructor(private zapier:Zapier,public navCtrl: NavController, public listCat: ListCat, public userService: UserService, public params: NavParams, public popoverCtrl: PopoverController, public loadingCtrl: LoadingController, public modalCtrl: ModalController) {
+    this.butOff = 'kelas';
+    console.log(this.params.data);
+    this.userId=this.params.get('key');
+    this.paketData = this.params.get('paket');
+    this.latLng = this.params.get('latLng').data;
+    console.log(this.latLng);
+    this.displayUser(this.userId.userId);
+    // this.getBookedSession(this.userId.userId);
+
+    this.schedule = this.userId.schedule;
+    // this.price = this.params.data.key.price;
+    // this.profile = this.getProfile();
+    console.log(this.profile);
+  }
+  test(startDate, uid){
+    var that = this;
+    let loader=this.loadingCtrl.create({content:'<img src="./assets/loading.gif"/>',
+    spinner:'hide'
+    });
+      loader.present();
+    this.zapier.getUnavailability(startDate,uid).subscribe(res=>{
+      console.log(res);
+      if(res != undefined  && res.length != 0){
+        that.tutorOrder = res;
+        console.log(that.tutorOrder)
+        loader.dismissAll();
+      }
+    })
+  }
+
+  getTutorBooked(day,time,jam){
+    var a = _.filter(this.tutorOrder, {day:day});
+    var b = _.filter(a,{});
+  }
+
+  getBookedSession(uid){
+    var that = this;
+    this.tutorOrder = [];
+    this.userService.getTutorSession(uid).subscribe(data =>{
+      data.forEach(orderData => {
+        if(orderData.status == 'booked' || orderData.status =='pending' || orderData.status =='cart'){
+          orderData.sessions.forEach(sesi => {
+            var data = sesi;
+            data.date = moment(data.date).format('MM-DD-YYYY');
+            that.tutorOrder.push(sesi);
+          })
+        }
+      })
+      console.log(this.tutorOrder);
+    })
+  }
+  displayUser(theUserId){
+    var that=this;
+    let lola=this.loadingCtrl.create({content:'<img src="./assets/loading.gif"/>',
+    spinner:'hide'
+    });
+      lola.present();
+      this.test(moment().add(1,'day').format('DD-MM-YYYY'),this.userId.userId)
+    this.userService.viewTeacher(theUserId).once('value',snapshot=> {
+      var dats = snapshot.val();
+      this.profile = dats;
+      this.displayClass(this.userId.userId);
+      lola.dismiss();
+    })
+
+  }
+  displayClass(uid){
+    var that = this;
+
+    let loads=this.loadingCtrl.create({content:'<img src="./assets/loading.gif"/>',
+    spinner:'hide'
+    });
+      loads.present();
+    this.listCat.getTeacherProducts(uid).on("value",function(snapshot){
+        snapshot.forEach(function(childSnapshot){
+          var data = childSnapshot.val();
+          that.class.push(data);
+        })
+      });
+
+      loads.dismiss();
+    };
+
+  onChange(name){
+    let test = this.loadingCtrl.create({showBackdrop:false, spinner:'hide'});
+    test.present();
+    console.log(name);
+    if(this.butOff != name){
+        this.butOff=name;
+        test.dismiss()
+    }
+    else{
+      this.butOff='empty';
+      test.dismiss()
+    }
+
+  }
+  orderMe(){
+    // if(this.params.data.paket == undefined){
+    var that=this;
+      // this.userService.getOrderCounter();
+
+      /*CHECK = BLOCK || SCHEDULE = SCHEDULE || SESSION = PAKETPAGE || COURSE = COURSE || PRICE == PRICE*/
+      console.log('this.userId',this.userId)
+      this.navCtrl.push(PaketPage, {
+        name:this.profile.fullName, course:this.params.data.key.courses,
+        price:this.userId.price, category:this.params.data.key.categoryName,
+        type:'order',data:this.paketData, blocked:this.tutorOrder,
+        schedule:this.schedule, profile:this.profile,
+        session:this.paketData, check:this.tutorOrder,
+        userId:{
+          rating:this.userId.rating,
+          categoryName:this.userId.categoryName,
+        },
+        latLng:{
+          uid:this.latLng.userId,
+          latitude:this.latLng.latitude,
+          longitude:this.latLng.longitude,
+          firstName:this.latLng.firstName,
+          lastName:this.latLng.lastName,
+          key:this.latLng.key,
+          address:this.latLng.address,
+          avatar:this.latLng.avatar,
+        },isFirst:true
+      });
+      // let rePaketModal = this.modalCtrl.create(PaketPage, {type:'order',data:this.paketData, blocked:this.tutorOrder,schedule:this.schedule});
+      //   let DataModal = this.modalCtrl.create(PaketPage, {type:'order',data:this.paketData, blocked:this.tutorOrder,schedule:this.schedule});
+          // DataModal.present();
+          // DataModal.onDidDismiss(data =>{
+        // if(data != undefined){
+        //   console.log(data);
+        //
+        //   this.paketData=data;
+        //   let orderModal = this.modalCtrl.create(OrderPage,{name:this.profile.fullName, course:this.params.data.key.courses,schedule:this.schedule,session:this.paketData, price:this.userId.price, category:this.params.data.key.categoryName, check:this.tutorOrder});
+        //   orderModal.present();
+        //   orderModal.onDidDismiss(dats =>{
+        //     console.log(dats);
+        //     if(dats != 'gagal'){
+        //       if(dats && dats.type == 'cancel'){
+        //         console.log('in')
+        //       }else{
+        //           this.userService.addToCart(this.userId.rating,this.profile.phoneNumber,this.userId.categoryName,this.profile.avatar,this.profile.uid, this.profile.fullName, {startDate:moment(this.paketData.startDate).format('YYYY-MM-DD'),endDate:moment(this.paketData.endDate).format('YYYY-MM-DD')}, dats.sessionDates,
+        //           {latitude:this.latLng.latitude,longitude:this.latLng.longitude}, dats.totalHarga, this.userId.price, this.paketData.frekuensi, this.paketData.jumlahMurid, this.paketData.jenisPaket,this.latLng.firstName+' '+this.latLng.lastName, this.latLng.key, this.latLng.address, this.latLng.avatar,
+        //           this.params.data.key.courses).then(()=>{
+        //
+        //             if(dats.type == 'bayar'){
+        //
+        //             this.navCtrl.setRoot(HomePage, {data:'cart'});
+        //           }
+        //           else if(dats.type == 'tambah'){
+        //             this.navCtrl.setRoot(KategoriPage,{uid:this.latLng.userId});
+        //           }
+        //           else{
+        //             console.log(dats);
+        //           }
+        //         }, error=>{
+        //           console.log(error);
+        //         });
+        //       }
+        //     }else{
+        //         return;
+        //     }
+        //       // this.userService.addToCart(categoryName,tutorAvatar,tutorUid, tutorName, orderSchedule, sessions:{status,review,jam,date,day,jamStart,jamEnd}, lokasi, totalHarga, frekuensi, jumlahMurid, jenisPaket, namaMurid, muridId, alamatMurid, avatarMurid, matpel);
+        //
+        //   })
+        // }
+
+    // })
+  }
+  cekTutor(hour,hari){
+    var data = [];
+    _.forEach(this.tutorOrder,(value:any)=>{
+      if(value.day == hari && value.jam == hour+''){
+        var date = moment(value.date).format('DD MMM');
+        data.push(date);
+      }
+    })
+    return data.length ? data.join(', ') : 'available';
+  }
+}

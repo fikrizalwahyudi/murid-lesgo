@@ -1,0 +1,45 @@
+<!--
+  Generated template for the Kategori page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+      <ion-toolbar>
+        <ion-buttons left>
+          <button ion-button icon-only class="backbut" navPop>
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+        </ion-buttons>
+          <ion-buttons right>
+              <p>FIND CLASS</p>
+          </ion-buttons>
+      </ion-toolbar>
+</ion-header> -->
+<ion-header *ngIf="this.latLng != null">
+      <ion-toolbar>
+        <ion-buttons left>
+          <button ion-button icon-only class="backbut" navPop>
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title>
+          <img src="assets/logowhite.png"/>
+        </ion-title>
+
+      </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid *ngIf="this.latLng != null">
+    <ion-row class="kategori">
+      <ion-col width-10></ion-col>
+      <ion-col width-80><img class="logo" src="assets/button pendukung-04.png" (click)="navigateTo('Les')"/></ion-col>
+      <ion-col width-10></ion-col>
+    </ion-row>
+      <ion-row class="kategori">
+        <ion-col width-10></ion-col>
+        <ion-col width-80><img class="logo" src="assets/button pendukung-05.png" /></ion-col>
+        <ion-col width-10></ion-col>
+      </ion-row>
+  </ion-grid>
+</ion-content>

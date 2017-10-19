@@ -1,0 +1,211 @@
+page-cart {
+  font-family: brandon;
+  span{
+    margin-right: 10%;
+  }
+
+  .select{
+    font-size: 2rem;
+  }
+
+  .orderCard{
+    h2{
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    }
+  .card-header{
+    font-size: 2.2rem;
+    color: #000000;
+    background-color: #e9efc2;
+  }
+  .card-content{
+    padding:0;
+  }
+  .item{
+    margin-bottom: 5%;
+    border-bottom-color: #e4e4e4;
+    border-bottom-width: thin;
+    border-bottom-style: solid;
+    }
+  }
+
+  .item [item-right]{
+
+      text-align: right;
+  }
+  .paymentCard{
+
+    .total{
+      background-color: #227D98;
+      border-top-style: solid;
+      border-top-color: #c5c5c5;
+      border-top-width: 1px;
+      h2{
+        font-weight: bold;
+        color:#ffffff;
+      }
+    }
+
+    .label{
+      font-size: 2rem;
+      color:black;
+    }
+    .select{
+      font-size: 2rem !important;
+    }
+    .card-header{
+      color: #000000;
+    background-color: #e9efc2;
+      font-size: 2.2rem;
+    }
+    .item {
+      h2{
+        font-size: 2rem;
+      }
+    }
+  }
+
+    .navtitle{
+      height:10%;
+    }
+    .navbar{
+      background: transparent;
+    }
+    .main{
+      // .toolbar-background{
+      //   background-image: url('../assets/button pendukung-01.png')!important;
+      //   background-size: cover;
+      //   background-repeat: no-repeat;
+      // }
+      // .bar-buttons[end]{
+      //   margin-top: 17%;
+      //   margin-right: 6%;
+      // }
+      // .toolbar{
+      //   height:17%;
+      // }
+      .toolbar-background{
+        background: #39b54a;
+      }
+      ion-title{
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 90px 1px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        img{
+          width: 20vw;
+        }
+      }
+      .bar-buttons[left]{
+          font-size: 2.5rem;
+        }
+    .bar-buttons[right]{
+      font-family: comic;
+      margin-top: 17%;
+      margin-right: 4%;
+    }
+
+    }
+    .subheader{
+      .segment-button{
+        font-size: 2rem;
+        color:gray;
+        font-family: comic;
+
+      }
+      .segment-activated{
+        color:darkgreen !important;
+        border-color:darkgreen !important;
+      }
+    .toolbar-background{
+    }
+    .bar-header {
+      border: 0px !important;
+    }
+    .bar-buttons[left]{
+      p{
+      font-size: 12pt;
+      font-family: roboto;
+      font-weight: bold;
+      }
+      border-right-style: solid;
+      border-right-width: 1px;
+    }
+    .left{
+        text-align: right;
+        button{
+          font-size: 12pt;
+          font-weight: bold;
+          color: #39b54a;
+        }
+        border-right-width: thin;
+        border-right-style: solid;
+      }
+
+    .right{
+          text-align: left;
+          button{
+            font-size: 12pt;
+            font-weight: bold;
+            color:#39b54a;
+          }
+        }
+    .bar-buttons[right]{
+      p{
+      font-size: 12pt;
+      font-family: roboto;
+      font-weight: bold;
+      }
+
+    }
+
+    }
+    .labeltop{
+      font-size: 12pt;
+      border-bottom-color: green;
+      border-bottom-style: solid;
+      border-bottom-width: 2px;
+      font-weight: bold;
+    }
+    .isi{
+      font-size: 11pt;
+      border-bottom-color: grey;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+    }
+    .total{
+      font-weight: bold;
+    }
+    .button-left{
+      text-align: right;
+    }
+    .button-right{
+      text-align: left;
+    }
+    .bayar{
+      text-align: right;
+    }
+    .topButton{
+        background-color: #39b54a !important;
+      }
+    ion-input{
+      width:50%;
+    }
+    .buttons{
+        width: 50%;
+        background-color:#50a639;
+        border-radius: 10px;
+        font-size: 1.6em;
+        text-transform: capitalize;
+        margin-left: 0%;
+        font-weight: strong;
+        align-self: center;
+        font-family: comic;
+
+    }
+}

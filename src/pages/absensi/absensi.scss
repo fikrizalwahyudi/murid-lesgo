@@ -1,0 +1,82 @@
+page-absensi {
+  .fixed-content{
+    background-color: #e4f7e9;
+  }
+  .name{
+    text-align: center;
+  }
+  .avatar{
+    text-align: center;
+  }
+  .rating{
+    text-align: center;
+  }
+  .page{
+    text-align: center;
+  }
+  .monthly{
+    text-align: center;
+  }
+  .yearly{
+    text-align: center;
+  }
+  .cum{
+    text-align: center;
+  }
+  ion-card{
+    border-radius: 10px;
+  }
+  ion-card-header{
+    text-align: center;
+    border-bottom-color: #cacaca;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    background-color: #cacaca;
+  }
+  .header{
+    text-align:center;
+  }
+ion-header{
+  .toolbar-background{
+  background-image: url('../assets/button pendukung-01.png')!important;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.toolbar{
+  height:17%;
+}
+.bar-buttons[left]{
+  top: 2%!important;
+  font-size: 2.5rem;
+}
+.bar-buttons[right]{
+  font-family: comic;
+  margin-top: 18%;
+  margin-right: 1%;
+}
+
+}
+
+  img{
+    height: 40vw;
+    width: 40vw;
+    border-radius: 50%;
+  }
+  .rating{
+    color:yellow;
+    font-size: 2.5rem;
+    padding:0;
+    margin:0;
+  }
+  .login-button:active {
+    background-color:blue;
+  }
+  .login-button {
+    width:30%;
+      border-radius: 10px;
+      font-size:1.4rem;
+      border: 1px solid #009900;
+      background-color: #009900;
+      font-family: comic;
+  }
+}

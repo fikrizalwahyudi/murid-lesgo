@@ -1,0 +1,112 @@
+<ion-toolbar top>
+  <ion-buttons left>
+    <button ion-button icon-only navPop>
+      <ion-icon name="md-arrow-round-back"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-toolbar>
+<ion-content scroll-content>
+  <div class="topData">
+    <ion-row content center class="tutorFName">
+      <h2>{{profile.fullName}}</h2>
+      <h3>{{userId.rating}}</h3>
+    </ion-row>
+    <ion-row content center class="Almameter">
+      <ion-col width-100>
+        {{profile.universitas}} {{profile.jurusan}}
+      </ion-col>
+    </ion-row>
+    <ion-row class="avatar">
+      <img content src="{{profile.avatar}}" *ngIf="profile.avatar != undefined" />
+    </ion-row>
+    <ion-row content center class="about">
+      <ion-col width-100>
+        {{profile.about}}
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="aboutData" *ngIf="profile.fullName != undefined">
+    <ion-row content>
+      <ion-col width-40 class="button-left"><button (click)="onChange('kelas')" [ngClass]="{'notActive' : butOff != 'kelas'}" ion-button>Kelas Mengajar</button></ion-col>
+      <ion-col width-40 class="button-right"><button (click)="onChange('jadwal')" [ngClass]="{'notActive' : butOff != 'jadwal'}" ion-button>Jadwal Mengajar</button></ion-col>
+    </ion-row>
+  </div>
+  <div class="botData">
+    <ion-grid content class="courseDetail" [hidden]="butOff != 'kelas'">
+      <ion-row class="labeltop">
+        <ion-col width-30>
+          Tingkatan
+        </ion-col>
+        <ion-col width-70>
+          Matpel
+        </ion-col>
+      </ion-row>
+      <ion-row class="isi" *ngFor="let category of class">
+        <ion-col width-30>
+          {{category.categoryName}}
+        </ion-col>
+        <ion-col width-70>
+          <div *ngFor="let course of category.courses">
+            {{course.text}}
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid content class="scheduleDetail" [hidden]="butOff != 'jadwal'">
+      <ion-row class="labeltop">
+        <ion-col width-20>
+          Hari
+        </ion-col>
+        <ion-col width-80>
+          Jam Mengajar
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let jadwal of userId.schedule" class="jadwalbot">
+        <ion-col width-20>
+          {{formatDay(jadwal.day)}}
+        </ion-col>
+        <ion-col width-80>
+          <span *ngFor="let AM of jadwal.AM; let i = index">
+            <ion-row width-100 *ngIf="AM == true">
+              <ion-col width-30>
+                {{i+1}}:00
+              </ion-col>
+              <ion-col width-70 *ngIf="cekTutor(i+1,jadwal.day).length">
+                <ion-row *ngFor="let order of  cekTutor(i+1,jadwal.day)">
+                  <ion-col>{{order}}</ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col width-70 *ngIf="!cekTutor(i+1,jadwal.day).length">
+                <ion-row>
+                  <ion-col>Available</ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </span>
+          <span *ngFor="let PM of jadwal.PM; let i = index">
+            <ion-row width-100 *ngIf="PM == true">
+              <ion-col width-30>
+                  {{i+13}}:00
+              </ion-col>
+              <ion-col width-70 *ngIf="cekTutor(i+13,jadwal.day).length">
+                <ion-row *ngFor="let order of  cekTutor(i+13,jadwal.day)">
+                  <ion-col>{{order}}</ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col width-70 *ngIf="!cekTutor(i+13,jadwal.day).length">
+                <ion-row>
+                  <ion-col>Available</ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-row class="orderTutor">
+    <ion-col>
+      <button ion-button center (click)="orderMe()">Order</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

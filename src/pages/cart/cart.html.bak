@@ -1,0 +1,340 @@
+
+<ion-header>
+
+      <ion-toolbar class="main">
+          <ion-buttons left>
+            <button ion-button icon-only class="backbut" (click)="dismiss()">
+              <ion-icon name="md-arrow-round-back"></ion-icon>
+            </button>
+          </ion-buttons>
+          <ion-title>
+            <img src="assets/logowhite.png"/>
+          </ion-title>
+
+      </ion-toolbar>
+      <ion-toolbar class="subheader">
+        <ion-segment [(ngModel)]="butOff" color="secondary">
+            <ion-segment-button value="pesan">
+              Pesan
+            </ion-segment-button>
+          <ion-segment-button value="riwayat">
+            Riwayat
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+
+</ion-header>
+<ion-content>
+  <template [ngIf]="butOff == 'pesan'">
+  <ion-card class="orderCard">
+  <ion-card-header>
+    Pesanan Anda
+  </ion-card-header>
+<ion-card-content>
+  <div *ngIf="cartData.length == 0">
+    <h2>Cart kosong, silahkan pesan tutor terlebih dahulu </h2>
+  </div>
+  <!-- <ion-list [virtualScroll]="cartData" [approxItemHeight]="'50px'">
+      <ion-item *virtualItem="let datsky"  (click)="orderDetailCart(datsky)">
+        <h2 item-left>{{datsky.key}}</h2>
+        <h3>{{datsky.orderSchedule.startDate}} - {{datsky.orderSchedule.endDate}}</h3>
+        <h1 item-content>Rp. {{thousandMask(teacher.price)}}</h1>
+        <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+    </ion-item>
+
+    {{getSubTotal()}}
+    {{theTotal()}}
+  </ion-list> -->
+  <div *ngIf="cartData.length > 0">
+  <template ngFor let-datsky [ngForOf]="cartData">
+  <ion-row>
+    <ion-col ion-item item-content>
+      <h3>Rp {{thousandMask(datsky.totalHarga)}}</h3>
+      <p>{{displayDate(datsky.orderSchedule.startDate)}} s.d </p><p>{{displayDate(datsky.orderSchedule.endDate)}}</p>
+    </ion-col>
+    <ion-col ion-item item-right>
+      <!-- <ion-icon name="ios-open-outline" style="color:black"></ion-icon> -->
+       <!-- <ion-icon name="md-close-circle" style="color:red"></ion-icon> -->
+      <button ion-button outline color="dark" (click)="orderDetailCart(datsky)">Detail</button>
+      <button ion-button outline color="danger" (click)="removeOrder(datsky.$key)">Remove</button>
+    </ion-col>
+  </ion-row>
+
+  {{getSubTotal()}}
+  {{theTotal()}}
+</template>
+</div>
+</ion-card-content>
+  <!-- <ion-list>
+    <div *ngFor="let datsky of cartData;let i =index">
+    <ion-item (click)="orderDetailCart(datsky)">
+
+      <h2>Order {{i+1}}</h2>
+
+      <p>{{datsky.orderSchedule.startDate}} - {{datsky.orderSchedule.endDate}}</p>
+      <span item-content>
+      <h1> {{thousandMask(datsky.totalHarga)}}</h1>
+    </span>
+
+
+        <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+    </ion-item>
+    {{getSubTotal()}}
+    {{theTotal()}}
+  </div>
+</ion-list> -->
+</ion-card>
+    <!-- <ion-item (click)="orderDetailCart('ORDERID')">
+      <ion-avatar item-left>
+        <img src="img/avatar-finn.png">
+      </ion-avatar>
+
+      <h2>#01020310120</h2>
+      <h3> 16 Feb 2017 - 22 feb 2017</h3>
+
+      <span item-content>
+      <h1> Rp. 550.000</h1>
+      </span>
+        <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+    </ion-item>
+    <ion-item (click)="orderDetailCart('ORDERID')">
+      <ion-avatar item-left>
+        <img src="img/avatar-finn.png">
+      </ion-avatar>
+
+      <h2>#01020310120</h2>
+      <p> 16 Feb 2017 - 22 feb 2017</p>
+
+      <span item-content>
+      <h1> Rp. 550.000</h1>
+      </span>
+        <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+    </ion-item> -->
+
+<ion-card class="paymentCard" [hidden]="butOff != 'pesan'">
+<ion-card-header>
+  Total Pembayaran
+</ion-card-header>
+  <ion-list>
+  <ion-item>
+
+    <h2>Sub Total</h2>
+    <h2 item-right>Rp {{thousandMask(subtotal)}}</h2>
+  </ion-item>
+  <ion-item>
+
+    <ion-label>Promo</ion-label>
+    <ion-input clear item-right type="text" class="promo">
+    </ion-input>
+  </ion-item>
+  <!-- <ion-row radio-group [(ngModel)]="payment" >
+    <ion-col width-50>
+      <ion-item>
+        <ion-label>Transfer</ion-label>
+        <ion-radio value="transfer" checked></ion-radio>
+      </ion-item>
+    </ion-col>
+      <ion-col width-50>
+        <ion-item>
+          <ion-label>Credit Card</ion-label>
+          <ion-radio value="creditcard"></ion-radio>
+        </ion-item>
+      </ion-col>
+    </ion-row> -->
+  <ion-item *ngIf="cartData.length > 0">
+
+    <ion-label>Pembayaran</ion-label>
+    <ion-select [(ngModel)]="payment" class="payment">
+      <ion-option value="transfer">Transfer</ion-option>
+      <!-- <ion-option value="creditcard">Credit Card</ion-option> -->
+    </ion-select>
+  </ion-item>
+
+
+  <ion-item *ngIf="cartData.length > 0">
+
+    <h2>Convenience Fee</h2>
+    <h2 item-right>Rp {{thousandMask(conFee)}}</h2>
+  </ion-item>
+
+  <ion-item class="total" *ngIf="cartData.length > 0">
+
+    <h2>Total</h2>
+    <h2 item-right>Rp {{thousandMask(total)}}</h2>
+  </ion-item>
+  <ion-item class="total" *ngIf="cartData.length == 0 || cartData == undefined">
+
+    <h2>Total</h2>
+    <h2 item-right>Rp 0</h2>
+  </ion-item>
+</ion-list>
+</ion-card>
+<ion-grid>
+  <ion-row *ngIf="cartData.length > 0">
+    <ion-col width-100 style="text-align:center;">
+      <input type="hidden" id="token" value="{{token}}">
+      <button class="buttons" ion-button id="pay-button" (click)="getToken()">Bayar</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</template>
+<div *ngIf="historyData[0] != undefined && historyData.length > 0">
+<ion-list  *ngFor="let history of historyData"  [hidden]="butOff != 'riwayat'">
+  <ion-item (click)="orderDetailCart(history)">
+
+    <h3>{{history.tutorName}}</h3>
+    <p> {{displayDate(history.orderSchedule.startDate)}} s.d {{displayDate(history.orderSchedule.endDate)}}</p>
+
+    <span item-content>
+    <h1> {{history.status}}</h1>
+    <p> Rp. {{thousandMask(history.totalHarga)}}</p>
+    </span>
+
+      <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+  </ion-item>
+  <!-- <ion-item (click)="orderDetail('ORDERID')">
+
+    <h2>#01020310120</h2>
+    <h3> 16 Feb 2017 - 22 feb 2017</h3>
+
+    <span item-content>
+    <h1> Completed</h1>
+    </span>
+      <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+  </ion-item>
+  <ion-item (click)="orderDetail('ORDERID')">
+    <h2>#01020310120</h2>
+    <p> 16 Feb 2017 - 22 feb 2017</p>
+
+    <span item-content>
+    <h1> Cancelled</h1>
+    </span>
+      <ion-icon item-right name="ios-arrow-forward-outline"></ion-icon>
+  </ion-item> -->
+</ion-list>
+</div>
+  <!-- <ion-row>
+    <ion-col width-50 class="button-left"><button class="topButton" (click)="onChange('pesan')" ion-button round>Pemesanan</button></ion-col>
+    <ion-col width-50 class="button-right"><button  class="topButton" (click)="onChange('riwayat')" ion-button round>Riwayat</button></ion-col>
+  </ion-row> -->
+  <!-- <ion-grid [hidden]="butOff != 'pesan'">
+  <ion-row class="labeltop">
+    <ion-col width-20>
+      Order Id
+    </ion-col>
+    <ion-col width-20>
+      Nama Guru
+    </ion-col>
+    <ion-col width-20>
+      Paket
+    </ion-col>
+    <ion-col width-20>
+      Total Sesi
+    </ion-col>
+    <ion-col width-20>
+      Harga Per Sesi
+    </ion-col>
+  </ion-row>
+  <ion-row class="isi">
+    <ion-col width-20>
+      A000307238id
+    </ion-col>
+    <ion-col width-20>
+      Hery Prasetyo
+    </ion-col>
+    <ion-col width-20>
+      Reguler
+    </ion-col>
+    <ion-col width-20>
+      4 Sesi
+    </ion-col>
+    <ion-col width-20>
+      Rp. 100.000
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="subtotal">
+    <ion-col offset-60>
+    </ion-col>
+    <ion-col width-20 class="isi">
+      Sub Total
+    </ion-col>
+    <ion-col width-20 class="isi">
+      Rp. 100.000
+    </ion-col>
+  </ion-row>
+  <ion-row class="promo">
+    <ion-col offset-60>
+    </ion-col>
+    <ion-col width-20 class="isi">
+      Promo
+    </ion-col>
+    <ion-col width-20 class="isi">
+      -
+    </ion-col>
+  </ion-row>
+  <ion-row class="total">
+    <ion-col offset-60>
+    </ion-col>
+    <ion-col width-20 class="isi">
+      Total
+    </ion-col>
+    <ion-col width-20 class="isi">
+      Rp. 100.000
+    </ion-col>
+  </ion-row>
+  <ion-row class="bottom-row">
+    <ion-col width-60 class="details">
+      Detail anda :
+      <br>Nama
+      <br>Alamat
+    </ion-col>
+    <ion-col width-40  class="bayar">
+      <button ion-button danger round (click)="bayar()">
+        Bayar
+      </button>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+  <ion-grid [hidden]="butOff != 'riwayat'">
+  <ion-row class="labeltop">
+    <ion-col width-20>
+      Order Id
+    </ion-col>
+    <ion-col width-20>
+      Nama Guru
+    </ion-col>
+    <ion-col width-15>
+      Paket
+    </ion-col>
+    <ion-col width-15>
+      Total Sesi
+    </ion-col>
+    <ion-col width-20>
+      Harga Per Sesi
+    </ion-col>
+    </ion-row>
+    <ion-row class="isi">
+      <ion-col width-20>
+        A000307238id
+      </ion-col>
+      <ion-col width-20>
+        Hery Prasetyo
+      </ion-col>
+      <ion-col width-15>
+        Reguler
+      </ion-col>
+      <ion-col width-15>
+        4 Sesi
+      </ion-col>
+      <ion-col width-30>
+        Rp. 100.000
+        <button ion-button round danger>
+          Review
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+    <!-- <button ion-button #pay-button>Pay!</button> -->
+</ion-content>

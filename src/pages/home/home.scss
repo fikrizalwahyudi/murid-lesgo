@@ -1,0 +1,132 @@
+.ios, .md{
+page-home {
+  .notif{
+
+    border-radius: 20px !important;
+    color: #fff;
+    position: absolute !important;
+    background-color:red !important;
+    top: 20px !important;
+}
+  font-family: brandon;
+  ion-content{
+    background:url('./assets/patternb.png');
+    background-repeat: repeat;
+    background-size: cover;
+
+  }
+  .profile {
+    height: 30vw;
+    width: 30vw;
+    border-radius: 50%;
+    margin-bottom: 0%;
+    margin-left: 15%;
+    margin-top: 5%;
+    margin-right: 5%;
+  }
+
+  .profileName{
+    font-size: 2.5rem;
+    font-family:brandon-bold;
+    margin-top: 0%;
+    margin-bottom: 0%;
+  }
+  .sign{
+    margin-bottom: 0%;
+  }
+  .profile:hover{
+    border-style: solid;
+    border-width: 5px;
+    border-color: #c5c5c5;
+  }
+  .backbut{
+    margin-top:5%;
+    margin-left:5%;
+  }
+  .details{
+    margin-left:5%;
+    font-family: brandon;
+  }
+  .details img{
+    width: 20%;
+  }
+  .logo{
+    width: 50%;
+    border-radius: 50%;
+
+  }
+  .logo:hover{
+    box-shadow: 0 5px 10px rgba(0,0,0,0.19), 0 3px 6px rgba(0,0,0,0.23);
+  }
+  .logo2{
+    width: 50%;
+    border-radius: 50%;
+
+  }
+  .logo2:hover{
+    box-shadow: 0 5px 20px rgba(0,0,0,0.19), 0 3px 6px rgba(0,0,0,0.23);
+  }
+  .image{
+    width: 100%;
+    height: 100%;
+  }
+  // .toolbar-background{
+  //   background-image: url('../assets/button pendukung-01.png')!important;
+  //   background-size: cover;
+  //   background-repeat: no-repeat;
+  // }
+  // .bar-buttons-md[end]{
+  //   margin-top: 17%;
+  //   margin-right: 6%;
+  // }
+  // .toolbar{
+  //   height:17%;
+  // }
+  .toolbar-background{
+    background: #39b54a;
+  }
+  ion-title{
+    img{
+      width: 20vw;
+    }
+  }
+  .title{
+    text-align: center;
+    font-family: comic !important;
+  }
+  .names{
+    text-align: center;
+    font-family: comic !important;
+  }
+  .names2{
+    text-align: center;
+    font-family: comic !important;
+  }
+  p .title{
+    text-align: center;
+    margin-right: 0%;
+    margin-top: 10%;
+    font-family: comic !important;
+  }
+  .welcome{
+    height:100%;
+  }
+  .1row{
+    padding-left: 20%;
+    font-size: 6pt;
+  }
+  .2row{
+    margin-left: 20%;
+  }
+  .navtitle{
+    height:10%;
+  }
+  .colLines{
+    text-align: center;
+  }
+  .colLines2{
+    text-align: center;
+  }
+
+}
+}

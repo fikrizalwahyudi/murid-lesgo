@@ -1,0 +1,188 @@
+<!--
+  Generated template for the Profile page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- <ion-header>
+        <ion-toolbar>
+          <ion-buttons left>
+            <button ion-button icon-only navPop>
+              <ion-icon name="md-arrow-round-back"></ion-icon>
+            </button>
+          </ion-buttons>
+            <ion-buttons right>
+                <p>Profile</p>
+            </ion-buttons>
+        </ion-toolbar>
+</ion-header> -->
+<ion-header>
+      <ion-toolbar class="main">
+        <ion-buttons left>
+          <button ion-button icon-only class="backbut" navPop>
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title>
+          <img src="assets/logowhite.png"/>
+        </ion-title>
+
+      </ion-toolbar>
+</ion-header>
+
+<ion-content #Content scroll-content>
+  <!-- <img src="{{avatar}}" /> -->
+    <!-- <ion-list>
+      <ion-item>
+        <ion-icon name="mail"> </ion-icon>
+        <ion-input type="text" [(ngModel)]="userEmail" placeholder="email"></ion-input>
+      </ion-item>
+
+        <ion-item>
+          <ion-input type="password" [(ngModel)]="oldpassword" placeholder="password anda saat ini"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="password" [(ngModel)]="newpassword" placeholder="masukkan password baru"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="password" [(ngModel)]="repassword" placeholder="masukkan kembali password baru"></ion-input>
+        </ion-item>
+
+
+    <ion-list>
+      <button ion-item (click)="phoneStatus('user')">
+        <ion-icon name="phone-portrait"> </ion-icon>
+          {{  userTelephone }}
+      </button>
+    </ion-list>
+
+      <ion-item>
+          <ion-icon name="ios-telephone-outline"> </ion-icon>
+        <ion-input type="text" [(ngModel)]="userTelephone" placeholder="Phone Number"></ion-input>
+      </ion-item>
+              <ion-item>
+
+                  <ion-icon name="finger-print"> </ion-icon>
+                  {{gender}}
+                <ion-row>
+                  <ion-col width-50>
+                    <button ion-button [ngClass]="{'active': gender=='male','gender': gender!='male'}" (click)="changeGender('male')">Male</button>
+                  </ion-col>
+                  <ion-col width-50>
+                    <button ion-button [ngClass]="{'active': gender=='female','gender': gender!='female'}" (click)="changeGender('female')">Female</button>
+                  </ion-col>
+                </ion-row>
+                </ion-item>
+    </ion-list> -->
+    <ion-list>
+
+      <ion-row>
+        <ion-col class="avatar">
+          <img src="{{dataUser.avatar}}" class="avatar">
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="font-family:brandon;
+    font-size: 1.7em;
+    text-transform: capitalize;">
+          {{  dataUser.firstName }} {{  dataUser.lastName }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button class="login-button" ion-button icon-left (click)="presentActionSheet('profile')">
+            <!-- <ion-icon name="camera"></ion-icon> -->
+            Select Image
+          </button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col width-100>
+          <ion-item >
+            <ion-label floating>Email</ion-label>
+            <ion-input (change)="status=false"  disabled="true" style="text-align: right; margin-right: 0px;" type="text" [(ngModel)]="dataUser.email" [textMask]="{mask:mask, modelClean:true}"></ion-input>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col width-50>
+          <ion-item>
+            <ion-label floating>First Name</ion-label>
+            <ion-input (ngModelChange)="status=false"  type="text" [(ngModel)]="dataUser.firstName" placeholder="First Name"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col width-50>
+        <ion-item>
+          <ion-label floating>Last Name</ion-label>
+          <ion-input (ngModelChange)="status=false"  type="text" [(ngModel)]="dataUser.lastName" placeholder="Last Name"></ion-input>
+        </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-100>
+          <ion-item >
+            <ion-label floating>Telephone</ion-label>
+            <ion-input (change)="status=false"  style="text-align: right; margin-right: 0px;" type="tel" [(ngModel)]="dataUser.phoneNumber" [textMask]="{mask:mask, modelClean:true}"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row radio-group [(ngModel)]="dataUser.gender" (ngModelChange)="status=false" >
+        <ion-col width-50>
+          <ion-item>
+            <ion-label>Male</ion-label>
+            <ion-radio value="male" checked></ion-radio>
+          </ion-item>
+        </ion-col>
+          <ion-col width-50>
+            <ion-item>
+              <ion-label>Female</ion-label>
+              <ion-radio value="female"></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-item>
+          <ion-label floating>Date Of Birth</ion-label>
+          <ion-datetime displayFormat="DD-MMM-YYYY" max='2016' [(ngModel)]="dataUser.dob" (ionChange)="status=false"></ion-datetime>
+          <!-- <ion-input type="date" [(ngModel)]="dataUser.dob"></ion-input> -->
+        </ion-item>
+
+    </ion-list>
+    <div *ngIf="dataUser.role =='murid'">
+      <ion-row>
+        <ion-col center>
+        <button class="login-button" ion-button icon-left (click)="saveProfile()" *ngIf="!status">
+          <!-- <ion-icon name="ios-contact-outline"></ion-icon> -->
+          Update User
+        </button>
+        <button class="upload-button" ion-button icon-left (click)="presentToast('Harap mengubah profile dahulu')" *ngIf="status">
+          <!-- <ion-icon name="ios-contact-outline"></ion-icon> -->
+          Update User
+        </button>
+      </ion-col>
+    </ion-row>
+
+    <div>
+
+          <ion-item>
+            <ion-label floating>Pilih Profile Murid</ion-label>
+            <ion-select [(ngModel)]="select" (ionChange)="isiMurid()" >
+              <ion-option *ngFor="let items of listMurid;let i=index" value="{{i}}" >{{items.firstName}} {{items.lastName}}</ion-option>
+            </ion-select>
+          </ion-item>
+      <ion-row>
+          <ion-col center>
+          <button class="login-button" style="margin-bottom:5%;" ion-button icon-left (click)="getMurid('tambah')">
+            <!-- <ion-icon name="ios-contact-outline"></ion-icon> -->
+            Tambah Murid
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
+    </div>
+
+</ion-content>

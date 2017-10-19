@@ -1,0 +1,358 @@
+<!--
+  Generated template for the Jadwal page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-title>
+      PAKET
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="subHeader" *ngIf="types == 'order'">
+    <ion-segment [(ngModel)]="butOff" color="secondary">
+      <ion-segment-button value="regular" (click)="getFrekuensi(1); switch=true">
+        Regular
+      </ion-segment-button>
+      <ion-segment-button value="daily" (click)="getFrekuensi(1); switch=true; getDates('single');">
+        Single Session
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content scroll-content style="padding-bottom:20% !important;">
+
+  <div [ngSwitch]="butOff">
+    <div *ngSwitchCase="'regular'">
+      <ion-grid class="Regular" *ngIf="butOff == 'regular'">
+        <ion-row class="firstRow" (click)="showHidePerOrang()">
+          <ion-col width-100>
+            <h2>Perorangan</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row class="firstRow" [hidden]="perOrang != true">
+
+          <ion-col width-100>
+            <ion-row style="margin-bottom: 5%;">
+              <ion-col width-50>
+                <ion-label>Start Date</ion-label>
+                <ion-item style="background-color: #f8f8f8;">
+                  <ion-datetime displayFormat="DD-MMM-YYYY" [min]="mins" [max]="max" [(ngModel)]="startDateRegular" (ionChange)="getDates('regular','start')"></ion-datetime>
+                  <!-- <ion-input type="date" (ionChange)="checkDate('start')" [(ngModel)]="startDateRegular"></ion-input> -->
+                </ion-item>
+              </ion-col>
+              <ion-col width-50>
+                <ion-label>End Date</ion-label>
+                <ion-item style="background-color: #f8f8f8;">
+                  <ion-datetime displayFormat="DD-MMM-YYYY" [min]="mins2" [(ngModel)]="endDateRegular" (ionChange)="getDates('regular','end')"></ion-datetime>
+                  <!-- <ion-input type="date" (ionChange)="checkDate('stop')" [(ngModel)]="endDateRegular"></ion-input> -->
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            Frekuensi belajar per minggu
+
+            <ion-row style="margin-top: 5%;">
+              <ion-col width-25 class="durasi 1">
+                <img src="assets/day-01.png" (click)="getFrekuensi(1)" />
+              </ion-col>
+              <ion-col width-25 class="durasi 2">
+                <img src="assets/day-02.png" (click)="getFrekuensi(2)" />
+              </ion-col>
+              <ion-col width-25 class="durasi 3">
+                <img src="assets/day-03.png" (click)="getFrekuensi(3)" />
+              </ion-col>
+              <ion-col width-25 class="durasi 4">
+                <img src="assets/day-04.png" (click)="getFrekuensi(4)" />
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="types != 'order'">
+              <template ngFor let-item [ngForOf]="hari" let-i="index">
+                <!-- <ion-col width-100> -->
+                <ion-item>
+                  <ion-label floating style="text-align:left !important;"> Hari </ion-label>
+                  <ion-select style="background-color: #f8f8f8;" [(ngModel)]="item.day">
+                    <ion-option value="Monday" selected="true">Senin</ion-option>
+                    <ion-option value="Tuesday">Selasa</ion-option>
+                    <ion-option value="Wednesday">Rabu</ion-option>
+                    <ion-option value="Thursday">Kamis</ion-option>
+                    <ion-option value="Friday">Jumat</ion-option>
+                    <ion-option value="Saturday">Sabtu</ion-option>
+                    <ion-option value="Sunday">Minggu</ion-option>
+                  </ion-select>
+                </ion-item>
+                <!-- </ion-col> -->
+              </template>
+            </ion-row>
+
+            <ion-row *ngIf="types == 'order'">
+              <template ngFor let-item [ngForOf]="hari" let-i="index">
+                <ion-col width-50>
+                  <ion-item>
+                    <ion-label floating> Hari </ion-label>
+                    <ion-select style="    background-color: #f8f8f8;" class="myselect" [(ngModel)]="item.day" (ionChange)="whatTime(i); item.jam='';">
+                      <ion-option *ngFor="let days of schedule" value="{{days.day}}">{{parseDay(days.day)}}</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col width-50>
+                  <ion-item>
+                    <ion-label floating> Jam </ion-label>
+                    <ion-select style="    background-color: #f8f8f8;" class="myselect" [disabled]="!item.day" [(ngModel)]="item.jam" (ionChange)="deleteTime(i);changeJam(item.jam)">
+                      <template ngFor let-hours [ngForOf]="jamArray[i]">
+                        <template ngFor let-AM [ngForOf]="hours.AM" let-i="index">
+                          <ion-option value="{{i+1}}" *ngIf="AM == true">{{i+1}}:00</ion-option>
+                        </template>
+                        <template ngFor let-PM [ngForOf]="hours.PM" let-i="index">
+                          <ion-option value="{{i+13}}" *ngIf="PM == true">{{i+13}}:00</ion-option>
+                        </template>
+                      </template>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </template>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="Regular">
+        <ion-row class="firstRow" (click)="showHideKelompok()">
+          <ion-col width-100>
+            <h2>Kelompok</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row class="firstRow" *ngIf="kelompokOrang == true">
+
+          <ion-col width-100>
+            <ion-row>
+              <ion-col width-50>
+                <ion-label>Start Date</ion-label>
+                <ion-item style="background-color: #f8f8f8;">
+                  <ion-datetime displayFormat="DD-MMM-YYYY" [min]="mins" [max]="max" [(ngModel)]="startDateRegular" (ionChange)="getDates('regular','start')"></ion-datetime>
+                  <!-- <ion-input type="date" (ionChange)="checkDate('start')" [(ngModel)]="startDateRegular"></ion-input> -->
+                </ion-item>
+              </ion-col>
+              <ion-col width-50>
+                <ion-label>End Date</ion-label>
+                <ion-item style="background-color: #f8f8f8;">
+                  <ion-datetime displayFormat="DD-MMM-YYYY" [min]="mins2" [(ngModel)]="endDateRegular" (ionChange)="getDates('regular','end')"></ion-datetime>
+                  <!-- <ion-input type="date" (ionChange)="checkDate('stop')" [(ngModel)]="endDateRegular"></ion-input> -->
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row style="margin-bottom: 5%;">
+              <ion-col width-5>
+                <ion-item>
+                  <ion-label floating style="text-align:left">Jumlah Murid</ion-label>
+                  <ion-select style="background-color: #f8f8f8;" [(ngModel)]="murid">
+                    <ion-option value="1" selected="true">1 Murid</ion-option>
+                    <ion-option value="2">2 Murid</ion-option>
+                    <ion-option value="3">3 Murid</ion-option>
+                    <ion-option value="4">4 Murid</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            Frekuensi belajar per minggu
+
+            <ion-row style="margin-top: 5%;">
+              <ion-col width-25 class="durasi 1">
+                <img src="assets/day-01.png" (click)="getFrekuensi(1)" />
+              </ion-col>
+              <ion-col width-25 class="durasi 2">
+                <img src="assets/day-02.png" (click)="getFrekuensi(2)" />
+              </ion-col>
+              <ion-col width-25 class="durasi 3">
+                <img src="assets/day-03.png" (click)="getFrekuensi(3)" />
+              </ion-col>
+              <ion-col width-25 class="durasi 4">
+                <img src="assets/day-04.png" (click)="getFrekuensi(4)" />
+              </ion-col>
+            </ion-row>
+            <ion-row *ngIf="types != 'order'">
+              <template ngFor let-item [ngForOf]="hari">
+                <!-- <ion-col width-100> -->
+                <ion-item>
+                  <ion-label floating style="text-align:left !important;"> Hari </ion-label>
+                  <ion-select style="background-color: #f8f8f8;" [(ngModel)]="item.day">
+                    <ion-option value="Monday" selected="true">Senin</ion-option>
+                    <ion-option value="Tuesday">Selasa</ion-option>
+                    <ion-option value="Wednesday">Rabu</ion-option>
+                    <ion-option value="Thursday">Kamis</ion-option>
+                    <ion-option value="Friday">Jumat</ion-option>
+                    <ion-option value="Saturday">Sabtu</ion-option>
+                    <ion-option value="Sunday">Minggu</ion-option>
+                  </ion-select>
+                </ion-item>
+                <!-- </ion-col> -->
+              </template>
+            </ion-row>
+
+            <ion-row *ngIf="types == 'order'">
+              <template ngFor let-item [ngForOf]="hari" let-i="index">
+                <ion-col width-50>
+                  <ion-item>
+                    <ion-label floating> Hari </ion-label>
+                    <ion-select style="background-color: #f8f8f8;" class="myselect" [(ngModel)]="item.day" (ionChange)="whatTime(i); item.jam='';">
+                      <ion-option *ngFor="let days of schedule" value="{{days.day}}">{{parseDay(days.day)}}</ion-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col width-50>
+
+                  <ion-item>
+                    <ion-label floating> Jam </ion-label>
+                    <ion-select style="background-color: #f8f8f8;" class="myselect" [(ngModel)]="item.jam" [disabled]="!item.day" (ionChange)="deleteTime(i); changeJam(item.jam)">
+                      <template ngFor let-hours [ngForOf]="jamArray[i]">
+                        <template ngFor let-AM [ngForOf]="hours.AM" let-i="index">
+                          <ion-option value="{{i+1}}" *ngIf="AM == true">{{i+1}}:00</ion-option>
+                        </template>
+                        <template ngFor let-PM [ngForOf]="hours.PM" let-i="index">
+                          <ion-option value="{{i+13}}" *ngIf="PM == true">{{i+13}}:00</ion-option>
+                        </template>
+                      </template>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </template>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngSwitchCase="'daily'">
+      <ion-grid class="Regular" *ngIf="butOff == 'daily'">
+
+        <ion-row class="firstRow" (click)="showHidePerOrang(); murid = 1">
+          <ion-col width-100>
+            <h2>Perorangan</h2>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="firstRow" *ngIf="perOrang == true" style="margin-bottom: 5%;">
+          <ion-col width-100>
+            <ion-row>
+              <ion-col width-100>
+                <ion-label>Study Date</ion-label>
+                <ion-item style="background-color: #f8f8f8;">
+                  <ion-datetime displayFormat="DD-MMM-YYYY" [min]="mins" [max]="max" [(ngModel)]="startDateRegular" (ionChange)="getDates('single')"></ion-datetime>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="types == 'order'">
+              <template ngFor let-item [ngForOf]="hari" let-i="index">
+                <ion-col width-50>
+                  <ion-item>
+                    <ion-label floating> Hari </ion-label>
+                    <ion-input disabled="true" value="{{parseDay(item.day)}}">{{parseDay(item.day)}}</ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col width-50>
+                  <ion-item style="background-color: #f8f8f8;">
+                    <ion-label floating> Jam </ion-label>
+                    <ion-select style="background-color: #f8f8f8;" class="myselect" [disabled]="!item.day" [(ngModel)]="item.jam" (ionChange)="deleteTime(i); changeJamSingle(item.jam,startDateRegular)">
+                      <template ngFor let-hours [ngForOf]="jamArray[i]">
+                        <template ngFor let-AM [ngForOf]="hours.AM" let-i="index">
+                          <ion-option value="{{i+1}}" *ngIf="AM == true">{{i+1}}:00</ion-option>
+                        </template>
+                        <template ngFor let-PM [ngForOf]="hours.PM" let-i="index">
+                          <ion-option value="{{i+13}}" *ngIf="PM == true">{{i+13}}:00</ion-option>
+                        </template>
+                      </template>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </template>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="Regular">
+        <ion-row class="firstRow" (click)="showHideKelompok()">
+          <ion-col width-100>
+            <h2>Kelompok</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row class="firstRow" *ngIf="kelompokOrang == true">
+
+          <ion-col width-100>
+            <ion-row>
+              <ion-col width-100>
+                <ion-label>Study Date</ion-label>
+                <ion-item style="background-color: #f8f8f8;">
+                  <ion-datetime displayFormat="DD-MMM-YYYY" [min]="mins" [max]="max" [(ngModel)]="startDateRegular" (ionChange)="getDates('single')"></ion-datetime>
+                  <!-- <ion-input type="date" (ionChange)="checkDate('start')" [(ngModel)]="startDateRegular"></ion-input> -->
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col width-50>
+                <ion-item style="background-color: #f8f8f8;">
+                  <ion-label floating>Jumlah Murid</ion-label>
+                  <ion-select [(ngModel)]="murid">
+                    <ion-option value="1" selected="true">1 Murid</ion-option>
+                    <ion-option value="2">2 Murid</ion-option>
+                    <ion-option value="3">3 Murid</ion-option>
+                    <ion-option value="4">4 Murid</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+
+            <ion-row *ngIf="types == 'order'">
+              <template ngFor let-item [ngForOf]="hari" let-i="index">
+
+                <ion-col width-50>
+                  <ion-item>
+                    <ion-label floating> Hari </ion-label>
+                    <ion-input disabled="true" value="{{parseDay(item.day)}}">{{parseDay(item.day)}}</ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col width-50>
+                  <ion-item style="background-color: #f8f8f8;">
+                    <ion-label floating> Jam </ion-label>
+                    <ion-select class="myselect" [(ngModel)]="item.jam" [disabled]="!item.day" (ionChange)="deleteTime(i); changeJamSingle(item.jam,startDateRegular)">
+                      <template ngFor let-hours [ngForOf]="jamArray[i]">
+                        <template ngFor let-AM [ngForOf]="hours.AM" let-i="index">
+                          <ion-option value="{{i+1}}" *ngIf="AM == true">{{i+1}}:00</ion-option>
+                        </template>
+                        <template ngFor let-PM [ngForOf]="hours.PM" let-i="index">
+                          <ion-option value="{{i+13}}" *ngIf="PM == true">{{i+13}}:00</ion-option>
+                        </template>
+                      </template>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+              </template>
+            </ion-row>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <ion-row>
+      <ion-col class="bottomBut">
+        <button ion-button class="submitMe" (click)="dismiss()">
+        CANCEL
+      </button>
+      </ion-col>
+      <ion-col class="bottomBut">
+        <button ion-button class="submitMe" (click)="send()">
+        OK
+      </button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+
+
+</ion-content>

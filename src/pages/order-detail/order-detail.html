@@ -1,0 +1,148 @@
+<!--
+  Generated template for the OrderDetail page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-toolbar class="main">
+    <ion-buttons left>
+      <button ion-button icon-only class="backbut" navPop>
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+    </ion-buttons>
+    <ion-title>
+      <img src="assets/logowhite.png" />
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="detailCard">
+    <img src="{{data.tutorAvatar}}">
+    <ion-row>
+      <ion-col>
+        <h2 style="margin-bottom: 5%;
+    font-size: 1.6em;
+    font-family: brandon-bold;" *ngIf="rate == undefined">Order Not Rated</h2>
+        <h2 style="margin-bottom: 5%;
+    font-size: 1.6em;
+    font-family: brandon-bold;" *ngIf="rate != undefined">{{rate}} / 5 out of {{data.totalReview}} review</h2>
+      </ion-col>
+    </ion-row>
+    <!-- <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" (ionChange)="onModelChange($event)"></rating> -->
+
+    <ion-item text-wrap>
+      <ion-icon name="ios-contact-outline" item-left large></ion-icon>
+      <p>Nama Tutor</p>
+      <h2>{{data.tutorName}}</h2>
+    </ion-item>
+
+    <ion-item text-wrap>
+      <ion-icon name="ios-book-outline" item-left large></ion-icon>
+      <p>Tingkatan</p>
+      <h2>{{data.categoryName}}</h2>
+    </ion-item>
+
+    <ion-item text-wrap>
+      <ion-icon name="ios-book-outline" item-left large></ion-icon>
+      <p>Matpel</p>
+      <h2><span *ngFor="let class of data.matpel">{{class.text}} </span></h2>
+    </ion-item>
+
+    <ion-item text-wrap>
+      <ion-icon name="ios-school-outline" item-left large></ion-icon>
+      <p>Jenis Paket</p>
+      <h2>{{data.jenisPaket}}</h2>
+    </ion-item>
+
+    <ion-item text-wrap>
+      <ion-icon name="ios-pin-outline" item-left large></ion-icon>
+      <p>Lokasi Belajar Mengajar</p>
+      <h2>{{data.alamatMurid}}</h2>
+    </ion-item>
+
+    <ion-item text-wrap>
+      <ion-icon name="ios-people" item-left large></ion-icon>
+      <p>Jumlah Murid</p>
+      <h2>{{data.jumlahMurid}}</h2>
+      <!-- <p>14 S. Hop Avenue, Madison, WI 53703</p> -->
+    </ion-item>
+
+
+  </ion-card>
+  <ion-card class="detailCard">
+    <img src="{{data.avatarMurid}}">
+    <!-- <rating [(ngModel)]="rate" readOnly="true" max="5" emptyStarIconName="star-outline" halfStarIconName="star-half" starIconName="star" (ionChange)="onModelChange($event)"></rating> -->
+
+    <ion-item text-wrap>
+      <ion-icon name="ios-contact-outline" item-left large></ion-icon>
+      <p>Nama Murid</p>
+      <h2>{{data.namaMurid}}</h2>
+    </ion-item>
+
+
+  </ion-card>
+  <ion-card class="orderCard" *ngFor="let sesi of data.sessions;let i =index">
+    <ion-card-header>
+      Sesi {{i+1}}
+    </ion-card-header>
+    <ion-list>
+      <ion-item>
+        <h2>{{timeMask(sesi.date)}} </h2>
+        <h2 item-right> {{sesi.jam}}:00</h2>
+      </ion-item>
+
+      <template [ngIf]="sesi.status == 'finish'">
+        <ion-item>
+          <ion-icon name="ios-stopwatch-outline" item-left large></ion-icon>
+          <h2>Jam Mulai</h2>
+          <h2 item-right>{{sesi.jamStart}}</h2>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="ios-stopwatch-outline" item-left large></ion-icon>
+          <h2>Jam Selesai</h2>
+          <h2 item-right>{{sesi.jamEnd}}</h2>
+        </ion-item>
+
+        <ion-item text-wrap>
+          <p>Hasil Belajar</p>
+          <h2>{{sesi.review}}</h2>
+        </ion-item>
+      </template>
+      <ion-item>
+        <h2>Status </h2>
+        <h2 item-right *ngIf="!sesi.jamStart">Belum Belajar</h2>
+        <h2 item-right *ngIf="sesi.jamStart && !sesi.jamEnd">Sedang Belajar</h2>
+        <h2 item-right *ngIf="sesi.jamEnd">Selesai</h2>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-grid style="text-align:center">
+    <ion-row>
+      <!-- <ion-col *ngIf="data.status == 'cart'">
+      <button class="login-button" ion-button icon-left large full (click)="deleteOrder()"><ion-icon name="md-close"></ion-icon>Delete Order</button>
+    </ion-col> -->
+      <ion-col *ngIf="data.status == 'booked'">
+        <button class="login-button" ion-button icon-left (click)="chatMe()"><ion-icon name="ios-chatbubbles-outline"></ion-icon>Chat</button>
+      </ion-col>
+      <ion-col *ngIf="data.status == 'booked'">
+        <button class="login-button" ion-button icon-left (click)="callMe()"><ion-icon name="ios-call-outline"></ion-icon>Call</button>
+      </ion-col>
+      <ion-col *ngIf="data.status == 'booked'">
+        <button class="login-button" ion-button icon-left (click)="smsMe()"><ion-icon name="ios-chatboxes-outline"></ion-icon>SMS</button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="data.status == 'finish' && status == false && data.totalHarga">
+      <ion-col>
+        <button class="login-button" #reviewButton ion-button icon-left large full (click)="reviewTutor()">Review Tutor</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+</ion-content>

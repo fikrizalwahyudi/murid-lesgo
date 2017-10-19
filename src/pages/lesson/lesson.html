@@ -1,0 +1,29 @@
+
+
+<ion-header>
+      <ion-toolbar>
+        <ion-buttons left>
+          <button ion-button icon-only class="backbut" (click)="getKey('dismiss')">
+            <ion-icon name="md-arrow-round-back"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title>
+          <img src="assets/logowhite.png"/>
+        </ion-title>
+      </ion-toolbar>
+</ion-header>
+<ion-content style="background:url('assets/patternb.png');background-size: cover;">
+    <ion-grid *ngIf="lessons.length != 0">
+      <div *ngFor="let row of lessons">
+          <ion-row>
+              <ion-col width-50 *ngFor="let items of row" class="container">
+                <button ion-button clear (click)="getKey(items.key)">
+                  <img class="logo" src="{{items.imageURL}}"/>
+                </button>
+                <br>
+                  <span class="title">{{items.name}}</span>
+              </ion-col>
+          </ion-row>
+        </div>
+  </ion-grid>
+</ion-content>

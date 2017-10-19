@@ -1,0 +1,304 @@
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, AlertController, ActionSheetController, ToastController, Platform, Content, LoadingController, Loading } from 'ionic-angular';
+import { UserService } from '../../providers/user-service';
+import { Zapier } from '../../providers/zapier';
+import { FilePath } from '@ionic-native/file-path';
+import { FileOpener } from '@ionic-native/file-opener';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
+import { Camera, CameraOptions } from '@ionic-native/Camera';
+import * as firebase from 'firebase';
+import { IonicImageViewerModule } from 'ionic-img-viewer';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+import { Helper } from '../../providers/helper';
+
+/*
+  Generated class for the Konsultasi page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+*/
+declare var cordova: any
+declare var window;
+@Component({
+  selector: 'page-konsultasi',
+  templateUrl: 'konsultasi.html',
+  providers: [UserService, Zapier]
+})
+export class KonsultasiPage {
+  @ViewChild(Content) content: Content;
+  theChat: any;
+  Tutor: any;
+  receiver: any;
+  uid: any;
+  tutorUid: any;
+  name: any;
+  loading: Loading;
+  status: any = false;
+  chatData: any = [];
+  offset: any;
+  tutorData: any = [];
+
+  constructor(
+    private zapier: Zapier,
+    private Camera: Camera,
+    private File: File,
+    private FilePath: FilePath,
+    private FileChooser: FileChooser,
+    private platform: Platform,
+    private loadingCtrl: LoadingController,
+    private actionSheetCtrl: ActionSheetController,
+    private toastCtrl: ToastController,
+    private navCtrl: NavController,
+    private alertCtrl: AlertController,
+    private userService: UserService,
+    private params: NavParams,
+    private helper: Helper
+  ) {
+    console.log(this.params);
+    this.uid = this.params.get('uid');
+    if (this.params.get('tutor') != undefined) {
+      this.status = true;
+      this.Tutor = this.params.get('tutor');
+      this.tutorUid = this.Tutor.tutorUid;
+      console.log(this.Tutor)
+    }
+    if (this.params.data.type == 'notification') {
+      // this.Tutor = 
+      this.helper.setDataNotif({});
+    }
+    this.name = this.params.get('name');
+    if (this.Tutor == undefined || this.Tutor == []) {
+      this.noTutor(this.uid);
+    } else {
+      this.chatHim(this.Tutor)
+    }
+
+
+
+    // this.tutor
+    // this.userService.myChatsGuru(this.uid,'cs').once('value').then(function(snapshot){
+    //   var data=[];
+    //   snapshot.forEach(function(childData){
+    //     console.log(childData);
+    //     var dats = childData.val();
+    //     dats['key']=childData.key;
+    //     that.chatData.push(dats);
+    //   });
+    //   console.log(that.chatData);
+    //   return that.chatData.push(data);
+    // });
+    // console.log(this.chatData);
+  }
+
+  noTutor(muridId) {
+    console.log(muridId);
+    var that = this;
+    this.userService.muridCariTutor(muridId).subscribe(snapshot => {
+      that.tutorData = [];
+      var data = snapshot;
+      if (snapshot.length == 0 && this.status == true) {
+        this.presentAlert('anda belum memesan guru');
+        return this.navCtrl.pop();
+      }
+      data = _.remove(data, { status: 'booked' });
+      data = _.unionBy(data, 'tutorUid');
+      console.log(data);
+      data.forEach(a => {
+        that.userService.getUserData(a.tutorUid).subscribe(child => {
+          console.log(child);
+          a.deviceId = child.deviceId;
+          that.tutorData.push(a);
+        })
+      })
+      console.log(this.tutorData);
+      // snapshot.forEach(e=>{
+      //   that.tutorData.push(e);
+      // })
+    })
+  }
+  chatHim(tutor) {
+    var that = this;
+    this.status = true;
+    this.Tutor = tutor;
+    this.tutorUid = tutor.tutorUid;
+    this.offset = this.userService.newChatTutor(this.uid, tutor.tutorUid).subscribe(snaps => {
+      console.log(snaps);
+      this.chatData = snaps;
+      var count = 0;
+      snaps.forEach(e => {
+        if (e.position == 'left' && e.status == false) {
+          that.userService.updateChatStatusTutor(that.uid, that.tutorUid, e.$key);
+          count = count + 1;
+        }
+      })
+      if (count != 0) {
+        that.presentToast('Ada chat dari ' + tutor.tutorName);
+        return that.scrollToBottom();
+      }
+    })
+  }
+  openThis(name: string) {
+    if (name == 'back') {
+      this.navCtrl.pop();
+    }
+  }
+  scrollToBottom() {
+    setTimeout(() => {
+      this.content.scrollToBottom(300);
+    });
+  }
+  sendChat() {
+    var that = this;
+    this.userService.sendChatTutorNew(this.theChat, this.uid, this.tutorUid, 'text').then(() => {
+      let notifChat = { title: 'New chat from ' + that.name, message: that.theChat, to: that.Tutor.deviceId };
+      that.zapier.sendNotification(notifChat).subscribe(mintaReview => {
+        return that.theChat = null;
+      })
+    })
+  }
+
+  getDates(dates) {
+    let date = moment(dates).format('DD/MM/YYYY HH:MM');
+    let hour = moment(dates).format('HH:MM');
+    return date + ' ' + hour;
+  }
+
+  getHour(hour) {
+    var a = new Date(hour).getHours();
+    var b = new Date(hour).getMinutes();
+    if (b > 9) {
+      return a + ':' + b;
+    } else {
+      return a + ':0' + b;
+    }
+  }
+
+  presentAlert(message) {
+    let alert = this.alertCtrl.create({
+      title: 'Sorry',
+      message: message,
+      buttons: [{
+        text: 'Dismiss', handler: datas => {
+          this.navCtrl.pop();
+        }
+      }]
+    });
+
+    alert.present();
+  }
+  private createFileName() {
+    var d = new Date(),
+      n = d.getTime(),
+      newFileName = n + ".jpg";
+    return newFileName;
+  }
+
+  public uploadImage(data) {
+    var that = this;
+    // Destination URL
+    let storageRef = firebase.storage().ref(this.uid + '/' + this.tutorUid);
+
+    const filename = new Date().getTime();
+    const imageRef = storageRef.child(`${filename}.png`);
+
+    this.loading = this.loadingCtrl.create({
+    });
+    this.loading.present();
+    imageRef.putString(data, 'base64', { contentType: 'image/jpg' }).then((snapshot) => {
+      that.userService.sendChatTutorNew(snapshot.downloadURL, this.uid, this.tutorUid, 'img');
+      this.loading.dismissAll()
+    }, err => {
+      this.loading.dismissAll()
+    });
+
+  }
+
+
+  private presentToast(text) {
+    let toast = this.toastCtrl.create({
+      message: text,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  // Always get the accurate path to your apps folder
+  public pathForImage(img) {
+    if (img === null) {
+      return '';
+    } else {
+      return cordova.file.dataDirectory + img;
+    }
+  }
+  public takePicture(sourceType) {
+    // Create options for the Camera Dialog
+    const options: CameraOptions = {
+      quality: 50,
+      sourceType: sourceType,
+      saveToPhotoAlbum: true,
+      allowEdit: true,
+      targetWidth: 600,
+      targetHeight: 600,
+      destinationType: 0,
+      encodingType: this.Camera.EncodingType.JPEG,
+      mediaType: 0,
+      correctOrientation: true
+    };
+
+    // Get the data of an image
+    this.Camera.getPicture(options).then((imagePath) => {
+      // Special handling for Android library
+      this.uploadImage(imagePath);
+    }, (err) => {
+    });
+  }
+
+  public presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Load from Library',
+          handler: () => {
+            this.takePicture(0);
+          }
+        },
+        {
+          text: 'Use Camera',
+          handler: () => {
+            this.takePicture(1);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  dismiss() {
+    this.offset = '';
+    this.status = false;
+    this.Tutor = [];
+    this.tutorData = [];
+    this.chatData = [];
+    this.tutorUid = undefined;
+    this.navCtrl.pop();
+  }
+  getTutor() {
+    this.offset.unsubscribe;
+    this.status = false;
+    this.tutorUid = undefined;
+    this.chatData = [];
+    this.noTutor(this.uid);
+  }
+  console(data) {
+    return console.log(data);
+  }
+}

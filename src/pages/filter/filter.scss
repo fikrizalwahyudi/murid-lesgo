@@ -1,0 +1,58 @@
+page-filter {
+  background: rgba(0,0,0,0.5);
+  font-family: brandon;
+  .scroll-content {
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius:10px;
+  }
+    ion-content{
+      background-color: #ffffff !important;
+      width: 95%;
+      height:50%;
+      padding:30%;
+      position:fixed;
+      top:30%;
+      left:2.5%;
+      border-radius:10px;
+      text-align: center;
+      font-family: brandon;
+      ion-list{
+        height:auto;
+        ion-item{
+          align-items: center;
+        }
+
+      }
+      .title{
+        font-size: 3rem;
+        width:100% !important;
+        color:white!important;
+        background-color:#999!important;
+        font-family: comic;
+      }
+      .bottomBut{
+        button{
+        text-align: center;
+        width:50%;
+        background-color: green !important;
+        font-size: 2rem;
+        color:white !important;
+        font-family: comic !important;
+        font-weight: bold !important;
+        border-radius:10px;
+
+        }
+      }
+      ion-item{
+        width:70%!important;
+        margin-bottom: 10%;
+        margin-left:15%!important;
+        border-radius:10px;
+      }
+    }
+
+
+}
