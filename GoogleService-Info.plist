@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>732818088048-k1m5pg8eonijqo5f886ct1r00tdq7m6v.apps.googleusercontent.com</string>
+	<string>732818088048-2ienj0l1je37gspbl9lq1e3vd4tbc5fb.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.732818088048-k1m5pg8eonijqo5f886ct1r00tdq7m6v</string>
+	<string>com.googleusercontent.apps.732818088048-2ienj0l1je37gspbl9lq1e3vd4tbc5fb</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCkbeWKhbEY_rtlpMp8O19GQ9RpAEyQfBs</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,23 +17,23 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.nativescript.nativetest</string>
+	<string>com.les-go.ios</string>
 	<key>PROJECT_ID</key>
 	<string>web-uat-1a4d8</string>
 	<key>STORAGE_BUCKET</key>
 	<string>web-uat-1a4d8.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:732818088048:ios:f3b18c62038a75c3</string>
+	<string>1:732818088048:ios:ff2f546a822f4258</string>
 	<key>DATABASE_URL</key>
 	<string>https://web-uat-1a4d8.firebaseio.com</string>
 </dict>
