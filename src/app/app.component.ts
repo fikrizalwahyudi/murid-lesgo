@@ -39,9 +39,7 @@ export class MyApp {
       .then(() => {
         this.rootPage = LoginPage;
         firebase.initializeApp(config);
-        firebase
-          .auth()
-          .onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user) {
               var loader = LoadingController.create({content: ' <img src="./assets/loading.gif"/>', spinner: 'hide'});
               loader.present();
@@ -68,6 +66,7 @@ export class MyApp {
         "sound": "true"
       },
       "ios": {
+        "senderID": "732818088048",
         "alert": "true",
         "badge": "true",
         "sound": "false",
@@ -75,26 +74,21 @@ export class MyApp {
       },
       "windows": {}
     }
-    this.pushObject = this
-      .push
-      .init(options);
+    this.pushObject = this.push.init(options);
     this.listenPushObject(uid);
   }
 
   listenPushObject(uid) {
-    this
-      .pushObject
-      .on('notification')
-      .subscribe((notification : any) => {
+    this.pushObject.on('notification').subscribe((notification : any) => {
         let first = !notification.additionalData.foreground && notification.additionalData.coldstart;
         let background = !notification.additionalData.foreground && !notification.additionalData.coldstart;
+        console.log('notification',notification);
         if (background) {
           let data = {
             additionalData: notification.additionalData,
             type: 'notification'
           }
           console.log('notification data run on background : ' + JSON.stringify(notification))
-          // return this.helper.setDataNotif(data);
           return
         }
         if (first) {
@@ -103,29 +97,15 @@ export class MyApp {
             type: 'notification'
           }
           console.log('notification data run on first : ' + JSON.stringify(notification))
-          return this
-            .helper
-            .setDataNotif(data);
+          return this.helper.setDataNotif(data);
         }
         console.log('notification data run on forground : ' + JSON.stringify(notification))
-        return this
-          .helper
-          .setDataNotifFourground(notification)
+        return this.helper.setDataNotifFourground(notification)
       });
-
-    this
-      .pushObject
-      .on('registration')
-      .subscribe((registration : any) => {
+    this.pushObject.on('registration').subscribe((registration : any) => {
         console.log('registration push', registration)
-        firebase
-          .database()
-          .ref('users/' + uid)
-          .update({deviceId: registration.registrationId})
+        firebase.database().ref('users/' + uid).update({deviceId: registration.registrationId, device:'ios'})
       });
-    this
-      .pushObject
-      .on('error')
-      .subscribe(error => console.log('plugin e rror', error));
+    this.pushObject.on('error').subscribe(error => console.log('plugin e rror', error));
   }
 }

@@ -54,6 +54,9 @@ export class SettingPage {
                 })
               }, (err: any) => {
                 console.log('err delete calendar', err)
+                this.userService.logoutUser().then(() => {
+                  this.navCtrl.setRoot(LoginPage);
+                })
               });
             }
           }
