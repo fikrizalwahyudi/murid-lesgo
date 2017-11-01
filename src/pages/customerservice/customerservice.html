@@ -11,8 +11,7 @@
 
   </ion-toolbar>
 </ion-header>
-<ion-content #content direction="y" style="background:url('assets/patterna.png');background-size:cover;background-repeat:repeat;"
-  class="has-footer">
+<ion-content #content direction="y"  class="has-footer contentbg">
   <!-- <template> -->
   <ion-list no-lines *ngFor="let chats of myChat">
     <ion-item style="background:none;">
@@ -38,9 +37,11 @@
       </div>
     </ion-item>
   </ion-list>
+
   <!-- </template> -->
 </ion-content>
 <ion-footer no-border>
+  <a href="#" (click)="scrollToBottom()">asdsaddsa</a>
   <ion-toolbar>
     <ion-buttons left>
       <button ion-button icon-only (click)="presentActionSheet()">

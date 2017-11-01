@@ -154,8 +154,13 @@ export class OrderDetailPage {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   }
   timeMask(e) {
-    let tanggal = moment(e).format('DD MMMM YYYY');
-    let day = moment(e).format('dddd')
+    console.log("date momment", e);
+    console.log("momment", moment(e, 'DD-MM-YYYY'));
+    let tanggal = moment(e, 'DD-MM-YYYY').format('DD-MMMM-YYYY');
+    let day = moment(e, 'DD-MM-YYYY').format('dddd')
+    console.log("momment tanggal", tanggal);
+    console.log("momment day", day);
+
     if (day == "Monday") day = "Senin";
     if (day == "Tuesday") day = "Selasa";
     if (day == "Wednesday") day = "Rabu";
