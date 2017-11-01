@@ -61,6 +61,8 @@ export class CustomerservicePage {
     // loader.present()
     // console.log(this.myChat);
   }
+
+
   ionViewWillEnter() {
     this.uid = this.params.get('data');
     this.name = this.params.get('name');
@@ -69,6 +71,11 @@ export class CustomerservicePage {
     }
     this.subcribers = [];
     this.updateChat();
+
+    // setTimeout(() => {
+    //   console.log("kepanggil");
+    //   this.content.scrollToBottom(100);
+    // }, 500);
   }
   ionViewWillLeave() {
     this.offset = false;
@@ -86,6 +93,7 @@ export class CustomerservicePage {
     // check evry convertation
     let userServiceSubcribe = this.userService.newChatCs(this.uid).subscribe(snapshot => {
       this.myChat = snapshot;
+
       if (snapshot.length == 0) {
         this.userService.sendFirstChat(this.uid, this.name)
       } else {
@@ -100,20 +108,28 @@ export class CustomerservicePage {
         })
       }
       setTimeout(() => {
+        this.content.scrollToBottom(300);
         this.scrollToBottom();
+        console.log("kepanggil 2 ");
         loader.dismissAll();
-      });
+      }, 2000);
     })
     this.subcribers.push(userServiceSubcribe)
+    // this.myChat = this.myChat.reverse();
   }
   scrollToBottom() {
-    console.log('this.content', this.content)
-    if (!this.content) return;
-    let dimension = this.content.getContentDimensions();
-    console.log('dimension', dimension)
-
-    this.content.scrollTo(300, dimension.scrollHeight);
+      // this.messages.push('message_added');
+      this.content.scrollToBottom(300);
   }
+
+  // scrollToBottom() {
+  //   // console.log('this.content', this.content)
+  //   // if (!this.content) return;
+  //   let dimension = this.content.getContentDimensions();
+  //   // console.log('dimension', dimension)
+  //
+  //   this.content.scrollTo(200, dimension.scrollHeight);
+  // }
   openThis(name: string) {
     if (name == 'back') {
       this.navCtrl.pop();
@@ -129,6 +145,7 @@ export class CustomerservicePage {
   getDates(dates) {
     console.log(dates)
     let date = moment(dates).format('DD/MM/YYYY HH:mm');
+    
     return date;
   }
 

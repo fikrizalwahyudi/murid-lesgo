@@ -27372,6 +27372,11 @@ page-paket .label-md {
   width: 100%;
 }
 
+page-paket .label-ios {
+  text-align: center;
+  width: 100%;
+}
+
 .block-date {
   color: red !important;
 }
