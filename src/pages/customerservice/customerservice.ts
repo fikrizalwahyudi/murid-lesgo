@@ -92,7 +92,7 @@ export class CustomerservicePage {
     loader.present()
     // check evry convertation
     let userServiceSubcribe = this.userService.newChatCs(this.uid).subscribe(snapshot => {
-      this.myChat = snapshot;
+      this.myChat = snapshot.reverse();
 
       if (snapshot.length == 0) {
         this.userService.sendFirstChat(this.uid, this.name)
@@ -108,10 +108,11 @@ export class CustomerservicePage {
         })
       }
       setTimeout(() => {
-        this.content.scrollToBottom(300);
-        this.scrollToBottom();
+        // this.content.scrollToBottom(300);
+        // this.scrollToBottom();
         console.log("kepanggil 2 ");
         loader.dismissAll();
+        // this.myChat = this.myChat.reverse();
       }, 2000);
     })
     this.subcribers.push(userServiceSubcribe)
@@ -145,7 +146,7 @@ export class CustomerservicePage {
   getDates(dates) {
     console.log(dates)
     let date = moment(dates).format('DD/MM/YYYY HH:mm');
-    
+
     return date;
   }
 
