@@ -11,11 +11,11 @@
     </ion-title>
   </ion-toolbar>
   <ion-toolbar class="subHeader" *ngIf="types == 'order'">
-    <ion-segment   [(ngModel)]="butOff" color="secondary">
-      <ion-segment-button style="min-width: 50%;height: 100%;padding: 6px"  value="regular" (click)="getFrekuensi(1); switch=true">
+    <ion-segment [(ngModel)]="butOff" color="secondary">
+      <ion-segment-button value="regular" (click)="getFrekuensi(1); switch=true">
         Regular
       </ion-segment-button>
-      <ion-segment-button style="min-width: 50%;height: 100%;padding: 6px" value="daily" (click)="getFrekuensi(1); switch=true; getDates('single');">
+      <ion-segment-button value="daily" (click)="getFrekuensi(1); switch=true; getDates('single');">
         Single Session
       </ion-segment-button>
     </ion-segment>
@@ -341,13 +341,13 @@
     <ion-row>
       <ion-col class="bottomBut">
         <button ion-button class="submitMe" (click)="dismiss()">
-        CANCEL
-      </button>
+          CANCEL
+        </button>
       </ion-col>
       <ion-col class="bottomBut">
         <button ion-button class="submitMe" (click)="send()">
-        OK
-      </button>
+          OK
+        </button>
       </ion-col>
     </ion-row>
   </div>

@@ -245,8 +245,13 @@ export class PaketPage {
     endDateCompare = new Date(endDateCompare);
     var startDateCompare = new Date(moment(this.startDateRegular).format('YYYY-MM-DD'));
     startDateCompare = new Date(startDateCompare);
+    console.log(this.hari)
+    console.log(endDateCompare)
+    console.log(startDateCompare)
     this.blockDays = this.check.filter((v: any) => {
-      return this.hari[i].day == v.day && new Date(moment(v.date).format('YYYY-MM-DD')) <= endDateCompare && new Date(moment(v.date).format('YYYY-MM-DD')) >= startDateCompare;
+      console.log(v)
+      console.log(new Date(moment(v.date).format('YYYY-MM-DD')))
+      return this.hari[i].day == v.day && new Date(moment(v.date, 'DD-MM-YYYY').format('YYYY-MM-DD')) <= endDateCompare && new Date(moment(v.date, 'DD-MM-YYYY').format('YYYY-MM-DD')) >= startDateCompare;
     });
     console.log('this.blockDays', this.blockDays)
   }
@@ -400,7 +405,7 @@ export class PaketPage {
       console.log('date', date);
       console.log('this.check', this.check)
       let block = this.check.filter((v: any) => {
-        return v.date == moment(date).format('MM-DD-YYYY') && jamArray.indexOf(v.jam) != -1;
+        return v.date == moment(date).format('DD-MM-YYYY') && jamArray.indexOf(v.jam) != -1;
       })
       console.log('block', block)
       if (block.length) {
