@@ -155,9 +155,9 @@ export class OrderDetailPage {
   }
   timeMask(e) {
     console.log("date momment", e);
-    console.log("momment", moment(e, 'DD-MM-YYYY'));
-    let tanggal = moment(e, 'DD-MM-YYYY').format('DD-MMMM-YYYY');
-    let day = moment(e, 'DD-MM-YYYY').format('dddd')
+    console.log("momment", moment(e, 'MM-DD-YYYY'));
+    let tanggal = moment(e, 'MM-DD-YYYY').format('DD-MMMM-YYYY');
+    let day = moment(e, 'MM-DD-YYYY').format('dddd')
     console.log("momment tanggal", tanggal);
     console.log("momment day", day);
 

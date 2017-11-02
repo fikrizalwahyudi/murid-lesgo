@@ -112,7 +112,7 @@ export class DashboardPage {
         if (orderData.status == 'booked' || orderData.status == 'pending' || orderData.status == 'cart') {
           orderData.sessions.forEach(sesi => {
             var data = sesi;
-            data.date = moment(data.date).format('MM-DD-YYYY');
+            data.date = moment(data.date, "DD-MM-YYYY").format('MM-DD-YYYY');
             this.tutorOrder.push(sesi);
           })
         }
@@ -192,7 +192,7 @@ export class DashboardPage {
     var data = [];
     for (let i = 0; i < this.tutorOrder.length; i++) {
       if (this.tutorOrder[i].day == hari && this.tutorOrder[i].jam == hour + '') {
-        data.push(moment(this.tutorOrder[i].date).format('DD-MMM-YYYY'));
+        data.push(moment(this.tutorOrder[i].date, "DD-MM-YYYY").format('DD-MMM-YYYY'));
       }
     }
     return data;
