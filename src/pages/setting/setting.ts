@@ -47,17 +47,18 @@ export class SettingPage {
           {
             text: 'Logout',
             handler: () => {
-              this.Calendar.deleteCalendar('Lesgo').then((res: any) => {
-                console.log('res delete calendar', res)
-                this.userService.logoutUser().then(() => {
-                  this.navCtrl.setRoot(LoginPage);
-                })
-              }, (err: any) => {
-                console.log('err delete calendar', err)
-                this.userService.logoutUser().then(() => {
-                  this.navCtrl.setRoot(LoginPage);
-                })
-              });
+              console.log('do Logout')
+              this.userService.logoutUser().then(() => {
+                this.navCtrl.setRoot(LoginPage);
+              })
+              // this.Calendar.deleteCalendar('Lesgo').then((res: any) => {
+              //   console.log('res delete calendar', res)
+              // }, (err: any) => {
+              //   console.log('err delete calendar', err)
+              //   this.userService.logoutUser().then(() => {
+              //     this.navCtrl.setRoot(LoginPage);
+              //   })
+              // });
             }
           }
         ]

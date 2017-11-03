@@ -72,9 +72,10 @@ export class PaketPage {
   ) {
     console.log(this.params);
     var now = moment();
-    this.max = moment().add(1, 'month').toISOString();
-    this.mins = moment().add(1, 'day').toISOString();
-    this.mins2 = moment().add(1, 'day').toISOString();
+    this.max = moment().add(1, 'month').format('YYYY-MM-DD');
+    this.mins = moment().add(1, 'day').format('YYYY-MM-DD');
+    this.mins2 = moment().add(1, 'day').format('YYYY-MM-DD');
+    console.log(moment().toISOString())
     this.types = this.params.data.type;
 
     this.blocked = this.params.data.blocked;
@@ -109,16 +110,16 @@ export class PaketPage {
       this.schedule = this.params.get('schedule');
       this.terOrder = this.params.get('tutorOrder');
       this.terOrderBackup = this.terOrder;
-      this.startDateRegular = moment().add(1, 'day').toISOString();
-      this.endDateRegular = moment().add(1, 'day').toISOString();
+      this.startDateRegular = moment().add(1, 'day').format('YYYY-MM-DD');
+      this.endDateRegular = moment().add(1, 'day').format('YYYY-MM-DD');
       this.getDates('regular', null);
       console.log(this.schedule);
       this.frekuensi = 1;
       // this.hari.push({ day: '', jam: '' });
       this.whatTime(0);
     } else if (this.types != 'order') {
-      this.startDateRegular = moment().add(1, 'day').toISOString();
-      this.endDateRegular = moment().add(1, 'month').toISOString();
+      this.startDateRegular = moment().add(1, 'day').format('YYYY-MM-DD');
+      this.endDateRegular = moment().add(1, 'month').format('YYYY-MM-DD');
       this.getDates('regular', null);
       this.frekuensi = 1;
     }
@@ -249,9 +250,13 @@ export class PaketPage {
     endDateCompare = new Date(endDateCompare);
     var startDateCompare = new Date(moment(this.startDateRegular).format('YYYY-MM-DD'));
     startDateCompare = new Date(startDateCompare);
+    console.log(this.hari)
+    console.log(endDateCompare)
+    console.log(startDateCompare)
     this.blockDays = this.check.filter((v: any) => {
-      console.log("v.date", v.date);
-      return this.hari[i].day == v.day && new Date(moment(v.date, "DD-MM-YYYY").format('YYYY-MM-DD')) <= endDateCompare && new Date(moment(v.date, "DD-MM-YYYY").format('YYYY-MM-DD')) >= startDateCompare;
+      console.log(v)
+      console.log(new Date(moment(v.date).format('YYYY-MM-DD')))
+      return this.hari[i].day == v.day && new Date(moment(v.date, 'DD-MM-YYYY').format('YYYY-MM-DD')) <= endDateCompare && new Date(moment(v.date, 'DD-MM-YYYY').format('YYYY-MM-DD')) >= startDateCompare;
     });
     console.log('this.blockDays', this.blockDays)
   }
@@ -365,7 +370,7 @@ export class PaketPage {
       let block = this.blockDate.map((v: any, i: number) => {
         let br = i != 0 && i % 2 ? '' : '<br>';
         let coma = v.date && i != this.blockDate.length - 1 ? ', ' : '';
-        let date = moment(v.date, 'MM-DD-YYYY').format('DD-MMM-YYYY')
+        let date = moment(v.date, 'DD-MM-YYYY').format('DD-MMM-YYYY')
         return v.date ? br + `<div class="alert-width">${date + coma}</div>` : '';
       }).join('');
       let myAlert = this.alertCtrl.create({
@@ -405,11 +410,15 @@ export class PaketPage {
       console.log('date', date);
       console.log('this.check', this.check)
       let block = this.check.filter((v: any) => {
-        console.log(date);
-        console.log("moment 409", moment(date, moment.ISO_8601).format('MM-DD-YYYY'));
-        console.log("moment 410", moment(date, "YYYY-MM-DD").format('MM-DD-YYYY'));
-        console.log("v.date 441", v.date);
-        return v.date == moment(date, moment.ISO_8601).format('DD-MM-YYYY') && jamArray.indexOf(v.jam) != -1;
+
+        // console.log(date);
+        // console.log("moment 409", moment(date, moment.ISO_8601).format('MM-DD-YYYY'));
+        // console.log("moment 410", moment(date, "YYYY-MM-DD").format('MM-DD-YYYY'));
+        // console.log("v.date 441", v.date);
+        // return v.date == moment(date, moment.ISO_8601).format('DD-MM-YYYY') && jamArray.indexOf(v.jam) != -1;
+
+        return v.date == moment(date).format('DD-MM-YYYY') && jamArray.indexOf(v.jam) != -1;
+
       })
       console.log('block', block)
       if (block.length) {
