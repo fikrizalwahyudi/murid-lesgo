@@ -238,7 +238,11 @@ export class PaketPage {
   }
   whatTime(i) {
     var hari = this.hari[i].day;
+    console.log("hari", this.hari[i].day);
     this.jamArray[i] = _.filter(this.schedule, { day: hari });
+    console.log("hari", this.hari[i].day);
+    console.log("check", this.check);
+    // console.log();
     // _.remove(this.jamArray[i][0], (r)=>{ return _.includes([true],r)})
 
     var endDateCompare = new Date(moment(this.endDateRegular).format('YYYY-MM-DD'));
@@ -246,7 +250,8 @@ export class PaketPage {
     var startDateCompare = new Date(moment(this.startDateRegular).format('YYYY-MM-DD'));
     startDateCompare = new Date(startDateCompare);
     this.blockDays = this.check.filter((v: any) => {
-      return this.hari[i].day == v.day && new Date(moment(v.date).format('YYYY-MM-DD')) <= endDateCompare && new Date(moment(v.date).format('YYYY-MM-DD')) >= startDateCompare;
+      console.log("v.date", v.date);
+      return this.hari[i].day == v.day && new Date(moment(v.date, "DD-MM-YYYY").format('YYYY-MM-DD')) <= endDateCompare && new Date(moment(v.date, "DD-MM-YYYY").format('YYYY-MM-DD')) >= startDateCompare;
     });
     console.log('this.blockDays', this.blockDays)
   }
@@ -367,7 +372,7 @@ export class PaketPage {
         title: 'Paket',
         message: `
                 <div>Maaf, guru tersebut memiliki jadwal mengajar pada :</div>
-                <div class="block-date">${block} </div> 
+                <div class="block-date">${block} </div>
                 <div>Pilih order jika ingin tetap memilih dengan jadwal ini</div>
                 `,
         buttons: [
@@ -400,7 +405,11 @@ export class PaketPage {
       console.log('date', date);
       console.log('this.check', this.check)
       let block = this.check.filter((v: any) => {
-        return v.date == moment(date).format('MM-DD-YYYY') && jamArray.indexOf(v.jam) != -1;
+        console.log(date);
+        console.log("moment 409", moment(date, moment.ISO_8601).format('MM-DD-YYYY'));
+        console.log("moment 410", moment(date, "YYYY-MM-DD").format('MM-DD-YYYY'));
+        console.log("v.date 441", v.date);
+        return v.date == moment(date, moment.ISO_8601).format('DD-MM-YYYY') && jamArray.indexOf(v.jam) != -1;
       })
       console.log('block', block)
       if (block.length) {
