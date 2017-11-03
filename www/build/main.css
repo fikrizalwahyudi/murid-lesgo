@@ -26613,6 +26613,13 @@ page-konsultasi .iconAvatar {
   border-radius: 50%;
 }
 
+page-konsultasi .background-dot {
+  background: url("assets/patterna.png");
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: initial !important;
+}
+
 page-lesson ion-content {
   background-repeat: repeat;
   background-size: cover;

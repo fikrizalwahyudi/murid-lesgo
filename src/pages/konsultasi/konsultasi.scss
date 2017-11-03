@@ -166,4 +166,10 @@ page-konsultasi {
       max-height: 100%;
       border-radius: 50%;
     }
+    .background-dot {
+      background:url('assets/patterna.png');
+      background-size:cover;
+      background-repeat:repeat;
+      background-position: initial !important;
+    }
 }
