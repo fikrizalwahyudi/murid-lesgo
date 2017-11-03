@@ -242,7 +242,7 @@ export class OrderPage {
   }
   formatDate(date: any) {
     console.log('formatDate', date)
-    return moment(date, 'MM-DD-YYYY').format('DD-MMM-YYYY')
+    return moment(date, 'DD-MM-YYYY').format('DD-MMM-YYYY')
 
   }
 }
