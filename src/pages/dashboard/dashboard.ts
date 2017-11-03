@@ -197,9 +197,10 @@ export class DashboardPage {
   }
   cekTutor(hour, hari) {
     var data = [];
+    // console.log(this.tutorOrder)
     for (let i = 0; i < this.tutorOrder.length; i++) {
       if (this.tutorOrder[i].day == hari && this.tutorOrder[i].jam == hour + '') {
-        data.push(moment(this.tutorOrder[i].date).format('DD-MMM-YYYY'));
+        data.push(moment(this.tutorOrder[i].date, 'DD-MM-YYYY').format('DD-MMM-YYYY'));
       }
     }
     return data;

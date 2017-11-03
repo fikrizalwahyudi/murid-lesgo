@@ -69,10 +69,10 @@ export class OrderPage {
     }
     var jenisPaket = this.data.jenisPaket;
     if (jenisPaket == 'Regular') {
-      if (moment(this.data.startDate).format('DD MM YYYY') != moment(this.data.endDate).format('DD MM YYYY')) {
+      if (moment(this.data.startDate, 'YYYY-MM-DD').format('DD MM YYYY') != moment(this.data.endDate, 'YYYY-MM-DD').format('DD MM YYYY')) {
         this.session = this.getDays(this.data.startDate, this.data.endDate, this.data);
       }
-      if (moment(this.data.startDate).format('DD MM YYYY') == moment(this.data.endDate).format('DD MM YYYY')) {
+      if (moment(this.data.startDate, 'YYYY-MM-DD').format('DD MM YYYY') == moment(this.data.endDate, 'YYYY-MM-DD').format('DD MM YYYY')) {
         this.session = this.getDays(this.data.startDate, this.data.endDate, this.data);
       }
     }
@@ -86,31 +86,36 @@ export class OrderPage {
     console.log('startDate', startDate)
     console.log('endDate', endDate)
     console.log('data', data)
+    console.log('this.check', this.check)
     this.status = true;
     this.sessionAll = [];
     var days = [], booking = [], bookingDay = [], bookingJam = [], checks = [], checksJam = [];
-    var start = moment(startDate).toDate();
-    var end = moment(endDate).toDate();
+    var start = moment(startDate, 'YYYY-MM-DD').toDate();
+    var end = moment(endDate, 'YYYY-MM-DD').toDate();
     booking = this.data.day || [];
     bookingDay = _.map(booking, 'day') || [];
     while (start <= end) {
       var dayNow = moment(start).format('dddd');
-      var dateNow = moment(start).format("MM-DD-YYYY");
+      var dateNow = moment(start).format("DD-MM-YYYY");
       var bookingDataNow = booking.filter((v: any) => {
         return v.day == dayNow;
       })
       var block = false;
       console.log('dayNow', dayNow)
+      console.log('dateNow', dateNow)
       console.log('bookingDataNow', bookingDataNow)
       if (bookingDataNow.length) {
         if (this.check.length) {
           for (let i = 0; i < bookingDataNow.length; i++) {
             let bookingData = bookingDataNow[i];
+
             checks = _.filter(this.check, { date: dateNow }) || [];
             checksJam = checks.map((v) => { return v.jam + '' });
             let jam = parseInt(bookingData.jam);
             let jamBlock = [jam + '', (jam - 1) + '', (jam + 1) + ''];
             let hasBooking = _.difference(checksJam, jamBlock);
+            console.log('checksJam', checksJam)
+            console.log('hasBooking', hasBooking)
             if (checksJam.length != hasBooking.length) {
               block = true;
               this.sessionAll.push({ date: dateNow, day: bookingData.day, jam: bookingData.jam, status: 'unbooked', jamStart: 0, jamEnd: 0, review: "" });
