@@ -121,5 +121,7 @@
         <variable name="PHOTOLIBRARY_ADD_USAGE_DESCRIPTION" value="take profile picture" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="take profile picture" />
     </plugin>
+    <allow-navigation href="http://192.168.100.25:8100" />
     <engine name="ios" spec="~4.4.0" />
+    <allow-navigation href="http://192.168.100.9:8100" />
 </widget>

@@ -11,32 +11,34 @@
 
   </ion-toolbar>
 </ion-header>
-<ion-content #content direction="y"  class="has-footer" style="background-image: url(assets/patterna.png); background-position: initial !important; background-repeat: repeat!important; background-size:cover !important;">
+<ion-content direction="y"  class="has-footer" style="background-image: url(assets/patterna.png); background-position: initial !important; background-repeat: repeat!important; background-size:cover !important;">
   <!-- <template> -->
-  <ion-list no-lines *ngFor="let chats of myChat">
-    <ion-item style="background:none;">
-      <div class="chatBubble">
-        <!-- <img class="profile-pic {{chats.position}}" src="{{msg.img}}"> -->
-        <div class="chat-bubble {{chats?.position}}" *ngIf="chats?.type == 'text'">
-          <div class="message">{{chats?.message}}</div>
-          <div class="message-detail">
-            <span style="font-weight:bold;" *ngIf="chats?.position == 'left'">LESGO! </span>
-            <span style="font-weight:bold;" *ngIf="chats?.position == 'right'">{{name}}</span>,
-            <span>{{getDates(chats?.sentAt)}}</span>
-            <span style="color:green;">{{!chats?.status ? 'new':''}}</span>
+  <!-- <ion-scroll #content > -->
+    <ion-list no-lines *ngFor="let chats of myChat; let i = index;">
+      <ion-item  style="background:none;" id="chat{{i+1}}">
+        <div class="chatBubble" >
+          <!-- <img class="profile-pic {{chats.position}}" src="{{msg.img}}"> -->
+          <div class="chat-bubble {{chats?.position}}" *ngIf="chats?.type == 'text'">
+            <div class="message">{{chats?.message}}</div>
+            <div class="message-detail">
+              <span style="font-weight:bold;" *ngIf="chats?.position == 'left'">LESGO! </span>
+              <span style="font-weight:bold;" *ngIf="chats?.position == 'right'">{{name}}</span>,
+              <span>{{getDates(chats?.sentAt)}}</span>
+              <span style="color:green;">{{!chats?.status ? 'new':''}}</span>
+            </div>
+          </div>
+          <div class="chat-bubble {{chats?.position}}" *ngIf="chats?.type != 'text'">
+            <div class="message"><img src="{{chats?.message}}" imageViewer/></div>
+            <div class="message-detail">
+              <span style="font-weight:bold;" *ngIf="chats?.position == 'left'">LESGO!</span>
+              <span style="font-weight:bold;" *ngIf="chats?.position == 'right'">{{name}} </span>,
+              <span>{{getDates(chats?.sentAt)}}</span>
+            </div>
           </div>
         </div>
-        <div class="chat-bubble {{chats?.position}}" *ngIf="chats?.type != 'text'">
-          <div class="message"><img src="{{chats?.message}}" imageViewer/></div>
-          <div class="message-detail">
-            <span style="font-weight:bold;" *ngIf="chats?.position == 'left'">LESGO!</span>
-            <span style="font-weight:bold;" *ngIf="chats?.position == 'right'">{{name}} </span>,
-            <span>{{getDates(chats?.sentAt)}}</span>
-          </div>
-        </div>
-      </div>
-    </ion-item>
-  </ion-list>
+      </ion-item>
+    </ion-list>
+  <!-- </ion-scroll> -->
 
   <!-- </template> -->
 </ion-content>
