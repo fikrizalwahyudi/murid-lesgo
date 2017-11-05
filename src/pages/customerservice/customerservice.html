@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-buttons left>
       <button ion-button icon-only class="backbut" (click)="dismiss()">
-            <ion-icon name="md-arrow-round-back"></ion-icon>
-          </button>
+        <ion-icon name="md-arrow-round-back"></ion-icon>
+      </button>
     </ion-buttons>
     <ion-title>
       <img src="assets/logowhite.png" />
@@ -11,29 +11,32 @@
 
   </ion-toolbar>
 </ion-header>
-<ion-content #content direction="y"  class="has-footer contentbg">
+<ion-content #content direction="y" class="has-footer" style="background-image: url(assets/patterna.png); background-position: initial !important; background-repeat: repeat!important; background-size:cover !important;">
   <!-- <template> -->
-  <ion-list no-lines *ngFor="let chats of myChat">
+  <ion-list no-lines *ngFor="let chats of myChat;let last = last">
     <ion-item style="background:none;">
       <div class="chatBubble">
         <!-- <img class="profile-pic {{chats.position}}" src="{{msg.img}}"> -->
-        <div class="chat-bubble {{chats?.position}}" *ngIf="chats?.type == 'text'">
+        <div class="chat-bubble {{chats?.position}}" [hidden]="chats?.type == 'text'">
           <div class="message">{{chats?.message}}</div>
           <div class="message-detail">
-            <span style="font-weight:bold;" *ngIf="chats?.position == 'left'">LESGO! </span>
-            <span style="font-weight:bold;" *ngIf="chats?.position == 'right'">{{name}}</span>,
+            <span style="font-weight:bold;" [hidden]="chats?.position == 'right'">LESGO! </span>
+            <span style="font-weight:bold;" [hidden]="chats?.position == 'left'">{{name}}</span>,
             <span>{{getDates(chats?.sentAt)}}</span>
             <span style="color:green;">{{!chats?.status ? 'new':''}}</span>
           </div>
         </div>
-        <div class="chat-bubble {{chats?.position}}" *ngIf="chats?.type != 'text'">
-          <div class="message"><img src="{{chats?.message}}" imageViewer/></div>
+        <div class="chat-bubble {{chats?.position}}" [hidden]="chats?.type != 'text'">
+          <div class="message">
+            <img src="{{chats?.message}}" imageViewer/>
+          </div>
           <div class="message-detail">
-            <span style="font-weight:bold;" *ngIf="chats?.position == 'left'">LESGO!</span>
-            <span style="font-weight:bold;" *ngIf="chats?.position == 'right'">{{name}} </span>,
+            <span style="font-weight:bold;" [hidden]="chats?.position == 'right'">LESGO!</span>
+            <span style="font-weight:bold;" [hidden]="chats?.position == 'left'">{{name}} </span>,
             <span>{{getDates(chats?.sentAt)}}</span>
           </div>
         </div>
+        {{last ? scrollToBottom() : ''}}
       </div>
     </ion-item>
   </ion-list>
@@ -41,7 +44,7 @@
   <!-- </template> -->
 </ion-content>
 <ion-footer no-border>
-  <a href="#" (click)="scrollToBottom()">asdsaddsa</a>
+  <!-- <a href="#" (click)="scrollToBottom()">asdsaddsa</a> -->
   <ion-toolbar>
     <ion-buttons left>
       <button ion-button icon-only (click)="presentActionSheet()">
@@ -51,8 +54,8 @@
     <ion-input content type="text" [(ngModel)]="theChat" placeholder="Enter your message" (keyup.enter)="sendChat();">{{theChat}}</ion-input>
     <ion-buttons right>
       <button ion-button icon-only (click)="sendChat();">
-          <ion-icon name="ios-send-outline"></ion-icon>
-        </button>
+        <ion-icon name="ios-send-outline"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

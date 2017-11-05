@@ -30,4 +30,5 @@ $RECYCLE.BIN/
 www/
 .DS_Store
 Thumbs.db
+config.xml
 UserInterfaceState.xcuserstate

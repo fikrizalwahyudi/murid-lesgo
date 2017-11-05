@@ -8,11 +8,11 @@
   <ion-toolbar>
     <ion-buttons left>
       <button *ngIf="tutorUid == undefined" ion-button icon-only class="backbut" (click)="dismiss()">
-            <ion-icon name="md-arrow-round-back"></ion-icon>
-          </button>
+        <ion-icon name="md-arrow-round-back"></ion-icon>
+      </button>
       <button *ngIf="tutorUid != undefined" ion-button icon-only class="backbut" (click)="getTutor()">
-            <ion-icon name="md-arrow-round-back"></ion-icon>
-          </button>
+        <ion-icon name="md-arrow-round-back"></ion-icon>
+      </button>
     </ion-buttons>
     <ion-title *ngIf="tutorUid == undefined">
       <img src="assets/logowhite.png" />
@@ -21,8 +21,7 @@
 
   </ion-toolbar>
 </ion-header>
-<ion-content #content direction="y" style="background:url('assets/patterna.png');background-size:cover;background-repeat:repeat;"
-  class="has-footer">
+<ion-content #content direction="y" class="has-footer content-scroll" style=" height: 100%; overflow: scroll">
 
   <ion-list no-lines *ngIf="tutorUid != undefined && status">
     <!-- <template ngFor let-chats [ngForOf]="chatData"> -->
@@ -38,7 +37,9 @@
           </div>
         </div>
         <div class="chat-bubble {{chats.position}}" *ngIf="chats.type != 'text'">
-          <div class="message"><img src="{{chats.message}}" imageViewer/></div>
+          <div class="message">
+            <img src="{{chats.message}}" imageViewer/>
+          </div>
           <div class="message-detail">
             <span style="font-weight:bold;" *ngIf="chats.position == 'left'">{{Tutor.tutorName}}</span>
             <span style="font-weight:bold;" *ngIf="chats.position == 'right'">{{name}} </span>,
@@ -70,8 +71,8 @@
     <ion-input *ngIf="status" content type="text" [(ngModel)]="theChat" placeholder="Enter your message" (keyup.enter)="sendChat();">{{theChat}}</ion-input>
     <ion-buttons *ngIf="status" right>
       <button *ngIf="status" ion-button icon-only (click)="sendChat();">
-          <ion-icon name="ios-send-outline"></ion-icon>
-        </button>
+        <ion-icon name="ios-send-outline"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

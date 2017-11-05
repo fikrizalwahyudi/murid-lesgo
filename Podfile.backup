@@ -5,3 +5,8 @@ target 'Lesgo' do
 	pod 'FirebaseMessaging', '~> 2.0.0'
 	pod 'Firebase/Auth'
 end
+
+
+// button 
+// button cancel logout
+// button pendaftarn

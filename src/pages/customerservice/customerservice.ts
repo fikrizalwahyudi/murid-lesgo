@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, AlertController, ActionSheetController, ModalController, ToastController, Platform, Content, LoadingController, Loading } from 'ionic-angular';
 import { UserService } from '../../providers/user-service';
 import { FilePath } from '@ionic-native/file-path';
@@ -61,8 +61,6 @@ export class CustomerservicePage {
     // loader.present()
     // console.log(this.myChat);
   }
-
-
   ionViewWillEnter() {
     this.uid = this.params.get('data');
     this.name = this.params.get('name');
@@ -71,11 +69,6 @@ export class CustomerservicePage {
     }
     this.subcribers = [];
     this.updateChat();
-
-    // setTimeout(() => {
-    //   console.log("kepanggil");
-    //   this.content.scrollToBottom(100);
-    // }, 500);
   }
   ionViewWillLeave() {
     this.offset = false;
@@ -92,8 +85,7 @@ export class CustomerservicePage {
     loader.present()
     // check evry convertation
     let userServiceSubcribe = this.userService.newChatCs(this.uid).subscribe(snapshot => {
-      this.myChat = snapshot.reverse();
-
+      this.myChat = snapshot;
       if (snapshot.length == 0) {
         this.userService.sendFirstChat(this.uid, this.name)
       } else {
@@ -108,29 +100,25 @@ export class CustomerservicePage {
         })
       }
       setTimeout(() => {
-        // this.content.scrollToBottom(300);
         // this.scrollToBottom();
-        console.log("kepanggil 2 ");
         loader.dismissAll();
-        // this.myChat = this.myChat.reverse();
       }, 2000);
     })
     this.subcribers.push(userServiceSubcribe)
-    // this.myChat = this.myChat.reverse();
   }
   scrollToBottom() {
-      // this.messages.push('message_added');
-      this.content.scrollToBottom(300);
+    console.log('this.content', this.content)
+    if (!this.content) return;
+    let dimension = this.content.getContentDimensions();
+    console.log('dimension', dimension)
+    this.content.scrollTo(300, dimension.scrollHeight);
+    // this.content.scrollToBottom(300)
+    // // console.log('this.content.nativeElement.scrollHeight', this.content.scrollHeight)
+    // // try {
+    // //   this.content.scrollTop = this.content.scrollHeight;
+    // //   console.log
+    // // } catch (err) { }
   }
-
-  // scrollToBottom() {
-  //   // console.log('this.content', this.content)
-  //   // if (!this.content) return;
-  //   let dimension = this.content.getContentDimensions();
-  //   // console.log('dimension', dimension)
-  //
-  //   this.content.scrollTo(200, dimension.scrollHeight);
-  // }
   openThis(name: string) {
     if (name == 'back') {
       this.navCtrl.pop();
@@ -146,7 +134,6 @@ export class CustomerservicePage {
   getDates(dates) {
     console.log(dates)
     let date = moment(dates).format('DD/MM/YYYY HH:mm');
-
     return date;
   }
 
