@@ -11,8 +11,8 @@
     </ion-title>
   </ion-toolbar>
   <ion-toolbar class="subHeader" *ngIf="types == 'order'">
-    <ion-segment   [(ngModel)]="butOff" color="secondary">
-      <ion-segment-button class="ionsegment"   value="regular" (click)="getFrekuensi(1); switch=true">
+    <ion-segment [(ngModel)]="butOff" color="secondary">
+      <ion-segment-button class="ionsegment" value="regular" (click)="getFrekuensi(1); switch=true">
         Regular
       </ion-segment-button>
       <ion-segment-button class="ionsegment" value="daily" (click)="getFrekuensi(1); switch=true; getDates('single');">

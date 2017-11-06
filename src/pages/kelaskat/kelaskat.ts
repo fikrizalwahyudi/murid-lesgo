@@ -51,7 +51,7 @@ export class KelaskatPage {
       snapshot.forEach(childSnapshot => {
         var jarak = this.distance(this.latLng.data.latitude, this.latLng.data.longitude, childSnapshot.latitude, childSnapshot.longitude, "K");
         var data = childSnapshot;
-        if (jarak < 7 && data.status == true) {
+        if (jarak <= 7 && data.status == true) {
           console.log(data);
           data.key = childSnapshot.$key;
           data.dataMurid = this.latLng.data;
