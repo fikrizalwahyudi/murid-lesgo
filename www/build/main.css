@@ -24693,11 +24693,16 @@ body {
 }
 
 .alert-ios .alert-title {
-  font-size: 26px;
+  font-size: 20px;
+}
+
+.alert-ios .alert-message:empty {
+  padding: 0 0 0px 0;
 }
 
 .alert-ios .alert-message {
   padding-top: 18px;
+  padding: 0 0 0 0;
   color: black;
   font-family: brandon-bold;
 }
@@ -24708,14 +24713,16 @@ body {
   color: white;
   font-family: comic;
   text-align: left;
-  margin: auto;
+  height: 30px;
+  width: 30%;
+  font-size: 1.5rem;
 }
 
 .alert-ios .alert-button-group {
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 8px;
+  padding: 10px;
 }
 
 .alert-md .alert-wrapper {
@@ -25287,11 +25294,17 @@ page-cart .subheader .segment-button {
   font-size: 2rem;
   color: gray;
   font-family: comic;
+  border-color: transparent !important;
 }
 
 page-cart .subheader .segment-activated {
   color: darkgreen !important;
-  border-color: darkgreen !important;
+  min-width: 50%;
+  background-color: transparent !important;
+  height: 100%;
+  padding: 6px;
+  border: 0px;
+  border-bottom: 2px solid green !important;
 }
 
 page-cart .subheader .bar-header {
@@ -26250,7 +26263,7 @@ page-filter ion-content ion-item {
 }
 
 .ios page-home .profileName, .md page-home .profileName {
-  font-size: 2.5rem;
+  font-size: 2.1rem;
   font-family: brandon-bold;
   margin-top: 0%;
   margin-bottom: 0%;
@@ -27185,7 +27198,7 @@ page-paket ion-segment-button {
   font-family: comic;
   font-size: 2rem !important;
   color: #5a5a5a !important;
-  background-color: #cacaca !important;
+  background-color: #ededed !important;
 }
 
 page-paket .segment-activated {

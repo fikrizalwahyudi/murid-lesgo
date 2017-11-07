@@ -27,8 +27,8 @@
   </div>
   <div class="aboutData" *ngIf="profile.fullName != undefined">
     <ion-row content>
-      <ion-col width-40 class="button-left"><button (click)="onChange('kelas')" [ngClass]="{'notActive' : butOff != 'kelas'}" ion-button>Kelas Mengajar</button></ion-col>
-      <ion-col width-40 class="button-right"><button (click)="onChange('jadwal')" [ngClass]="{'notActive' : butOff != 'jadwal'}" ion-button>Jadwal Mengajar</button></ion-col>
+      <ion-col width-40 class="button-left"><button (click)="onChange('kelas')" [ngClass]="{'notActive' : butOff != 'kelas'}" ion-button style="height: 35px;">Kelas Mengajar</button></ion-col>
+      <ion-col width-40 class="button-right"><button (click)="onChange('jadwal')" [ngClass]="{'notActive' : butOff != 'jadwal'}" ion-button style="height: 35px;">Jadwal Mengajar</button></ion-col>
     </ion-row>
   </div>
   <div class="botData">
@@ -106,7 +106,7 @@
   </div>
   <ion-row class="orderTutor">
     <ion-col>
-      <button ion-button center (click)="orderMe()">Order</button>
+      <button ion-button center (click)="orderMe()" style="width: 35%;height: 20%">Order</button>
     </ion-col>
   </ion-row>
 </ion-content>

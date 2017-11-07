@@ -11,10 +11,10 @@
   </ion-toolbar>
   <ion-toolbar class="subheader">
     <ion-segment [(ngModel)]="butOff" color="secondary">
-      <ion-segment-button style="min-width: 50%;height: 100%;padding: 6px;border-color: rgba(0, 0, 255, 0.05) !important;" value="pesan">
+      <ion-segment-button style="min-width: 50%;height: 100%;padding: 6px;" value="pesan">
         Pesan
       </ion-segment-button>
-      <ion-segment-button style="min-width: 50%;height: 100%;padding: 6px; border-color: rgba(0, 0, 255, 0.05) !important;" value="riwayat">
+      <ion-segment-button style="min-width: 50%;height: 100%;padding: 6px; " value="riwayat">
         Riwayat
       </ion-segment-button>
     </ion-segment>
@@ -90,14 +90,14 @@
       <ion-row *ngIf="cartData.length > 0">
         <ion-col width-100 style="text-align:center;">
           <input type="hidden" id="token" value="{{token}}">
-          <button class="buttons" ion-button id="pay-button" (click)="getToken()">Bayar</button>
+          <button class="buttons" ion-button id="pay-button" (click)="getToken()" style="height: 35px;width: 150px;">Bayar</button>
         </ion-col>
       </ion-row>
     </ion-grid>
   </template>
   <div *ngIf="historyData[0] != undefined && historyData.length > 0">
     <ion-list *ngFor="let history of historyData" [hidden]="butOff != 'riwayat'">
-      <ion-item (click)="orderDetailCart(history)">
+      <ion-item (click)="orderDetailCart(history)" style="border: 0px;">
         <h3>{{history.tutorName}}</h3>
         <p> {{displayDate(history.orderSchedule.startDate)}} s.d {{displayDate(history.orderSchedule.endDate)}}</p>
         <span item-content>

@@ -116,11 +116,19 @@ page-cart {
         font-size: 2rem;
         color:gray;
         font-family: comic;
+        border-color: transparent !important;
 
       }
       .segment-activated{
         color:darkgreen !important;
-        border-color:darkgreen !important;
+        // border-color:darkgreen !important;
+        min-width: 50%;
+        background-color: transparent !important;
+height: 100%;
+padding: 6px;
+border: 0px;
+// border-color: rgba(57, 144, 60, 1) !important;
+border-bottom: 2px solid green !important;
       }
     .toolbar-background{
     }

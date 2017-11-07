@@ -34,34 +34,34 @@
     <ion-grid>
       <ion-row>
         <ion-col width-25>
-          <button ion-button clear (click)="goPick('pelajaran')" wrap style="height:70px;">
+          <button ion-button clear (click)="goPick('pelajaran')" wrap style="height: 70px;width: 70px;">
         <img src="assets/Pelajaran.png" class="filters"/>
       </button>
         </ion-col>
         <ion-col width-25>
-          <button ion-button clear (click)="goPick('paket')" wrap style="height:70px;">
+          <button ion-button clear (click)="goPick('paket')" wrap style="height: 70px;width: 70px;">
         <img src="assets/Paket.png" class="filters"/>
       </button>
         </ion-col>
         <ion-col width-25>
-          <button ion-button clear (click)="goPick('preference')" wrap style="height:70px;">
+          <button ion-button clear (click)="goPick('preference')" wrap style="height: 70px;width: 70px;">
         <img src="assets/Preferensi.png"  class="filters"/>
       </button>
         </ion-col>
         <ion-col width-25>
-          <button ion-button clear (click)="goFilter()" wrap style="height:70px;">
+          <button ion-button clear (click)="goFilter()" wrap style="height: 70px;width: 70px;">
         <img src="assets/jam.png" class="filters"/>
       </button>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col width-100 style="font-family:comic;text-align:center;">
-          <h1>PILIHAN GURU YANG SESUAI</h1>
+        <ion-col width-100 style="font-family: comic;text-align: center;padding: 1px;margin-top: -7%;margin-bottom: -10%;">
+          <h1 style="font-size:2.3rem">PILIHAN GURU YANG SESUAI</h1>
         </ion-col>
       </ion-row>
       <template [ngIf]="teachers != undefined">
         <ion-list [virtualScroll]="teachers" [approxItemHeight]="'70px'">
-          <ion-item *virtualItem="let teacher" (click)="showProfile(teacher)">
+          <ion-item *virtualItem="let teacher" (click)="showProfile(teacher)" style="border-top: 0px;">
             <ion-thumbnail item-left>
               <img [src]="teacher.avatar" />
             </ion-thumbnail>

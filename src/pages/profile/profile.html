@@ -93,7 +93,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <button class="login-button" ion-button icon-left (click)="presentActionSheet('profile')">
+          <button class="login-button" ion-button icon-left (click)="presentActionSheet('profile')" style="width: 40%;height: 30px;">
             <!-- <ion-icon name="camera"></ion-icon> -->
             Select Image
           </button>
@@ -155,11 +155,11 @@
     <div *ngIf="dataUser.role =='murid'">
       <ion-row>
         <ion-col center>
-        <button class="login-button" ion-button icon-left (click)="saveProfile()" *ngIf="!status">
+        <button class="login-button" ion-button icon-left (click)="saveProfile()" *ngIf="!status" style="width: 40%;height: 30px;">
           <!-- <ion-icon name="ios-contact-outline"></ion-icon> -->
           Update User
         </button>
-        <button class="upload-button" ion-button icon-left (click)="presentToast('Harap mengubah profile dahulu')" *ngIf="status">
+        <button class="upload-button" ion-button icon-left (click)="presentToast('Harap mengubah profile dahulu')" *ngIf="status" style="width: 40%;height: 30px;">
           <!-- <ion-icon name="ios-contact-outline"></ion-icon> -->
           Update User
         </button>
@@ -176,7 +176,7 @@
           </ion-item>
       <ion-row>
           <ion-col center>
-          <button class="login-button" style="margin-bottom:5%;" ion-button icon-left (click)="getMurid('tambah')">
+          <button class="login-button" style="margin-bottom:5%; width: 40%;height: 30px;" ion-button icon-left (click)="getMurid('tambah')" >
             <!-- <ion-icon name="ios-contact-outline"></ion-icon> -->
             Tambah Murid
           </button>

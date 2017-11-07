@@ -192,7 +192,13 @@ export class KonsultasiPage {
       this.status = true;
       setTimeout(() => {
         loader.dismissAll();
-        this.scrollToBottom();
+        // this.scrollToBottom();
+        var i = "chat"+this.chatData.length; 
+        // console.log("iiii", i);
+        var element = document.getElementById(i);
+        // console.log(element);
+        element.scrollIntoView();
+        // console.log("kepanggil 2 ");
       }, 3000);
     })
     this.subcribers.push(chatTutorSubcriber);
