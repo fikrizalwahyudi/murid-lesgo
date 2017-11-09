@@ -102,7 +102,9 @@ const config = {
     AngularFireModule.initializeApp(config),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCsCcTL_NLswlKyQ0mweNB-DLY3tHVn9P4',
-      libraries: ['places']
+      libraries: ['places'],
+      language: 'id',
+      region: 'ID'
     }),
     IonicModule.forRoot(MyApp),
   ],
