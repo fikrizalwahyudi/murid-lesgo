@@ -26808,6 +26808,10 @@ page-lesson ion-col {
   color: #5a5a5a;
 }
 
+page-maps .pac-container {
+  z-index: 10000 !important;
+}
+
 page-maps #map {
   width: 100%;
   height: 100%;
