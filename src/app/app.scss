@@ -229,11 +229,16 @@ body {
     text-transform: uppercase;
     font-family: brandon-bold;
     background-color: #39b54a !important;
+    color:black;
+    font-size: 1.7rem;
+
     .button-inner {
       text-align: center !important;
     }
   }
   .action-sheet-group {
+    margin-bottom: 0px !important;
+    border-radius: 0px !important;
     .button-inner {
       justify-content: center!important;
     }

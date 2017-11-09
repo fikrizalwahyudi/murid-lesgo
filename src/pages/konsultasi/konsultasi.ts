@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, AlertController, ActionSheetController, ToastController, Platform, Content, LoadingController, Loading } from 'ionic-angular';
 import { UserService } from '../../providers/user-service';
 import { Zapier } from '../../providers/zapier';
@@ -29,7 +29,7 @@ declare var window;
   providers: [UserService, Zapier]
 })
 export class KonsultasiPage {
-  @ViewChild('content') content: Content;
+  @ViewChild('content') content: ElementRef;
   theChat: any;
   Tutor: any;
   receiver: any;
@@ -211,9 +211,12 @@ export class KonsultasiPage {
   scrollToBottom() {
     console.log('this.content', this.content)
     if (!this.content) return;
-    let dimension = this.content.getContentDimensions();
-    console.log('dimension.scrollHeight', dimension.scrollHeight)
-    this.content.scrollTo(400, dimension.scrollHeight);
+    // let dimension = this.content.getContentDimensions();
+    // console.log('dimension.scrollHeight', dimension.scrollHeight)
+    // this.content.scrollTo(400, dimension.scrollHeight);
+    try {
+      this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+    } catch (err) { }
   }
   sendChat() {
     if (this.theChat) {

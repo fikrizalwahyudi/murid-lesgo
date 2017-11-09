@@ -5,3 +5,17 @@ target 'Lesgo' do
 	pod 'FirebaseMessaging', '~> 2.0.0'
 	pod 'Firebase/Auth'
 end
+
+
+// button 
+// button cancel logout margin width
+// button pendaftaran huruf terlalu kecil
+// button verify  marin dan width
+// button province margin width
+// button city margin width
+// map saat mengclick auto complete tidak merender
+
+// take photo profile button dan ada gap transparant
+// back button warna putih (semua font yang berwarna biru)
+// button order terlalu kebawah
+// button

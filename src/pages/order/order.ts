@@ -109,11 +109,12 @@ export class OrderPage {
           for (let i = 0; i < bookingDataNow.length; i++) {
             let bookingData = bookingDataNow[i];
 
-            checks = _.filter(this.check, { date: dateNow }) || [];
+            checks = _.filter(this.check, { date: moment(dateNow, 'DD-MM-YYYY').format('MM-DD-YYYY') }) || [];
             checksJam = checks.map((v) => { return v.jam + '' });
             let jam = parseInt(bookingData.jam);
             let jamBlock = [jam + '', (jam - 1) + '', (jam + 1) + ''];
             let hasBooking = _.difference(checksJam, jamBlock);
+            console.log('checks', checks)
             console.log('checksJam', checksJam)
             console.log('hasBooking', hasBooking)
             if (checksJam.length != hasBooking.length) {

@@ -1,7 +1,8 @@
-import { Component, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, ViewChild, ElementRef, NgZone, ChangeDetectorRef, OnInit } from '@angular/core';
 import { NavController, Platform, AlertController, ModalController, NavParams, ViewController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { MapsAPILoader, GoogleMapsAPIWrapper } from 'angular2-google-maps/core';
+import {googlemaps} from 'googlemaps';
 
 /*
   Generated class for the Maps page.
@@ -15,14 +16,24 @@ declare var google: any;
   selector: 'page-maps',
   templateUrl: 'maps.html'
 })
-export class MapsPage {
+
+
+
+export class MapsPage implements OnInit  {
+  @ViewChild('searchbar', {read: ElementRef}) searchbar: ElementRef;
   map: any;
   search: any;
+  autocompleteItems: any;
+  autocomplete: any;
+  acService:any;
+  placesService: any;
   constructor(
     public alert: AlertController,
     public viewCtrl: ViewController,
     public navParams: NavParams,
-    public _loader: MapsAPILoader
+    public _loader: MapsAPILoader,
+    public zone: NgZone,
+    private ref: ChangeDetectorRef
   ) {
     this.autocomplete();
     this.loadMap();
@@ -34,18 +45,76 @@ export class MapsPage {
     })
     // this.map = {lat: -6.174668, lng:106.827126, zoom:15, panning:true, address:'Ketik lokasi anda untuk memindahkan pin'}
   }
-  autocomplete() {
-    this._loader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete').getElementsByTagName('input')[0], {});
-      google.maps.event.addListener(autocomplete, 'place_changed', () => {
-        let place = autocomplete.getPlace();
-        this.map.lat = place.geometry.location.lat();
-        this.map.lng = place.geometry.location.lng();
-        this.map.address = place.formatted_address.substring(0, 50);
-        console.log(place);
+
+  ngOnInit() {
+    this.acService = new google.maps.places.AutocompleteService();
+    this.autocompleteItems = [];
+    this.autocomplete = {
+    query: ''
+    };
+  }
+
+  updateSearch() {
+    console.log('modal > updateSearch');
+    if (this.autocomplete.query == '') {
+      this.autocompleteItems = [];
+      return;
+    }
+    let self = this;
+    let config = {
+      //types:  ['geocode'], // other types available in the API: 'establishment', 'regions', and 'cities'
+      input: this.autocomplete.query,
+      componentRestrictions: {  }
+    }
+    this.acService.getPlacePredictions(config, function (predictions, status) {
+      console.log('modal > getPlacePredictions > status > ', status);
+      self.autocompleteItems = [];
+      predictions.forEach(function (prediction) {
+      self.autocompleteItems.push(prediction);
       });
     });
   }
+
+
+
+
+  // autocomplete() {
+  //   this._loader.load().then(() => {
+  //     let autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete').getElementsByTagName('input')[0], {});
+  //     google.maps.event.addListener(autocomplete, 'place_changed', () => {
+  //       this.zone.run(() => {
+  //         let place = autocomplete.getPlace();
+  //         // console.log('place_changed', this.location);
+  //         this.ref.detectChanges();
+  //         this.map.lat = place.geometry.location.lat();
+  //         this.map.lng = place.geometry.location.lng();
+  //         this.map.address = place.formatted_address.substring(0, 50);
+  //         console.log(place);
+  //       });
+  //     });
+  //   });
+  // }
+
+  // autocomplete() {
+  //     this._loader.load().then(() => {
+  //     let autocomplete = new google.maps.places.Autocomplete(this.searchbar.nativeElement.querySelector('.searchbar-input'), {
+  //     types: ["geocode"]
+  //     });
+  //     autocomplete.addListener("place_changed", () => {
+  //     this.zone.run(() => {
+  //     //get the place result
+  //     let place = autocomplete.getPlace();
+  //
+  //                     //set latitude, longitude and zoom
+  //                     this.map.lat = place.geometry.location.lat();
+  //                     this.map.lng = place.geometry.location.lng();
+  //                     this.map.zoom = 12;
+  //                     console.log(place);
+  //                     // Keyboard.close();
+  //                 });
+  //             });
+  //         });
+  //     }
   send() {
     if (this.map.lat == 0 || this.map.lang == 0) {
       return this.alert.create({

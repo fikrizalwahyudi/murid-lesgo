@@ -98,6 +98,9 @@
     <allow-navigation href="http://192.168.1.109:8100" />
     <allow-navigation href="http://192.168.5.11:8100" />
     <allow-navigation href="http://192.168.1.2:8100" />
+    <allow-navigation href="http://192.168.5.22:8100" />
+    <allow-navigation href="http://192.168.100.25:8100" />
+    <allow-navigation href="http://192.168.100.9:8100" />
     <engine name="android" spec="~6.3.0" />
     <plugin name="phonegap-plugin-push" spec="^2.1.0">
         <variable name="SENDER_ID" value="732818088048" />
@@ -121,8 +124,5 @@
         <variable name="PHOTOLIBRARY_ADD_USAGE_DESCRIPTION" value="take profile picture" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="take profile picture" />
     </plugin>
-    <allow-navigation href="http://192.168.100.25:8100" />
     <engine name="ios" spec="~4.4.0" />
-    <allow-navigation href="http://192.168.100.9:8100" />
-    <allow-navigation href="http://192.168.5.5:8100" />
 </widget>

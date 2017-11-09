@@ -18,7 +18,14 @@
     <ion-toolbar color="primary">
 
         <ion-item >
-            <ion-input (click)="search=''" id="autocomplete" type="text" name="title" placeholder="Enter Address" [(ngModel)]="search"></ion-input>
+            <!-- <ion-input (click)="search=''" id="autocomplete" type="text" name="title" placeholder="Enter Address" [(ngModel)]="search"></ion-input> -->
+            <ion-searchbar 
+                [(ngModel)]="autocomplete.query"
+                [showCancelButton]="true"
+                (ionInput)="updateSearch()"
+                (ionCancel)="dismiss()"
+                placeholder="Start typing and select ...">
+            </ion-searchbar>
         </ion-item>
 
     </ion-toolbar>

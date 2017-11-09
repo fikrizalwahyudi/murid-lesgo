@@ -24841,10 +24841,17 @@ body {
   text-transform: uppercase;
   font-family: brandon-bold;
   background-color: #39b54a !important;
+  color: black;
+  font-size: 1.7rem;
 }
 
 .action-sheet-ios .action-sheet-button .button-inner {
   text-align: center !important;
+}
+
+.action-sheet-ios .action-sheet-group {
+  margin-bottom: 0px !important;
+  border-radius: 0px !important;
 }
 
 .action-sheet-ios .action-sheet-group .button-inner {
@@ -25499,6 +25506,14 @@ page-cart .buttons {
 
 page-customerservice .navtitle {
   height: 10%;
+}
+
+page-customerservice .content-scroll {
+  background-image: url(assets/patterna.png);
+  background-position: initial !important;
+  background-repeat: repeat !important;
+  background-size: cover !important;
+  overflow: scroll;
 }
 
 page-customerservice .header .toolbar {
@@ -26467,6 +26482,14 @@ page-konsultasi .navtitle {
 
 page-konsultasi ion-thumbnail img {
   border-radius: 50%;
+}
+
+page-konsultasi .content-scroll {
+  background-image: url(assets/patterna.png);
+  background-position: initial !important;
+  background-repeat: repeat !important;
+  background-size: cover !important;
+  -webkit-overflow-scrolling: auto;
 }
 
 page-konsultasi .header .toolbar {

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, AlertController, ActionSheetController, ModalController, ToastController, Platform, Content, LoadingController, Loading } from 'ionic-angular';
 import { UserService } from '../../providers/user-service';
 import { FilePath } from '@ionic-native/file-path';
@@ -52,7 +52,7 @@ export class CustomerservicePage {
     public loadingCtrl: LoadingController,
     public helper: Helper,
   ) {
-    // console.log(this.params);
+    console.log(this.params);
     // let loader = this.loadingCtrl.create({
     //   content: '<img src="./assets/loading.gif"/>',
     //   spinner: 'hide',
@@ -92,7 +92,7 @@ export class CustomerservicePage {
     loader.present()
     // check evry convertation
     let userServiceSubcribe = this.userService.newChatCs(this.uid).subscribe(snapshot => {
-      this.myChat = snapshot;
+      this.myChat = snapshot.reverse();
 
       if (snapshot.length == 0) {
         this.userService.sendFirstChat(this.uid, this.name)
@@ -110,14 +110,7 @@ export class CustomerservicePage {
       setTimeout(() => {
         // this.content.scrollToBottom(300);
         // this.scrollToBottom();
-        // console.log("chat.length", this.myChat.length);
-        var i = "chat" + this.myChat.length;
-        // console.log("iiii", i);
-        var element = document.getElementById(i);
-        // console.log(element);
-        element.scrollIntoView();
-        // console.log("kepanggil 2 ");
-
+        console.log("kepanggil 2 ");
         loader.dismissAll();
         // this.myChat = this.myChat.reverse();
       }, 2000);
@@ -125,10 +118,9 @@ export class CustomerservicePage {
     this.subcribers.push(userServiceSubcribe)
     // this.myChat = this.myChat.reverse();
   }
-  scrollToBottom(elem: ElementRef) {
-    // this.messages.push('message_added');
-    elem.nativeElement.scrollIntoView();
-    // this.content.scrollToBottom(300);
+  scrollToBottom() {
+      // this.messages.push('message_added');
+      this.content.scrollToBottom(300);
   }
 
   // scrollToBottom() {
@@ -152,7 +144,7 @@ export class CustomerservicePage {
     }
   }
   getDates(dates) {
-    // console.log(dates)
+    console.log(dates)
     let date = moment(dates).format('DD/MM/YYYY HH:mm');
 
     return date;
