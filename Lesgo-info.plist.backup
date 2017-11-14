@@ -80,7 +80,7 @@
       </dict>
     </dict>
     <key>NSCalendarsUsageDescription</key>
-    <string/>
+    <string>Use Schedule</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
     <string>take profile picture</string>
     <key>NSCameraUsageDescription</key>
