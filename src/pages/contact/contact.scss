@@ -2,7 +2,7 @@
 
   page-contact {
     .datetime-text:empty:not(:focus):before{
-      content: "Date of birth"
+      content: "Date of birth (Optional)"
     }
     ion-content{
       background:url('../assets/patternb.png');

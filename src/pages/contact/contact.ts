@@ -88,8 +88,9 @@ export class ContactPage {
   passReState: any = 'password';
   passReIcon: any = 'ios-eye-outline';
   lat: any;
-  dob: any;
+  dob: any ;
   lng: any;
+  dobInput:any;
 
   constructor(
     public navCtrl: NavController,
@@ -128,8 +129,9 @@ export class ContactPage {
     if (!/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(this.email)) return alert('format email salah');
     if (!this.password) return alert('anda belum memasukan password');
     if (this.password != this.rePassword) return alert('repassword tidak sama');
-    if (!this.dob) return alert('anda belum memasukan Date of Birth');
-    if (!this.gender) return alert('anda belum memasukan Gender');
+    if (!this.dobInput) this.dob = "1984-04-04";
+    if (this.dobInput) this.dob = this.dobInput;
+    // if (!this.gender) return alert('anda belum memasukan Gender');
     if (!this.lastName) this.lastName = '';
     loader.present();
     let telpon = this.telepon.toString().split('');
@@ -179,3 +181,5 @@ export class ContactPage {
     }
   }
 }
+
+

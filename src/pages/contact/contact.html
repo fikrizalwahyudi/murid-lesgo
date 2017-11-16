@@ -56,23 +56,30 @@
 
         <ion-item>
           <ion-icon class="icon" name="ios-calendar-outline" item-left></ion-icon>
-          <ion-datetime displayFormat="DD-MMM-YYYY" max='2016' [(ngModel)]="dob" (ionChange)="status=false"></ion-datetime>
+          <ion-datetime displayFormat="DD-MMM-YYYY" max='2016' [(ngModel)]="dobInput" (ionChange)="status=false"></ion-datetime>
           <!-- <ion-input type="date" [(ngModel)]="dataUser.dob"></ion-input> -->
         </ion-item>
+        
         <ion-row radio-group [(ngModel)]="gender">
+          
           <ion-col width-50>
             <ion-item>
-              <ion-label>Male</ion-label>
+              <ion-label>Male </ion-label>
               <ion-radio value="male" checked></ion-radio>
             </ion-item>
           </ion-col>
           <ion-col width-50>
             <ion-item>
-              <ion-label>Female</ion-label>
+              <ion-label>Female </ion-label>
               <ion-radio value="female"></ion-radio>
             </ion-item>
           </ion-col>
         </ion-row>
+        <ion-row style="margin-top:-10px">
+            <ion-col width-100>
+                <span style="font-size:1rem;">Gender (Optional)</span>
+            </ion-col>
+          </ion-row>
 
         <ion-item>
           <p item-right> Dengan mendaftar anda telah menyetujui <a (click)="goTo('tnc')">Terms & Condition</a> serta <a (click)="goTo('privacy')">Kebijakan Privasi</a>            kami</p>

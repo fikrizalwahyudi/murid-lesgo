@@ -25412,7 +25412,7 @@ page-cart .buttons {
 }
 
 .ios page-contact .datetime-text:empty:not(:focus):before, .md page-contact .datetime-text:empty:not(:focus):before {
-  content: "Date of birth";
+  content: "Date of birth (Optional)";
 }
 
 .ios page-contact ion-content, .md page-contact ion-content {
