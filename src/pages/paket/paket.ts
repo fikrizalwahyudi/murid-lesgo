@@ -72,7 +72,7 @@ export class PaketPage {
   ) {
     console.log(this.params);
     var now = moment();
-    this.max = moment().add(1, 'month').format('YYYY-MM-DD');
+    this.max = moment().add(2, 'month').format('YYYY-MM-DD');
     this.mins = moment().add(1, 'day').format('YYYY-MM-DD');
     this.mins2 = moment().add(1, 'day').format('YYYY-MM-DD');
     console.log(moment().toISOString())

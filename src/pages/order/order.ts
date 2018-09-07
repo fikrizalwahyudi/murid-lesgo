@@ -96,7 +96,7 @@ export class OrderPage {
     bookingDay = _.map(booking, 'day') || [];
     while (start <= end) {
       var dayNow = moment(start).format('dddd');
-      var dateNow = moment(start).format("DD-MM-YYYY");
+      var dateNow = moment(start).format("MM-DD-YYYY");
       var bookingDataNow = booking.filter((v: any) => {
         return v.day == dayNow;
       })
@@ -109,7 +109,7 @@ export class OrderPage {
           for (let i = 0; i < bookingDataNow.length; i++) {
             let bookingData = bookingDataNow[i];
 
-            checks = _.filter(this.check, { date: moment(dateNow, 'DD-MM-YYYY').format('MM-DD-YYYY') }) || [];
+            checks = _.filter(this.check, { date: moment(dateNow, 'MM-DD-YYYY').format('MM-DD-YYYY') }) || [];
             checksJam = checks.map((v) => { return v.jam + '' });
             let jam = parseInt(bookingData.jam);
             let jamBlock = [jam + '', (jam - 1) + '', (jam + 1) + ''];
@@ -243,7 +243,7 @@ export class OrderPage {
   }
   formatDate(date: any) {
     console.log('formatDate', date)
-    return moment(date, 'DD-MM-YYYY').format('DD-MMM-YYYY')
+    return moment(date, 'MM-DD-YYYY').format('DD-MMM-YYYY')
 
   }
 }

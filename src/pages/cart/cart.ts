@@ -44,6 +44,11 @@ export class CartPage {
   historyData: any = [];
   userId: any;
   platformType: any;
+  promoCode:any;
+  discount:any = 0;
+  discountText:any = 0;
+  setDiscount:boolean = false;
+
 
   constructor(
     public alert: AlertController,
@@ -85,6 +90,13 @@ export class CartPage {
       this.user.phoneNumber = this.user.phoneNumber.replace("+62 ", "+62").replace("(", "").replace(")", "").replace(" ", "").replace("-", "").replace("_", "").replace("_", "");
     })
   }
+
+  checkPromo(promo){
+    console.log(promo);
+    this.userService.getPromo(promo).subscribe(data=>{
+      console.log(data);
+    })
+  }
   getCart(uid) {
     this.userService.muridCariTutor(uid).subscribe(snapshot => {
       this.cartData = [];
@@ -102,11 +114,25 @@ export class CartPage {
     var sendData = [];
     var transId = 'LP' + new Date().getTime();
     for (let i = 0; i < this.cartData.length; i++) {
+      var fullName = this.cartData[i].tutorName.substring(0, 17) + '.. ';
+      // var StringDiscount = "";
+
+      if(this.cartData[i].totalHarga >= 50000 && this.setDiscount == true){
+        if(this.discount != 0){
+          fullName += '**';
+        }
+        this.cartData[i].totalHarga = (this.cartData[i].totalHarga - this.discount);
+        this.discount = 0;
+        // StringDiscount = "potongan " + this.discountText;
+      }
       sendData.push({
         "id": this.cartData[i].orderId,
         "price": this.cartData[i].totalHarga,
         "quantity": 1,
-        "name": this.cartData[i].tutorName + ' ' + this.cartData[i].orderSchedule.startDate + ' - ' + this.cartData[i].orderSchedule.endDate
+        "name": fullName  + this.cartData[i].orderSchedule.startDate + ' - ' + this.cartData[i].orderSchedule.endDate,
+        "brand": "Midtrans",
+        "category": "Toys",
+        "merchant_name": "Midtrans"
       })
     }
     sendData.push({
@@ -115,6 +141,7 @@ export class CartPage {
       "quantity": 1,
       "name": "Convenience Fee"
     });
+
     let loader = this.loadingCtrl.create({
       showBackdrop: false,
       spinner: "hide"
@@ -144,7 +171,7 @@ export class CartPage {
       "expiry": {
         "start_time": moment(new Date()).format('YYYY-MM-DD HH:mm:ss Z'),
         "unit": "minutes",
-        "duration": 60
+        "duration": 360
       }
     };
     console.log(body);
@@ -189,6 +216,7 @@ export class CartPage {
             showBackdrop: false, spinner: 'hide'
           });
           loader.present();
+          this.promoCode = null;
           this.doUpdateStatus(cart, transId, 'cart');
           loader.dismissAll();
           this.presentAlert('Payment Not Finish', 'Pembayaran tidak diselesaikan');
@@ -240,8 +268,10 @@ export class CartPage {
     }
     else if (this.payment == 'creditcard') {
       this.conFee = this.subtotal / 100 * 3.2;
-    }
-    this.total = this.subtotal + this.conFee;
+    } 
+    this.total = (this.subtotal + this.conFee) - this.discount;
+    console.log(this.total);
+    console.log(this.subtotal);
   }
   orderDetail(orderid) {
     this.navCtrl.push(DetailPage, { data: orderid });
@@ -274,5 +304,29 @@ export class CartPage {
 
   updateCartStatus(transId, status) {
     return this.userService.updateCartStatus(transId, { status: status });
+  }
+
+  getDiscount(code){
+    // this.userService.getUserData(this.uid).subscribe(snap=>{
+    //   console.log("nih user nyaaa", snap);
+    // })
+    return this.userService.getDiscount(code).subscribe(snap=>{
+      console.log("DISCOUNT ", snap);
+      if(this.subtotal <= 100000){
+        this.presentAlert('Promo Gagal', 'Diskon hanya untuk pemesanan minimal 100 ribu !');
+      }else {
+        if(snap.value == null){
+          this.discount = 0;
+          this.presentAlert('Promo Code Tidak Valid', 'Code yang anda masukkan salah atau sudah expired !');
+          console.log("DISCOUNT TIDAK DITEMUKAN");
+        }else {
+          this.setDiscount = true;
+          this.discount = snap.value;
+          this.discountText = snap.value;
+          console.log("DISCOUNT DITEMUKAN");
+
+        }
+      }
+    })
   }
 }

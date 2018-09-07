@@ -8,7 +8,7 @@
     <ion-title>
       <img src="assets/logowhite.png" />
     </ion-title>
-  </ion-toolbar>
+  </ion-toolbar> 
   <ion-toolbar class="subheader">
     <ion-segment [(ngModel)]="butOff" color="secondary">
       <ion-segment-button style="min-width: 50%;height: 100%;padding: 6px;" value="pesan">
@@ -58,11 +58,15 @@
           <h2>Sub Total</h2>
           <h2 item-right>Rp {{cartData.length ? thousandMask(subtotal) : '0'}}</h2>
         </ion-item>
-        <ion-item>
-          <ion-label>Promo</ion-label>
-          <ion-input clear item-right type="text" class="promo">
+
+        <!-- <ion-item>
+          <ion-label>Kode Promo</ion-label>
+          <ion-input clear item-right type="text" [(ngModel)]="promo" class="promo">
           </ion-input>
-        </ion-item>
+        </ion-item> -->
+        <!-- <ion-item>
+          <button ion-button (click)="checkPromo(promo)">Check</button>
+        </ion-item> -->
         <ion-item *ngIf="cartData.length > 0">
           <ion-label>Pembayaran</ion-label>
           <ion-select [(ngModel)]="payment" class="payment">
@@ -73,6 +77,19 @@
           <h2>Convenience Fee</h2>
           <h2 item-right>Rp {{thousandMask(conFee)}}</h2>
         </ion-item>
+
+        <ion-item *ngIf="discount != 0">
+          <h2>Potongan Harga</h2>
+          <h2 item-right>Rp {{thousandMask(discount)}}</h2>
+        </ion-item>
+        <ion-card>
+          <ion-item>
+            <ion-label>Kode Promo</ion-label>
+            <ion-input clear item-right type="text" class="promo" placeholder="Masukkan Kode Promo" [(ngModel)]="promoCode">
+            </ion-input>
+          </ion-item>
+          <button ion-button outline color="dark" (click)="getDiscount(promoCode)" style="margin-left:  20%;">Check Kode Promo</button>
+        </ion-card>
 
         <ion-item class="total" *ngIf="cartData.length > 0">
 

@@ -45,7 +45,7 @@
               <ion-col width-50>
                 <ion-label>End Date</ion-label>
                 <ion-item style="background-color: #f8f8f8;">
-                  <ion-datetime displayFormat="DD-MMM-YYYY" [min]="mins2" [(ngModel)]="endDateRegular" (ionChange)="getDates('regular','end')"></ion-datetime>
+                  <ion-datetime displayFormat="DD-MMM-YYYY" [min]="mins2" [max]="max" [(ngModel)]="endDateRegular" (ionChange)="getDates('regular','end')"></ion-datetime>
                   <!-- <ion-input type="date" (ionChange)="checkDate('stop')" [(ngModel)]="endDateRegular"></ion-input> -->
                 </ion-item>
               </ion-col>

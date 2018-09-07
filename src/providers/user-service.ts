@@ -504,4 +504,18 @@ export class UserService {
   updateTransaction(transId, data) {
     return this.af.database.object('/transaction/' + transId).update(data);
   }
+
+  getPromo(promo){
+    return this.af.database.object('/discount/' + promo);
+  }
+
+  //discount
+  getDiscount(code) {
+    return this.af.database.object('/discount/' + code);
+  }
+
+  updateUserPromo(userId, promoCode) {
+    return this.af.database.object('/users/' + userId).update({promo:promoCode});
+  }
+
 }

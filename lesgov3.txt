@@ -1,0 +1,11 @@
+- Simple Order
+    
+- Lesgo Koin/Point
+    - Lesgo Mimpi
+        - User Lesgo Guru / Murid dapat menukarkan point menjadi barang impian mereka. 
+    - Lesgo Pamer
+        - Konsep : Membuat forum tanya jawab yang di batasi oleh waktu dan di sebar ke tutor. beberapa tutor yang berhasil menjawab mendapatkan point. 
+- Verified Tutor 
+    - Verified Tutor di bagi menjadi 3 level bronze, silver dan gold untuk membedakan rating dari setiap guru.
+    - Tentukan requerements dari setiap level
+        
